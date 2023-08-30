@@ -3,10 +3,10 @@ This directory aimed to share my Arch - Hyprland configuration.
 
 ## Screen
 Screenshot of my background and waybar setup:
-![Screen of Waybar and Background](Screen/Waybar.png)
+![Screen of Waybar and Background](Screen/desktop.png)
 
 Screenshot of my rofi setup:
-![Screen of Waybar and Rofi](Screen/Rofi.png)
+![Screen of Waybar and Rofi](Screen/rofi.png)
 
 ## Pacman Hooks
 Per far girare orphan.hook c'è bisogno del package 'moreutils' per far andare il comando 'ifne'
