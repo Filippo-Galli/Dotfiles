@@ -184,6 +184,12 @@ bind=SUPER,XF86AudioRaiseVolume,exec,pamixer --default-source -i 5
 bind=SUPER,XF86AudioLowerVolume,exec,pamixer --default-source -d 5
 bind=,XF86AudioMicMute,exec,pamixer --default-source --toggle-mute
 
+# Settings
+# bind=,F9,exec,gnome-control-center
+
+# Lock screen
+bind=,F10,exec,systemctl --user start lock
+
 # Screenshot
 bind=,XF86Calculator,exec,grim -g "$(slurp)" 
 #bind=,XF86Calculator,exec,XDG_CURRENT_DESKTOP=sway flameshot gui
@@ -193,8 +199,8 @@ bind=$mainMod, W, exec, pkill waybar || waybar
 
 # Costum
 bind= $mainMod, B, exec, brave
-# bind= $mainMod, F, exec, nautilus
-# bind= $mainMod, O, exec, obsidian
+iibind= $mainMod, F, exec, nautilus
+bind= $mainMod, O, exec, obsidian
 bind= $mainMod, C, exec, code
 
 

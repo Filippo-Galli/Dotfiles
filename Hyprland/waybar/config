@@ -8,12 +8,12 @@
 
     "modules-left": ["wlr/workspaces","sway/workspaces"],
 
-    "modules-center": ["hyprland/window"],
+    "modules-center": [],
 
     "modules-right": ["tray", "cpu", "memory", "network", "temperature", "battery", "battery#bat2", "pulseaudio", "clock"],
 
     "wlr/workspaces": {
-    	"format": "{name}: {icon}",
+    	"format": "{icon}",
     	"format-icons": {
     		"urgent": "",
     		"focused": "",
@@ -80,7 +80,6 @@
     },
     "cpu": {
         "format": "{usage}% ",
-        "tooltip": false
     },
     "memory": {
         "format": "{used} GB "
@@ -91,7 +90,7 @@
         "critical-threshold": 80,
         // "format-critical": "{temperatureC}°C {icon}",
         "format": "{temperatureC}°C {icon}",
-        "format-icons": ["", "", ""]
+        "format-icons": [""]
     },
     "backlight": {
         // "device": "acpi_video1",
@@ -100,39 +99,39 @@
     },
     "battery": {
         "states": {
-            // "good": 95,
+            "good": 80,
             "warning": 30,
             "critical": 15
         },
+        "interval": 1,
         "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-plugged": "{capacity}% ",
+        "format-charging": "{capacity}% ",
         "format-alt": "{time} {icon}",
         // "format-good": "", // An empty format will hide the module
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
     "battery#bat2": {
-        "bat": "BAT2"
+        "bat": "BAT2",
     },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
-        //"format-wifi": "{essid} ({signalStrength}%) ",
-        "format-wifi": "[{bandwidthUpBits}]/[{bandwidthDownBits}] ",
-        "format-ethernet": "[{bandwidthUpBits}]/[{bandwidthDownBits}] ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        // "format-wifi": "[{bandwidthUpBits}]/[{bandwidthDownBits}] ",
+        "format-ethernet": "[{bandwidthUpBits}]/[{bandwidthDownBits}] ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         //"format-alt": "{ifname}: {ipaddr}/{cidr}",
-        "on-click": "wofi-wifi.sh",	// https://raw.githubusercontent.com/cristobaltapia/dotfiles_sway/master/home/.config/wofi/scripts/wofi-wifi.sh
+        //"on-click": "wofi-wifi.sh",	// https://raw.githubusercontent.com/cristobaltapia/dotfiles_sway/master/home/.config/wofi/scripts/wofi-wifi.sh
 	//"on-click": "nmtui",
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float
         "format": "{volume}% {icon} {format_source}",
         "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
         "format-source": "",
         "format-source-muted": "",
         "format-icons": {
