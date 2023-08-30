@@ -9,7 +9,7 @@
 
 /*****----- Configuration -----*****/
 configuration {
-	modi:                       "drun,run,filebrowser";
+	modi:                       "drun,filebrowser";
     show-icons:                 true;
     display-drun:               "";
     display-run:                "";
@@ -48,7 +48,7 @@ window {
 mainbox {
     enabled:                     true;
     spacing:                     25px;
-    padding:                     50px;
+    padding:                     30px;
     background-color:            transparent;
     children:                    [ "inputbar", "message","listview", "mode-switcher" ];
 }
