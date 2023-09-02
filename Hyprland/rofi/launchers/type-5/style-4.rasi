@@ -17,6 +17,7 @@ configuration {
     display-window:             "";
 	drun-display-format:        "{name} [<span weight='light' size='small'><i>({generic})</i></span>]";
 	window-format:              "{w}   {c}   {t}";
+	
 }
 
 /*****----- Global Properties -----*****/
@@ -41,14 +42,14 @@ window {
     padding:                     0px;
     border-radius:               20px;
     cursor:                      "default";
-    background-color:            #22272C;
+    background-color:            rgba(34, 39, 44, 0.8);
 }
 
 /*****----- Main Box -----*****/
 mainbox {
     enabled:                     true;
     spacing:                     25px;
-    padding:                     30px;
+    padding:                     50px;
     background-color:            transparent;
     children:                    [ "inputbar", "message","listview", "mode-switcher" ];
 }
@@ -116,7 +117,7 @@ element {
     border-radius:               100%;
     border-color:                gray/15%;
     background-color:            transparent;
-    text-color:                  gray;
+    text-color:                  #adb5db;
     cursor:                      pointer;
 }
 element normal.active {
