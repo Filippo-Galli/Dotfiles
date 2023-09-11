@@ -13,6 +13,8 @@ Screenshot of my rofi setup:
 Bluetooth manager: 
 [Bluetuith](https://github.com/darkhz/bluetuith)
 
+Screen Temperature:
+[wl-gammarelay-rs](https://github.com/MaxVerevkin/wl-gammarelay-rs)
 
 ## Scripts
 
