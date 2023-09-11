@@ -8,8 +8,11 @@ Screenshot of my background and waybar setup:
 Screenshot of my rofi setup:
 ![Screen of Waybar and Rofi](Screen/rofi.png)
 
-## Pacman Hooks
-Per far girare orphan.hook c'è bisogno del package 'moreutils' per far andare il comando 'ifne'
+## Useful link
+
+Bluetooth manager: 
+[Bluetuith](https://github.com/darkhz/bluetuith)
+
 
 ## Scripts
 
