@@ -22,3 +22,5 @@ Screen Temperature:
 This script help to automate the activation of Wayland on Electron-base programs like Visual Studio Code.
 ### Daynight-shifter
 Script that modifies the temperature of the screen and accepts 2 modes: fixed or varying temperature according to the time.
+### Battery level notifier
+[battery-notify.sh](https://github.com/cybergaz/scripts/blob/main/hyprland/battery_notify.sh)
