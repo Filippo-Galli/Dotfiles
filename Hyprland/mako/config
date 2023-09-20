@@ -1,7 +1,7 @@
 sort=-time
 layer=overlay
 
-background-color=#2e3440
+background-color=#2e3440AA
 width=300
 height=110
 border-size=2
@@ -19,10 +19,10 @@ font=monospace 10
 border-color=#cccccc
 
 [urgency=normal]
-border-color=#d08770
+border-color=#f55302
 
 [urgency=high]
-border-color=#bf616a
+border-color=#ff0000
 default-timeout=0
 
 [category=mpd]

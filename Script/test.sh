@@ -1,11 +1,12 @@
 SLEEP_TIME=30
 full_flag=0
-low_flag_30=0
-low_flag_20=0
+low_flag=0
+low_flag_1=0
 crit_flag=0
 vcrit_flag=0
-while [ true ]; do
+#while [ true ]; do
 	capc=$(cat /sys/class/power_supply/BAT0/capacity)
+	echo "$capc"
 	if [[ $(cat /sys/class/power_supply/BAT0/status) != "Discharging" ]]; then # -- charging state
 		shutdown -c                                                               # -- closing the pending shutdowns from critical shutdown action
 		low_flag=0
@@ -25,18 +26,18 @@ while [ true ]; do
 			SLEEP_TIME=40
 		else
 			SLEEP_TIME=30
-			if (($capc > 20)) && (($capc <= 30)); then
+			if (($capc <= 30)); then
 				SLEEP_TIME=20
-				if ((low_flag_30 != 1)); then
+				if ((low_flag_1 != 1)); then
 					notify-send "    Battery LOW" "\nBattery at 30%" -u low -t 5000
-					low_flag_30=1
+					low_flag_1=1
 				fi
 			fi
-			if (($capc > 10)) && (($capc <= 20)); then
+			if (($capc <= 20)); then
 				SLEEP_TIME=20
-				if ((low_flag_20 != 1)); then
-					notify-send "    Battery LOW" "\nBattery at 20%, search the charger" -u normal
-					low_flag_20=1
+				if ((low_flag != 1)); then
+					notify-send "    Battery LOW" "\nBattery at 20%, search the charger" -u low
+					low_flag=1
 				fi
 
 			fi
@@ -61,4 +62,4 @@ while [ true ]; do
 	fi
 	#echo "$capc sl_time = $SLEEP_TIME"
 	sleep $SLEEP_TIME
-done
+#done
