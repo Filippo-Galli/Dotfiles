@@ -104,7 +104,6 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias ls="ls -lah --color=auto"
-alias exa="exa -alh"
+alias ls="exa -alh"
 # Only for Ubuntu 
 # alias all-upgrade="sudo sh ~/Documents/Coding/Bash/checkUpdate.sh"

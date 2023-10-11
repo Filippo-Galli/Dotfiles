@@ -10,7 +10,7 @@
 
     "modules-center": [],
 
-    "modules-right": ["tray", "cpu", "memory", "network", "bluetooth", "temperature", "battery", "battery#bat2", "pulseaudio", "clock"],
+    "modules-right": ["tray", "cpu", "memory", "network", "bluetooth", "temperature", "battery", "pulseaudio", "clock"],
 
     "hyprland/workspaces": {
     	"format": "{icon}",
@@ -111,9 +111,6 @@
         // "format-full": "",
         "format-icons": ["", "", "", "", ""]
     },
-    "battery#bat2": {
-        "bat": "BAT2",
-    },
     "network": {
         // "interface": "wlp2*", // (Optional) To force the use of this interface
         "format-wifi": "{essid} ({signalStrength}%) ",
@@ -123,8 +120,7 @@
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
         //"format-alt": "{ifname}: {ipaddr}/{cidr}",
-        "on-click": "iwgtk",
-	//"on-click": "nmtui",
+        //"on-click": "nmtui",
     },
     "pulseaudio": {
         // "scroll-step": 1, // %, can be a float

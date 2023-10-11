@@ -16,6 +16,9 @@ Bluetooth manager:
 Screen Temperature:
 [wl-gammarelay-rs](https://github.com/MaxVerevkin/wl-gammarelay-rs)
 
+Auto-mount devices:
+[udiskie](https://github.com/coldfix/udiskie)
+
 ## Scripts
 
 ### Wayland-activator
