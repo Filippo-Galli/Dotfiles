@@ -104,6 +104,8 @@ source $ZSH/oh-my-zsh.sh
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
-alias ls="exa -alh"
-# Only for Ubuntu 
-# alias all-upgrade="sudo sh ~/Documents/Coding/Bash/checkUpdate.sh"
+eval "$(starship init zsh)"
+
+if [ -f ~/.zsh_aliases ]; then
+    source ~/.zsh_aliases
+fi 

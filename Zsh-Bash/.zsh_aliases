@@ -1,0 +1,46 @@
+
+# ----------------------- list files ----------------------- 
+alias ls="exa -alhF"
+
+# ----------------------- Wireguard -----------------------
+# alias connect="sudo wg-quick up"
+# alias disconnect="sudo wg-quick down"
+
+# ----------------------- Sublime Text -----------------------
+
+function s {
+  if [ "$1" != "" ]; then
+    subl $1
+  else
+    subl $PWD
+  fi
+} 
+
+# ----------------------- clear directory -----------------------
+
+alias c="clear"
+
+# ----------------------- change directory -----------------------
+
+function take {
+    mkdir -p $1
+    cd $1
+}
+
+# ----------------------- bat <-> cat -----------------------
+
+alias cat="bat"
+
+# ----------------------- wifi management -----------------------
+
+alias wstatus="nmcli dev status"
+alias wlist="nmcli dev wifi list"
+alias wrescan="nmcli dev wifi rescan"
+alias wshow="nmcli con show"
+
+# after the command insert network-ssid
+alias wc="nmcli --ask dev wifi connect $1"
+alias wdown="nmcli con down $1"
+alias wup="nmcli con up $1"
+
+
