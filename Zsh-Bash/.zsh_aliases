@@ -43,4 +43,14 @@ alias wc="nmcli --ask dev wifi connect $1"
 alias wdown="nmcli con down $1"
 alias wup="nmcli con up $1"
 
+# ----------------------- pacman  -----------------------
 
+alias clean_orph="sudo pacman -Qtdq | sudo pacman -Rns -"
+
+# ----------------------- Resources Monitor  -----------------------
+
+alias gputop="sudo intel_gpu_top"
+alias cputop="auto-cpufreq --stats"
+
+# ----------------------- Redshift  -----------------------
+alias redshift="./Documents/Dotfiles/Script/daynight-shifter.sh"

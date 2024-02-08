@@ -11,7 +11,7 @@ while [ true ]; do
 		low_flag=0
 		crit_flag=0
 		vcrit_flag=0
-		if (($capc == 100)); then
+		if (($capc >= 90)); then
 			if ((full_flag != 1)); then
 				notify-send "    Battery FULL" "Unplug the charger"
 				full_flag=1

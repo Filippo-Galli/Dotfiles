@@ -1,25 +1,121 @@
 {
     "layer": "top", // Waybar at top layer
     // "position": "bottom", // Waybar position (top|bottom|left|right)
+    
     "height": 30, // Waybar height (to be removed for auto height)
     // "width": 1280, // Waybar width
+    
     "spacing": 4, // Gaps between modules (4px)
     // Choose the order of the modules
 
-    "modules-left": ["hyprland/workspaces"],
+    
+    "modules-left": ["network", "pulseaudio", "bluetooth", "custom/wl-gammarelay-temperature"],
 
-    "modules-center": [],
+    "modules-center": [ "clock"],
 
-    "modules-right": ["tray", "cpu", "memory", "network", "bluetooth", "temperature", "battery", "pulseaudio", "clock"],
+    // system stats
+    "modules-right": ["tray", "cpu", "memory", "temperature", "battery"],
+
+    
+    "clock": {
+        // "timezone": "America/New_York",
+        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
+        "format-alt": "{:%Y-%m-%d}"
+    },
+
+    "cpu": {
+        "format": "{usage}% ",
+    },
+    
+    "memory": {
+        "format": "{used} GB "
+    },
+    
+    "temperature": {
+        "thermal-zone": 9,
+        // "hwmon-path": "/sys/class/hwmon/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": [""]
+    },
+    
+    "battery": {
+        "states": {
+            "good": 80,
+            "warning": 30,
+            "critical": 15
+        },
+        "interval": 1,
+        "format": "{capacity}% {icon}",
+        "format-charging": "{capacity}% ",
+        "format-alt": "{time} {icon}",
+        // "format-good": "", // An empty format will hide the module
+        // "format-full": "",
+        "format-icons": ["", "", "", "", ""]
+    },
+    
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": "{essid} ({signalStrength}%) ",
+        // "format-wifi": "[{bandwidthUpBits}]/[{bandwidthDownBits}] ",
+        "format-ethernet": "[{bandwidthUpBits}]/[{bandwidthDownBits}] ",
+        "tooltip-format": "{ifname} via {gwaddr} ",
+        "format-linked": "{ifname} (No IP) ",
+        "format-disconnected": "Disconnected ⚠",
+        //"format-alt": "{ifname}: {ipaddr}/{cidr}",
+        //"on-click": "nmtui",
+    },
+    
+    "pulseaudio": {
+        // "scroll-step": 1, // %, can be a float
+        "format": "{volume}% {icon} {format_source}",
+        "format-bluetooth": "{volume}% {icon} {format_source}",
+        "format-bluetooth-muted": " {icon} {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": "",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    },
+	
+    "bluetooth": {
+    	// "format-alt": "bluetooth: {status}",
+        "format-on": " ",
+    	"format-off": "! ",
+    	"on-click": "foot bluetuith",
+    	"tooltip-format": "{status}"
+    },
+
+    "custom/wl-gammarelay-temperature": {
+        "format": "{icon}",
+        "tooltip-format": "{icon}",
+
+        "on-click": "~/Documents/Dotfiles/Script/toogle_temperature.sh",          
+
+        "format-icons": ["", ""],      
+    },
+    
+
+
+    // -------------------------- Unused module but may be useful someday
+
 
     "hyprland/workspaces": {
-    	"format": "{icon}",
-    	"format-icons": {
-    		"urgent": "",
-    		"focused": "",
-    		"active": "",
-    		"default": ""
-    	},
+        "format": "{icon}",
+        //"format": "{name}",
+        "format-icons": {
+            "active": "",
+            "default": ""
+        },
         "on-click": "activate",
     },
 
@@ -73,81 +169,7 @@
         "icon-size": 21,
         "spacing": 5
     },
-    "clock": {
-        // "timezone": "America/New_York",
-        "tooltip-format": "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>",
-        "format-alt": "{:%Y-%m-%d}"
-    },
-    "cpu": {
-        "format": "{usage}% ",
-    },
-    "memory": {
-        "format": "{used} GB "
-    },
-    "temperature": {
-        "thermal-zone": 9,
-        // "hwmon-path": "/sys/class/hwmon/temp1_input",
-        "critical-threshold": 80,
-        // "format-critical": "{temperatureC}°C {icon}",
-        "format": "{temperatureC}°C {icon}",
-        "format-icons": [""]
-    },
-    "backlight": {
-        // "device": "acpi_video1",
-        "format": "{percent}% {icon}",
-        "format-icons": ["", "", "", "", "", "", "", "", ""]
-    },
-    "battery": {
-        "states": {
-            "good": 80,
-            "warning": 30,
-            "critical": 15
-        },
-        "interval": 1,
-        "format": "{capacity}% {icon}",
-        "format-charging": "{capacity}% ",
-        "format-alt": "{time} {icon}",
-        // "format-good": "", // An empty format will hide the module
-        // "format-full": "",
-        "format-icons": ["", "", "", "", ""]
-    },
-    "network": {
-        // "interface": "wlp2*", // (Optional) To force the use of this interface
-        "format-wifi": "{essid} ({signalStrength}%) ",
-        // "format-wifi": "[{bandwidthUpBits}]/[{bandwidthDownBits}] ",
-        "format-ethernet": "[{bandwidthUpBits}]/[{bandwidthDownBits}] ",
-        "tooltip-format": "{ifname} via {gwaddr} ",
-        "format-linked": "{ifname} (No IP) ",
-        "format-disconnected": "Disconnected ⚠",
-        //"format-alt": "{ifname}: {ipaddr}/{cidr}",
-        //"on-click": "nmtui",
-    },
-    "pulseaudio": {
-        // "scroll-step": 1, // %, can be a float
-        "format": "{volume}% {icon} {format_source}",
-        "format-bluetooth": "{volume}% {icon} {format_source}",
-        "format-bluetooth-muted": " {icon} {format_source}",
-        "format-muted": " {format_source}",
-        "format-source": "",
-        "format-source-muted": "",
-        "format-icons": {
-            "headphone": "",
-            "hands-free": "",
-            "headset": "",
-            "phone": "",
-            "portable": "",
-            "car": "",
-            "default": ["", "", ""]
-        },
-        "on-click": "pavucontrol"
-    },
-	"bluetooth": {
-    	// "format-alt": "bluetooth: {status}",
-    	"format-on": "",
-    	"format-off": "!",
-    	"on-click": "foot bluetuith",
-    	"tooltip-format": "{status}"
-    },
+
     "custom/media": {
         "format": "{icon} {}",
         "return-type": "json",
@@ -159,6 +181,13 @@
         "escape": true,
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
-    }
+    },
+
+    "custom/wl-gammarelay-brightness": {
+        "format": "{} ",
+        //"exec": "wl-gammarelay --subscribe Brightness",
+        "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateBrightness d +0.02",
+        "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateBrightness d -0.02"
+    },
 }
 

@@ -2,8 +2,12 @@
 This directory aimed to share my Arch - Hyprland configuration.
 
 ## Screen
-Screenshot of my background and waybar setup:
-![Screen of Waybar and Background](Screen/desktop.png)
+
+Screenshot of my waybar setup:
+![Screenshot waybar](Screen/waybar.png)
+
+Screenshot of my background and waybar:
+![Screenshot of home](Screen/desktop.png)
 
 Screenshot of my rofi setup:
 ![Screen of Waybar and Rofi](Screen/rofi.png)
@@ -19,6 +23,9 @@ Screen Temperature:
 Auto-mount devices:
 [udiskie](https://github.com/coldfix/udiskie)
 
+Hyprland plugin:
+[Hycov](https://github.com/DreamMaoMao/hycov)
+
 ## Scripts
 
 ### Wayland-activator
@@ -27,3 +34,5 @@ This script help to automate the activation of Wayland on Electron-base programs
 Script that modifies the temperature of the screen and accepts 2 modes: fixed or varying temperature according to the time.
 ### Battery level notifier
 [battery-notify.sh](https://github.com/cybergaz/scripts/blob/main/hyprland/battery_notify.sh)
+### Toogle_temperature
+Necessary script to my custom module of waybar. Its aim is to configure the icon on waybar to enable/disable red shift on the screen (red_shifted temperature: 3500, default temperature: 5500).

@@ -8,7 +8,7 @@ time_checking()
   do
    currenttime=$(date +%H:%M)
    if [[ "$currenttime" > "21:00" ]] || [[ "$currenttime" < "07:30" ]]; then
-	busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 3500
+	  busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 3500
    else
     busctl --user set-property rs.wl-gammarelay / rs.wl.gammarelay Temperature q 6500
    fi
