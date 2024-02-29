@@ -92,7 +92,7 @@
         "format-on": " ",
     	"format-off": "! ",
     	"on-click": "foot bluetuith",
-    	"tooltip-format": "{status}"
+    	//"tooltip-format": "{status}"
     },
 
     "custom/wl-gammarelay-temperature": {

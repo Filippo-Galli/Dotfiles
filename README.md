@@ -26,6 +26,9 @@ Auto-mount devices:
 Hyprland plugin:
 [Hycov](https://github.com/DreamMaoMao/hycov)
 
+Clipboard manager:
+[Cliphist](https://github.com/sentriz/cliphist)
+
 ## Scripts
 
 ### Wayland-activator

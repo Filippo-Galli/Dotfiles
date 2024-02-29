@@ -54,3 +54,7 @@ alias cputop="auto-cpufreq --stats"
 
 # ----------------------- Redshift  -----------------------
 alias redshift="./Documents/Dotfiles/Script/daynight-shifter.sh"
+
+# ----------------------- Radian (R development) ----------------------
+alias r="radian"
+
