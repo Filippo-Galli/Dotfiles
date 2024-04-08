@@ -1,20 +1,10 @@
 
 # ----------------------- list files ----------------------- 
-alias ls="exa -alhF"
+alias ls="eza -alhF"
 
 # ----------------------- Wireguard -----------------------
 # alias connect="sudo wg-quick up"
 # alias disconnect="sudo wg-quick down"
-
-# ----------------------- Sublime Text -----------------------
-
-function s {
-  if [ "$1" != "" ]; then
-    subl $1
-  else
-    subl $PWD
-  fi
-} 
 
 # ----------------------- clear directory -----------------------
 
