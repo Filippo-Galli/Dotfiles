@@ -7,7 +7,11 @@ return {
     "LazyVim/LazyVim",
     opts = {
       colorscheme = "gruvbox",
-      transparent_background = true,
+      transparent = true,
+      styles = {
+        sidebars = "transparent",
+        floats = "transparent",
+      },
     },
   },
 }
