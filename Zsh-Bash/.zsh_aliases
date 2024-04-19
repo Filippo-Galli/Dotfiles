@@ -1,6 +1,7 @@
 
 # ----------------------- list files ----------------------- 
-alias ls="eza -alhF"
+alias ls="eza -alhF --icons=always --no-user"
+alias lu="eza -alhF --icons=always"
 
 # ----------------------- Wireguard -----------------------
 # alias connect="sudo wg-quick up"
@@ -47,4 +48,3 @@ alias redshift="./Documents/Dotfiles/Script/daynight-shifter.sh"
 
 # ----------------------- Radian (R development) ----------------------
 alias r="radian"
-

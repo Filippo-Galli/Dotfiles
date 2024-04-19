@@ -63,8 +63,8 @@
         "tooltip-format": "{ifname} via {gwaddr} ",
         "format-linked": "{ifname} (No IP) ",
         "format-disconnected": "Disconnected ⚠",
+        "format-disabled": "Disabled ⚠",
         //"format-alt": "{ifname}: {ipaddr}/{cidr}",
-        //"on-click": "nmtui",
     },
     
     "pulseaudio": {

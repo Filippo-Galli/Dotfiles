@@ -112,6 +112,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 eval "$(starship init zsh)"
+eval "$(fzf --zsh)"
 
 if [ -f ~/.zsh_aliases ]; then
     source ~/.zsh_aliases
