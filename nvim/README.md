@@ -12,7 +12,7 @@ mv .config/nvim .config/nvim.bak
 - Clone this repo wherever you want
 - link local repo to your config: 
 ```Bash
-ln -s path/where/you/cloned/this/repo/ .config/nvim
+cd; cd .config; ln -s path/where/you/cloned/this/repo/nvim .
 ```
 
 ## Theme
