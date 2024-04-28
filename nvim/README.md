@@ -52,6 +52,22 @@ Refer to the [Lazygit](https://github.com/jesseduffield/lazygit) and to the plug
 
 It's a plugin to use Mason directly in your editor. You can open it with `:Mason`.
 
+### neo-tree.lua
+Neo-tree is a file explorer. You can open it with `:NvimTreeToggle`. I set the option to always show hidden files. 
+
 ### telescope.lua
 
 It's a plugin to use Telescope. It's a fuzzy finder, you can search for files, buffers, git files and more.
+
+## Useful keybindings
+
+<leader> is the leader key, by default is the space key.
+
+- e: open the file explorer
+- <space> or ff: find files
+- ,: switch between open buffers (tabs)
+- /: search in files (cwd)
+- gg: open lazygit
+- st: search TODOs
+ 
+
