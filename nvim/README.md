@@ -69,5 +69,21 @@ It's a plugin to use Telescope. It's a fuzzy finder, you can search for files, b
 - /: search in files (cwd)
 - gg: open lazygit
 - st: search TODOs
- 
+- u: undo
+
+### Search:
+Useful references:
+- [Simpler guide](https://thevaluable.dev/vim-search-find-replace/)
+
+
+#### Method 1:
+"/" or "?" <keyword>: search in the file and press enter to highlight occurrences.
+Use n to go to the next match and N to go to the previous match.
+
+#### Method 2:
+Highlight the word you want to search and press * to search for the word. As before, use n and N to go to the next and previous match.
+
+### Search and replace:
+by default, i have [nvim-spectre](https://github.com/nvim-pack/nvim-spectre).
+<leader>sr: search and replace in the file, after inserting the word you want to replace, come back to normal mode and use <leader> + R to replace all the occurrences in the file.
 

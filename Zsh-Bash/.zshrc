@@ -119,3 +119,4 @@ if [ -f ~/.zsh_aliases ]; then
 fi
 
 export QT_QPA_PLATFORM=xcb
+source /usr/share/nvm/init-nvm.sh
