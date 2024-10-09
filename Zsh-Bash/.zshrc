@@ -119,4 +119,6 @@ if [ -f ~/.zsh_aliases ]; then
 fi
 
 export QT_QPA_PLATFORM=xcb
+export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 source /usr/share/nvm/init-nvm.sh
+
