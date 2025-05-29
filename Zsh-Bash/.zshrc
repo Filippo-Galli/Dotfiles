@@ -118,7 +118,14 @@ if [ -f ~/.zsh_aliases ]; then
     source ~/.zsh_aliases
 fi
 
-export QT_QPA_PLATFORM=xcb
+# export QT_QPA_PLATFORM=xcb
+
+export GTK_THEME="Adwaita:Dark"
 export LD_LIBRARY_PATH="/usr/local/lib:$LD_LIBRARY_PATH"
 source /usr/share/nvm/init-nvm.sh
 
+
+. "$HOME/.cargo/env"
+
+# Created by `pipx` on 2024-12-30 08:37:01
+export PATH="$PATH:/home/filippo/.local/bin"
