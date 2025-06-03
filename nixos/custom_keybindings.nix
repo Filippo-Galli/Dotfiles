@@ -4,6 +4,7 @@
   # Ensure we have the necessary tools
   home.packages = with pkgs; [
     zenity  # For dialog boxes if needed
+    
   ];
 
   # GNOME keybindings through Home Manager

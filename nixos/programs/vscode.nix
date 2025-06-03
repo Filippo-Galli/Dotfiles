@@ -10,11 +10,18 @@
       "editor.fontFamily" = "'Fira Code'";
       "editor.fontSize" = 14;
       "editor.formatOnSave" = true;
+
+      # Auto-save settings
+      "files.autoSave" = "afterDelay";
+      "files.autoSaveDelay" = 500; # Auto-save after 1 second of inactivity
+
       
       # Nix-specific settings
       "[nix]" = {
         "editor.defaultFormatter" = "jnoortheen.nix-ide";
         "editor.formatOnSave" = true;
+        "editor.tabSize" = 2;
+        "editor.insertSpaces" = true;
       };
       
       # Terminal settings
