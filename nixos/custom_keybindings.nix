@@ -4,7 +4,7 @@
   # Ensure we have the necessary tools
   home.packages = with pkgs; [
     zenity  # For dialog boxes if needed
-    
+  
   ];
 
   # GNOME keybindings through Home Manager
@@ -14,8 +14,8 @@
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom1/"
         "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom2/"
-	"/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"     
-	 ];
+	      "/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom3/"     
+	    ];
     };
 
     # Kitty terminal with Super+q

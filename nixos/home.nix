@@ -42,5 +42,9 @@ home.sessionVariables = {
     slurp          # Screen area selection
     mako           # Notification daemon
     hyprsunset     # Blue-light
+
+    # Vs code nix extension
+    nil
+    nixpkgs-fmt
   ];
 }
