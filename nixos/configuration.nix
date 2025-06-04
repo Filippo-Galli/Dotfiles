@@ -36,7 +36,6 @@
   boot.loader.efi.canTouchEfiVariables = true;
 
   networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Enable networking
   networking.networkmanager.enable = true;
@@ -58,6 +57,7 @@
     LC_TELEPHONE = "it_IT.UTF-8";
     LC_TIME = "it_IT.UTF-8";
   };
+
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
@@ -71,7 +71,7 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland ];
+    extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk];
   };
 
   # Optional: Keep GNOME alongside Hyprland
@@ -135,29 +135,23 @@
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
   	wget
-	btop
-	vim
-	kitty
-	git
-        bat
-	#gnome-tweaks
-	lazygit
-	lazydocker
+    vim
+    kitty
+    git
 
-	gnome-keyring
-	seahorse
-        libsecret  # Needed for apps to talk to gnome-keyring
+    gnome-keyring
+    seahorse
+    libsecret  # Needed for apps to talk to gnome-keyring
   ];
 
   security.pam.services.hyprland.enableGnomeKeyring = true;
   security.pam.services.login.enableGnomeKeyring = true;
   security.pam.services.passwd.enableGnomeKeyring = true;
 
-  
   # Set the default editor to vim
   environment.variables = {
   	EDITOR = "nvim";
-	SECRET_TOOL_BACKEND = "gnome";
+	  SECRET_TOOL_BACKEND = "gnome";
   };
 
   system.stateVersion = "24.11"; 

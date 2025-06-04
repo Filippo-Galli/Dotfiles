@@ -4,27 +4,25 @@
   home.username = "filippo";
   home.homeDirectory = "/home/filippo";
   services.gnome-keyring = {
-  enable = true;
-  components = [ "pkcs11" "secrets" "ssh" ];
-};
+    enable = true;
+    components = [ "pkcs11" "secrets" "ssh" ];
+  };
 
-# Set environment variables for applications to find the keyring
-home.sessionVariables = {
-  # ... your existing variables
-  GNOME_KEYRING_CONTROL = "${config.home.homeDirectory}/.cache/keyring-control";
-  BRAVE_PASSWORD_STORE = "gnome-libsecret";
-};
+  # Set environment variables for applications to find the keyring
+  home.sessionVariables = {
+    GNOME_KEYRING_CONTROL = "${config.home.homeDirectory}/.cache/keyring-control";
+    BRAVE_PASSWORD_STORE = "gnome-libsecret";
+    # GTK theme dark 
+    GTK_THEME = "Adwaita:dark";
+  };
 	
   imports = [
     ./WM
     ./shell
     ./programs
-    #./custom_keybindings.nix 
   ];
 
   home.stateVersion = "24.11";
-
-  # Let home Manager install and manage itself.
   programs.home-manager.enable = true;
 
   home.sessionVariables = {
@@ -46,6 +44,5 @@ home.sessionVariables = {
     # Vs code nix extension
     nil
     nixfmt-rfc-style
-    
   ];
 }

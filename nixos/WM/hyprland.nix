@@ -27,16 +27,13 @@
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "cliphist wipe"
+        
         "hyprsunset -t 4000"
         "bus-update-activation-environment --all"
         "swww-daemon"
         "swww img ./pxfuel.jpg"
         #"udiskie -an --no-tray -f nemo"
-        "mako"
-        #"swaybg -i ~/.config/hypr/pxfuel.jpg"
-        #"wl-gammarelay-rs"
         "bash ./battery_notify.sh"
-        #"bash ~/Documents/Dotfiles/Script/toogle_temperature.sh"
       ];
       
       # Input configuration
