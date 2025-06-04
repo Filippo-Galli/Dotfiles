@@ -3,8 +3,8 @@
 {
   programs.git = {
     enable = true;
-    #userName  = "Filippo-Galli";
-    #userEmail = "filippo.galli.cr@gmail.com";
+    userName  = "Filippo-Galli";
+    userEmail = "filippo.galli.cr@gmail.com";
     lfs.enable = true;
   };
 
@@ -12,6 +12,6 @@
     enable = true; 
     gitCredentialHelper = {
       enable = true;
-    }
-  }
+    };
+  };
 }
