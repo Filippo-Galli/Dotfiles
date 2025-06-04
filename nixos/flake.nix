@@ -11,7 +11,6 @@
 
     nixvim = {
       url = "github:nix-community/nixvim";
-      # Make sure nixvim uses the same nixpkgs version
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
