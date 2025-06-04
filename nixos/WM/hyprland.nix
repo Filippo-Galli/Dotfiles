@@ -27,9 +27,9 @@
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "cliphist wipe"
-	"hyprsunset -t 4000"
-	"bus-update-activation-environment --all"
-	"swww-daemon"
+        "hyprsunset -t 4000"
+        "bus-update-activation-environment --all"
+        "swww-daemon"
         "swww img ./pxfuel.jpg"
         #"udiskie -an --no-tray -f nemo"
         "mako"
@@ -176,11 +176,12 @@
         
         # Waybar toggle
         #"$mainMod, W, exec, pkill waybar || waybar -c ~/Documents/Dotfiles/Hyprland/waybar/config -s ~/Documents/Dotfiles/Hyprland/waybar/style.css "
-       "$mainMod, W, exec, if systemctl --user is-active --quiet waybar; then systemctl --user stop waybar; else systemctl --user start waybar; fi"
-       # Custom application bindings
+        "$mainMod, W, exec, if systemctl --user is-active --quiet waybar; then systemctl --user stop waybar; else systemctl --user start waybar; fi"
+        
+        # Custom application bindings
         "$mainMod, B, exec, brave"
         "$mainMod, F, fullscreen"
-        "$mainMod, C, exec, code"
+        "$mainMod, C, exec, code --password-store=\"gnome-libsecret\""
         "$mainMod, N, exec, nemo"
         "$mainMod, V, exec, cliphist list | rofi -dmenu -theme ~/.config/rofi/launchers/type-2/style-1.rasi | cliphist decode | wl-copy"
         "$mainMod, R, exec, ~/Documents/Dotfiles/Script/toogle_temperature.sh"

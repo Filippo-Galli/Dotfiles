@@ -45,6 +45,7 @@ home.sessionVariables = {
 
     # Vs code nix extension
     nil
-    nixpkgs-fmt
+    nixfmt-rfc-style
+    
   ];
 }
