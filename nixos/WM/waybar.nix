@@ -17,9 +17,9 @@
         spacing = 4;
         
         # Module layout
-        modules-left = [ "network" "pulseaudio" "bluetooth" "custom/hyprsunset" ];
+        modules-left = [ "network" "pulseaudio" "bluetooth" ];
         modules-center = [ "clock" ];
-        modules-right = [ "tray" "cpu" "memory" "temperature" "battery" ];
+        modules-right = [ "tray" "cpu" "memory" "temperature" "power-profiles-daemon" "battery" ];
         
         # Module configurations
         clock = {
@@ -33,6 +33,18 @@
         
         memory = {
           format = "{used} GB  ";
+        };
+
+        power-profiles-daemon = {
+          format = "{icon}";
+          tooltip-format = "Power profile: {profile}\nDriver: {driver}";
+          tooltip = true;
+          format-icons = {
+            "default" = " ";
+            "performance" = " ";
+            "balanced" = "  ";
+            "power-saver" = "  ";
+          };
         };
         
         temperature = {
@@ -52,7 +64,7 @@
           format = "{capacity}% {icon}";
           format-charging = "{capacity}%  ";
           format-alt = "{time} {icon}";
-	  format-icons = [" " " " " " " " " "];
+	        format-icons = [" " " " " " " " " "];
         };
         
         network = {

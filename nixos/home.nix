@@ -40,6 +40,7 @@
     slurp          # Screen area selection
     mako           # Notification daemon
     hyprsunset     # Blue-light
+    brightnessctl  # Brightness control
 
     # Vs code nix extension
     nil

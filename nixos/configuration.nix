@@ -144,6 +144,8 @@
     libsecret  # Needed for apps to talk to gnome-keyring
   ];
 
+  services.power-profiles-daemon.enable = true;
+
   security.pam.services.hyprland.enableGnomeKeyring = true;
   security.pam.services.login.enableGnomeKeyring = true;
   security.pam.services.passwd.enableGnomeKeyring = true;
