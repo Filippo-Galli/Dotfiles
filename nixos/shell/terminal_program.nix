@@ -19,6 +19,7 @@
     eza # A modern replacement for ‘ls’
     fzf # A command-line fuzzy finder
     tree 
+
     # nix related
     #
     # it provides the command `nom` works just like `nix`
@@ -38,6 +39,9 @@
     ethtool
     pciutils # lspci
     usbutils # lsusb
+
+    # Terminal file managers
+    yazi
   ];
 
 }

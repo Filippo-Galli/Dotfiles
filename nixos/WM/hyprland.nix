@@ -117,7 +117,7 @@
         "$mainMod, Q, exec, kitty"
         "$mainMod, k, killactive"
         "$mainMod, L, exec, swaylock --clock --color 000000"
-        "$mainMod, E, exec, bash ~/.config/rofi/launchers/type-5/launcher.sh"
+        "$mainMod, E, exec, rofi -show run"
         "$mainMod SHIFT, S, exec, shutdown now"
         "$mainMod SHIFT, R, exec, reboot"
         "$mainMod, P, pseudo"
@@ -168,6 +168,9 @@
         "SUPER, XF86AudioRaiseVolume, exec, swayosd-client --input-volume raise"
         "SUPER, XF86AudioLowerVolume, exec, swayosd-client --input-volume lower"
         ", XF86AudioMicMute, exec, swayosd-client --input-volume mute-toggle"
+
+        # Caps Lock toggle with SwayOSD
+        ", Caps_Lock, exec, swayosd-client --caps-lock"
         
         # Screenshot
         ", XF86Calculator, exec, grim -g \"$(slurp)\""
