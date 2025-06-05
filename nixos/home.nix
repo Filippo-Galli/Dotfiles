@@ -45,5 +45,8 @@
     # Vs code nix extension
     nil
     nixfmt-rfc-style
+
+    # OSD
+    swayosd 
   ];
 }

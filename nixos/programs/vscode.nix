@@ -3,6 +3,7 @@
 {
   programs.vscode = {
     enable = true;
+    package = pkgs.unstable.vscode; 
 
     # User settings (applied to settings.json)
     userSettings = {
