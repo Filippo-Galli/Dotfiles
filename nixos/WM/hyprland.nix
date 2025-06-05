@@ -117,10 +117,13 @@
         "$mainMod, Q, exec, kitty"
         "$mainMod, k, killactive"
         "$mainMod, L, exec, swaylock --clock --color 000000"
-        "$mainMod, E, exec, rofi -show run"
+
+        # Rofi bindings
+        "$mainMod, E, exec, rofi -show drun -theme ~/.config/rofi/custom-theme.rasi"
+        "$mainMod, P, exec, rofi -show window -theme ~/.config/rofi/custom-theme.rasi"
+
         "$mainMod SHIFT, S, exec, shutdown now"
         "$mainMod SHIFT, R, exec, reboot"
-        "$mainMod, P, pseudo"
         "$mainMod, J, togglesplit"
         
         # Focus movement with arrow keys
@@ -176,7 +179,6 @@
         ", XF86Calculator, exec, grim -g \"$(slurp)\""
         
         # Waybar toggle
-        #"$mainMod, W, exec, pkill waybar || waybar -c ~/Documents/Dotfiles/Hyprland/waybar/config -s ~/Documents/Dotfiles/Hyprland/waybar/style.css "
         "$mainMod, W, exec, if systemctl --user is-active --quiet waybar; then systemctl --user stop waybar; else systemctl --user start waybar; fi"
         
         # Custom application bindings
@@ -184,7 +186,7 @@
         "$mainMod, F, fullscreen"
         "$mainMod, C, exec, code --password-store=\"gnome-libsecret\""
         "$mainMod, N, exec, nemo"
-        "$mainMod, V, exec, cliphist list | rofi -dmenu -theme ~/.config/rofi/launchers/type-2/style-1.rasi | cliphist decode | wl-copy"
+        "$mainMod, V, exec, cliphist list | rofi -dmenu -display-columns 2- -theme ~/.config/rofi/custom-theme-dmenu.rasi | cliphist decode | wl-copy"
         "$mainMod, R, exec, ~/Documents/Dotfiles/Script/toogle_temperature.sh"
         "$mainMod, O, exec, obsidian"
         

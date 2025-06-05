@@ -36,6 +36,7 @@
     waybar         # Status bar
     swww           # Wallpaper daemon
     wl-clipboard   # Clipboard utilities
+    cliphist       # Clipboard history
     grim           # Screenshot utility
     slurp          # Screen area selection
     mako           # Notification daemon
