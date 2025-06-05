@@ -34,6 +34,7 @@
         "swww img ./pxfuel.jpg"
         #"udiskie -an --no-tray -f nemo"
         "bash ./battery_notify.sh"
+        "swayosd-server"  # Add SwayOSD server
       ];
       
       # Input configuration
@@ -76,7 +77,7 @@
       
       # Animation settings
       animations = {
-        enabled = false;
+        enabled = true;
         
         bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
         
@@ -156,17 +157,17 @@
         "$mainMod, mouse_down, workspace, e+1"
         "$mainMod, mouse_up, workspace, e-1"
         
-        # Brightness controls
-        ", XF86MonBrightnessUp, exec, brightnessctl set 5%+"
-        ", XF86MonBrightnessDown, exec, brightnessctl set 5%- --min-value=5"
+        # Brightness controls with SwayOSD
+        ", XF86MonBrightnessUp, exec, swayosd-client --brightness raise"
+        ", XF86MonBrightnessDown, exec, swayosd-client --brightness lower"
         
-        # Audio controls
-        ", XF86AudioRaiseVolume, exec, pamixer -i 5"
-        ", XF86AudioLowerVolume, exec, pamixer -d 5"
-        ", XF86AudioMute, exec, pamixer -t"
-        "SUPER, XF86AudioRaiseVolume, exec, pamixer --default-source -i 5"
-        "SUPER, XF86AudioLowerVolume, exec, pamixer --default-source -d 5"
-        ", XF86AudioMicMute, exec, pamixer --default-source --toggle-mute"
+        # Audio controls with SwayOSD
+        ", XF86AudioRaiseVolume, exec, swayosd-client --output-volume raise"
+        ", XF86AudioLowerVolume, exec, swayosd-client --output-volume lower"
+        ", XF86AudioMute, exec, swayosd-client --output-volume mute-toggle"
+        "SUPER, XF86AudioRaiseVolume, exec, swayosd-client --input-volume raise"
+        "SUPER, XF86AudioLowerVolume, exec, swayosd-client --input-volume lower"
+        ", XF86AudioMicMute, exec, swayosd-client --input-volume mute-toggle"
         
         # Screenshot
         ", XF86Calculator, exec, grim -g \"$(slurp)\""
