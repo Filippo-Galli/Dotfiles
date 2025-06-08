@@ -47,6 +47,9 @@
     nil
     nixfmt-rfc-style
 
+    # Bluetooth
+    bluetuith      # TUI Bluetooth manager
+
     # OSD
     swayosd 
   ];

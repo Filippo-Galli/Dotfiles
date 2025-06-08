@@ -105,6 +105,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    wireplumber.enable = true;
     # If you want to use JACK applications, uncomment this
     #jack.enable = true;
 
@@ -125,7 +126,7 @@
   users.users.filippo = {
     isNormalUser = true;
     description = "Filippo Galli";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "bluetooth"];
     shell = pkgs.zsh;
   };
 
@@ -194,6 +195,19 @@
       serif = [ "DejaVu Serif" ];
       sansSerif = [ "DejaVu Sans" ];
       monospace = [ "JetBrainsMono Nerd Font" ];
+    };
+  };
+};
+
+
+# Enable Bluetooth
+hardware.bluetooth = {
+  enable = true;
+  powerOnBoot = false;  # Don't auto-enable at boot
+  settings = {
+    General = {
+      Enable = "Source,Sink,Media,Socket";
+      Experimental = true;
     };
   };
 };

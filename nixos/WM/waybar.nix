@@ -96,9 +96,9 @@
         };
         
         bluetooth = {
-          format-on = " ";
-          format-off = "! ";
-          on-click = "foot bluetuith";
+          format-on = " ";
+          format-off = "! ";
+          on-click = "kitty bluetuith";
         };
         
         "custom/hyprsunset" = {
