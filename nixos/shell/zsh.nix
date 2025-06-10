@@ -27,7 +27,7 @@
       term = "kitty";
     };
 
-    initExtra = ''
+    initContent = "
       # Keybindings
       bindkey '^[[A' history-beginning-search-backward # Up arrow
       bindkey '^[[B' history-beginning-search-forward  # Down arrow
@@ -37,8 +37,8 @@
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
       # fzf 
-      eval "$(fzf --zsh)"
-    '';
+      eval \"$(fzf --zsh)\"
+    ";
     
     plugins = [
       {

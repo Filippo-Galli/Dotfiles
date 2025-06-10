@@ -3,24 +3,23 @@
 {
   services.mako = {
     enable = true;
-    
-    # Basic settings
-    sort = "-time";
-    layer = "overlay";
-    backgroundColor = "#2e3440AA";
-    width = 300;
-    height = 110;
-    borderSize = 2;
-    borderColor = "#88c0d0";
-    borderRadius = 15;
-    icons = true;
-    maxIconSize = 64;
-    defaultTimeout = 5000;
-    ignoreTimeout = true;
-    font = "monospace 10";
-    
-    # Use settings instead of extraConfig
+
     settings = {
+      ignore-timeout = true;
+      default-timeout = 5000;
+      icons = true;
+      border-radius = 15;
+      border-color = "#88c0d0";
+      border-size = 2;
+      height = 110;
+      width = 300;
+      background-color = "#2e3440AA";
+      font = "monospace 10";
+      layer = "overlay";
+      sort = "-time";
+      max-icon-size = 64;
+
+
       "urgency=low" = {
         border-color = "#cccccc";
       };

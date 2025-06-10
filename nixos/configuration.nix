@@ -94,7 +94,7 @@
   services.printing.enable = true;
 
   # Enable sound with pipewire.
-  hardware.pulseaudio.enable = false;
+  services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -118,7 +118,7 @@
     setSocketVariable = true;
   };
 
-  # Define a user account. Don't forget to set a password with ‘passwd’.
+  # Define a user account. Don't forget to set a password with 'passwd'.
   users.users.filippo = {
     isNormalUser = true;
     description = "Filippo Galli";
@@ -147,6 +147,8 @@
   security.pam.services.login.enableGnomeKeyring = true;
   security.pam.services.passwd.enableGnomeKeyring = true;
 
+  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+
   # Set the default editor to vim
   environment.variables = {
   	EDITOR = "nvim";
@@ -156,56 +158,53 @@
   system.stateVersion = stateVersion;
 
   fonts = {
-  packages = with pkgs; [
-    (nerdfonts.override { 
-      fonts = [ 
-        "JetBrainsMono"
-        "FiraCode"
-        "Hack"
-        "DejaVuSansMono"
-      ]; 
-    })
+    packages = with pkgs; [
+      # Individual Nerd Fonts (new format)
+      nerd-fonts.jetbrains-mono
+      nerd-fonts.fira-code
+      nerd-fonts.hack
+      nerd-fonts.dejavu-sans-mono
+      
+      # Font Awesome (all versions for compatibility)
+      font-awesome_6
+      font-awesome_5
+      
+      # Additional icon fonts that many applications use
+      material-design-icons
+      material-icons
+      
+      # Emoji support
+      noto-fonts-emoji
+      
+      # Symbols and icons
+      symbola
+    ];
     
-    # Font Awesome (all versions for compatibility)
-    font-awesome_6
-    font-awesome_5
+    # Enable default fonts for better compatibility
+    enableDefaultPackages = true;
     
-    # Additional icon fonts that many applications use
-    material-design-icons
-    material-icons
-    
-    # Emoji support
-    noto-fonts-emoji
-    
-    # Symbols and icons
-    symbola
-  ];
-  
-  # Enable default fonts for better compatibility
-  enableDefaultPackages = true;
-  
-  # Font configuration
-  fontconfig = {
+    # Font configuration
+    fontconfig = {
+      enable = true;
+      defaultFonts = {
+        serif = [ "DejaVu Serif" ];
+        sansSerif = [ "DejaVu Sans" ];
+        monospace = [ "JetBrainsMono Nerd Font" ];
+      };
+    };
+  };
+
+
+  # Enable Bluetooth
+  hardware.bluetooth = {
     enable = true;
-    defaultFonts = {
-      serif = [ "DejaVu Serif" ];
-      sansSerif = [ "DejaVu Sans" ];
-      monospace = [ "JetBrainsMono Nerd Font" ];
+    powerOnBoot = false;  # Don't auto-enable at boot
+    settings = {
+      General = {
+        Enable = "Source,Sink,Media,Socket";
+        Experimental = true;
+      };
     };
   };
-};
-
-
-# Enable Bluetooth
-hardware.bluetooth = {
-  enable = true;
-  powerOnBoot = false;  # Don't auto-enable at boot
-  settings = {
-    General = {
-      Enable = "Source,Sink,Media,Socket";
-      Experimental = true;
-    };
-  };
-};
 
 }

@@ -1,21 +1,24 @@
 { config, lib, ... }:
 
-let
-  disableService = {
+{
+  # Mask kwalletd6 by overriding with disabled units
+  systemd.user.services.kwalletd6 = lib.mkForce {
     Unit = {
-      Description = "Disabled KWallet Daemon";
+      Description = "KWallet Daemon (Disabled)";
     };
     Service = {
-      ExecStart = "${config.programs.bash.package}/bin/false";
-    };
-    Install = {
-      WantedBy = [ "default.target" ];
+      Type = "oneshot";
+      ExecStart = "/bin/true";
+      RemainAfterExit = false;
     };
   };
-in {
-  # Mask kwalletd6 (prevents auto-starting)
-  systemd.user.services.kwalletd6 = disableService;
-  systemd.user.sockets.kwalletd6 = disableService;
+
+  systemd.user.sockets.kwalletd6 = lib.mkForce {};
+
+  # Also disable through environment variable
+  home.sessionVariables = {
+    KWALLETD_DISABLE = "1";
+  };
 
   # Disable it through config
   home.file.".config/kwalletrc".text = ''
@@ -24,5 +27,3 @@ in {
     First Use=false
   '';
 }
-
-
