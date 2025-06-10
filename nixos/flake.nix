@@ -1,12 +1,12 @@
 {
   description = "NixOS configuration";
-
+  
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-24.11";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
     
     home-manager = {
-      url = "github:nix-community/home-manager/release-24.11";
+      url = "github:nix-community/home-manager/release-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
@@ -18,25 +18,25 @@
     hyprland.url = "github:hyprwm/Hyprland/v0.49.0";
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }: 
-  let
-    # Define the state version here - change this when updating NixOS versions
-    stateVersion = "24.11";
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }:
+  let 
+    stateVersion = "25.05";
+    username = "filippo";
+    system = "x86_64-linux";
   in
   {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
-      specialArgs = { 
-        username = "filippo"; 
-        inherit stateVersion;  # Pass stateVersion to configuration.nix
+      inherit system;
+      specialArgs = {
+        inherit username stateVersion;
       };
       
       modules = [
         ./configuration.nix
         
-        # Add unstable overlay to be specified for each package
+        # Add unstable overlay
         ({ config, pkgs, ... }: {
-          nixpkgs.overlays = [ 
+          nixpkgs.overlays = [
             (final: prev: {
               unstable = import nixpkgs-unstable {
                 system = final.system;
@@ -53,8 +53,7 @@
             useGlobalPkgs = true;
             useUserPackages = true;
             backupFileExtension = "bak";
-            users.filippo = import ./home.nix;
-            # Pass stateVersion to home-manager
+            users.${username} = import ./home.nix;
             extraSpecialArgs = { inherit stateVersion; };
           };
         }

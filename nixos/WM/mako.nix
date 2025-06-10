@@ -19,21 +19,25 @@
     ignoreTimeout = true;
     font = "monospace 10";
     
-    # Extra configuration for urgency levels and categories
-    extraConfig = ''
-      [urgency=low]
-      border-color=#cccccc
+    # Use settings instead of extraConfig
+    settings = {
+      "urgency=low" = {
+        border-color = "#cccccc";
+      };
       
-      [urgency=normal]
-      border-color=#f55302
+      "urgency=normal" = {
+        border-color = "#f55302";
+      };
       
-      [urgency=high]
-      border-color=#ff0000
-      default-timeout=0
+      "urgency=high" = {
+        border-color = "#ff0000";
+        default-timeout = 0;
+      };
       
-      [category=mpd]
-      default-timeout=2000
-      group-by=category
-    '';
+      "category=mpd" = {
+        default-timeout = 2000;
+        group-by = "category";
+      };
+    };
   };
 }
