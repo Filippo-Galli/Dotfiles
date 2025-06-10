@@ -18,10 +18,18 @@
     hyprland.url = "github:hyprwm/Hyprland/v0.49.0";
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }: {
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }: 
+  let
+    # Define the state version here - change this when updating NixOS versions
+    stateVersion = "24.11";
+  in
+  {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
-      specialArgs = { username = "filippo"; };
+      specialArgs = { 
+        username = "filippo"; 
+        inherit stateVersion;  # Pass stateVersion to configuration.nix
+      };
       
       modules = [
         ./configuration.nix
@@ -46,6 +54,8 @@
             useUserPackages = true;
             backupFileExtension = "bak";
             users.filippo = import ./home.nix;
+            # Pass stateVersion to home-manager
+            extraSpecialArgs = { inherit stateVersion; };
           };
         }
       ];

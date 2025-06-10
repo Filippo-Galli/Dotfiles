@@ -11,6 +11,8 @@
       "editor.fontFamily" = "'Fira Code'";
       "editor.fontSize" = 14;
       "editor.formatOnSave" = true;
+      "editor.cursorSmoothCaretAnimation" = true;
+      "editor.cursorBlinking" = "smooth";
 
       # Password-store management
       "password-store" = "gnome-libsecret";

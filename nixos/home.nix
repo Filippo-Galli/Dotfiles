@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, stateVersion, ... }:
 
 {
   home.username = "filippo";
@@ -22,7 +22,7 @@
     ./programs
   ];
 
-  home.stateVersion = "24.11";
+  home.stateVersion = stateVersion;
   programs.home-manager.enable = true;
 
   home.sessionVariables = {

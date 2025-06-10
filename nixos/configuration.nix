@@ -1,8 +1,4 @@
-# Edit this configuration file to define what should be installed on
-# your system.  Help is available in the configuration.nix(5) man page
-# and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, inputs, ... }:
+{ config, pkgs, inputs, stateVersion, ... }:
 
 {
   imports =
@@ -11,13 +7,9 @@
 
       # Tailscale 
       ./programs/tailscale.nix
-
-      # Disable kwallet
-      #./programs/kwallet.nix
     ];
 
   nix.settings = {
-    # Your existing settings...
     experimental-features = [ "nix-command" "flakes" ];
     
     # Add these lines
@@ -161,7 +153,7 @@
 	  SECRET_TOOL_BACKEND = "gnome";
   };
 
-  system.stateVersion = "24.11"; 
+  system.stateVersion = stateVersion;
 
   fonts = {
   packages = with pkgs; [
