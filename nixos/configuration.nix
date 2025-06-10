@@ -146,6 +146,10 @@
   security.pam.services.hyprland.enableGnomeKeyring = true;
   security.pam.services.login.enableGnomeKeyring = true;
   security.pam.services.passwd.enableGnomeKeyring = true;
+  # To show * in password prompts
+  security.sudo.extraConfig = ''
+    Defaults pwfeedback
+  '';
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 

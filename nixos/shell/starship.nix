@@ -10,7 +10,7 @@
       
       format = "$memory_usage$directory$git_branch$git_state$git_status$git_metrics$line_break$character";
       
-      right_format = "$cmd_duration $jobs $time";
+      right_format = "$nix_shell $cmd_duration $jobs $time";
 
       jobs = {
         symbol = "";
@@ -27,19 +27,19 @@
       };
       
       cmd_duration = {
-        format = "[ $duration]($style)";
+        format = "[$duration ]($style)";
         style = "yellow";
       };
       
       directory = {
         style = "blue";
-        read_only = " ";
+        read_only = " ";
         truncation_length = 4;
         truncate_to_repo = false;
       };
       
       git_branch = {
-        symbol = "";
+        symbol = " ";
         format = "[$symbol$branch]($style) ";
         style = " fg:#f77e05 ";
       };
@@ -72,9 +72,17 @@
       memory_usage = {
         disabled = false;
         threshold = -1;
-        symbol = "";
-        format = "[$symbol$ram_pct]($style) ";
+        symbol = " ";
+        format = "[$ram_pct $symbol]($style) ";
         style = "bold dimmed green";
+      };
+      
+      nix_shell = {
+        disabled = false;
+        impure_msg = "[❄️ impure](bold blue)";
+        pure_msg = "[❄️ pure](bold green)";
+        unknown_msg = "[❄️ unknown](bold yellow)";
+        format = "$state ";
       };
     };
   };
