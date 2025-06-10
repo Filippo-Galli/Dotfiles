@@ -7,5 +7,6 @@
     ./mako.nix
     ./rofi.nix
     ./nemo.nix
+    ./hyprlock.nix
   ];
 }

@@ -65,7 +65,11 @@
   };
 
   # Enable necessary services for Hyprland
-  security.polkit.enable = true;
+  security = {
+    polkit.enable = true;
+    pam.services.hyprlock = {};
+  };
+
   services.dbus.enable = true;
 
   xdg.portal = {

@@ -116,7 +116,7 @@
         # Basic application bindings
         "$mainMod, Q, exec, kitty"
         "$mainMod, k, killactive"
-        "$mainMod, L, exec, swaylock --clock --color 000000"
+        "$mainMod, L, exec, hyprlock"
 
         # Rofi bindings
         "$mainMod, E, exec, rofi -show drun -theme ~/.config/rofi/custom-theme.rasi"

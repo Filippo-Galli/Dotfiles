@@ -3,7 +3,7 @@
 {
   # Install Nemo with plugins and image preview support
   home.packages = with pkgs; [
-    cinnamon.nemo-with-extensions
+    nemo-with-extensions
     imagemagick
     ffmpegthumbnailer
   ];
