@@ -54,7 +54,10 @@
             useUserPackages = true;
             backupFileExtension = "bak";
             users.${username} = import ./home.nix;
-            extraSpecialArgs = { inherit stateVersion; };
+            extraSpecialArgs = { 
+              inherit username;
+              inherit stateVersion; 
+            };
           };
         }
       ];

@@ -151,6 +151,23 @@
     Defaults pwfeedback
   '';
 
+  # Enable all firmware
+  hardware.enableAllFirmware = true;
+
+  # CPU microcode updates
+  hardware.cpu.intel.updateMicrocode = true;
+
+  # Enable fstrim for SSDs
+  services.fstrim.enable = true;
+
+  # Optimize boot times
+  boot.loader.timeout = 2;
+
+  # Enable parallel builds
+  nix.settings.max-jobs = "auto";
+  nix.settings.cores = 0; # Use all cores
+  nix.settings.auto-optimise-store = true; # Automatically optimize the Nix store
+
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
   # Set the default editor to vim

@@ -1,8 +1,8 @@
-{ config, pkgs, stateVersion, ... }:
+{ config, pkgs, username, stateVersion, ... }:
 
 {
-  home.username = "filippo";
-  home.homeDirectory = "/home/filippo";
+  home.username = username;
+  home.homeDirectory = "/home/${username}";
   services.gnome-keyring = {
     enable = true;
     components = [ "pkcs11" "secrets" "ssh" ];
