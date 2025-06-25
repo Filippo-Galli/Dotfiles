@@ -60,6 +60,28 @@
   security = {
     polkit.enable = true;
     pam.services.hyprlock = {};
+    
+    # Improve sudo security
+    sudo = {
+      enable = true;
+      extraConfig = ''
+        Defaults pwfeedback
+        Defaults lecture = never
+        Defaults timestamp_timeout=30
+      '';
+    };
+    
+    # Enable AppArmor for additional security
+    apparmor = {
+      enable = true;
+      #killUnconfinedConfinables = true;
+    };
+
+    pam.services = {
+      hyprland.enableGnomeKeyring = true;
+      login.enableGnomeKeyring = true;
+      passwd.enableGnomeKeyring = true;
+    };
   };
 
   services.dbus.enable = true;
@@ -102,12 +124,6 @@
     alsa.support32Bit = true;
     pulse.enable = true;
     wireplumber.enable = true;
-    # If you want to use JACK applications, uncomment this
-    #jack.enable = true;
-
-    # use the example session manager (no others are packaged yet so this is enabled by default,
-    # no need to redefine it in your config for now)
-    #media-session.enable = true;
   };
 
   programs.zsh.enable = true;
@@ -142,14 +158,6 @@
   ];
 
   services.power-profiles-daemon.enable = true;
-
-  security.pam.services.hyprland.enableGnomeKeyring = true;
-  security.pam.services.login.enableGnomeKeyring = true;
-  security.pam.services.passwd.enableGnomeKeyring = true;
-  # To show * in password prompts
-  security.sudo.extraConfig = ''
-    Defaults pwfeedback
-  '';
 
   # Enable all firmware
   hardware.enableAllFirmware = true;

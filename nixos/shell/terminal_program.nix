@@ -42,6 +42,9 @@
 
     # Terminal file managers
     yazi
+
+    # Automounting
+    udiskie # automounting for Wayland
   ];
 
 }

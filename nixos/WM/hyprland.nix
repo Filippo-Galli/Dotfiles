@@ -1,40 +1,41 @@
 { config, pkgs, ... }:
 {
 
-  home.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-  };
-
   wayland.windowManager.hyprland = {
     enable = true;
     
     settings = {
       "$mainMod" = "SUPER";
 
-      env = [
-      	"XCURSOR_THEME,Adwaita"
-      	"XCURSOR_SIZE,24"
-       ];
-      
       # Monitor configuration
       monitor = [
         ",preferred,auto,2"
         "DP-3, 1920x1080, 2880x0, 1"
       ];
+
+      env = [
+        "XCURSOR_THEME,Adwaita"
+        "XCURSOR_SIZE,24"
+      ];
       
       # Startup applications
       exec-once = [
+        # Set DBus environment variables
+        "dbus-update-activation-environment --all"
+
         "wl-paste --type text --watch cliphist store"
         "wl-paste --type image --watch cliphist store"
         "cliphist wipe"
         
         "hyprsunset -t 4000"
-        "bus-update-activation-environment --all"
+
         "swww-daemon"
         "swww img ./pxfuel.jpg"
-        #"udiskie -an --no-tray -f nemo"
+        
+        "udiskie -an --no-tray -f nemo"
         "bash ./battery_notify.sh"
-        "swayosd-server"  # Add SwayOSD server
+        
+        "swayosd-server"
       ];
       
       # Input configuration
@@ -173,7 +174,7 @@
         ", XF86AudioMicMute, exec, swayosd-client --input-volume mute-toggle"
 
         # Caps Lock toggle with SwayOSD
-        ", Caps_Lock, exec, swayosd-client --caps-lock"
+        ", Caps_Lock, exec, swayosd-client --caps-lock toogle"
         
         # Screenshot
         ", XF86Calculator, exec, grim -g \"$(slurp)\""
@@ -193,6 +194,18 @@
         # Multi-monitor workspace movement
         "$mainMod ALT, L, movecurrentworkspacetomonitor, l"
         "$mainMod ALT, R, movecurrentworkspacetomonitor, r"
+
+        # Window management
+        "$mainMod SHIFT, left, movewindow, l"
+        "$mainMod SHIFT, right, movewindow, r"
+        "$mainMod SHIFT, up, movewindow, u"
+        "$mainMod SHIFT, down, movewindow, d"
+        
+        # Resizing
+        "$mainMod CTRL, left, resizeactive, -20 0"
+        "$mainMod CTRL, right, resizeactive, 20 0"
+        "$mainMod CTRL, up, resizeactive, 0 -20"
+        "$mainMod CTRL, down, resizeactive, 0 20"
       ];
       
       # Mouse bindings

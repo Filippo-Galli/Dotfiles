@@ -16,6 +16,9 @@
     };
     
     hyprland.url = "github:hyprwm/Hyprland/v0.49.0";
+
+    # Add for better flake management
+    flake-utils.url = "github:numtide/flake-utils";
   };
 
   outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }:

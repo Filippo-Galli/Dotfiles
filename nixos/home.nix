@@ -3,6 +3,7 @@
 {
   home.username = username;
   home.homeDirectory = "/home/${username}";
+  
   services.gnome-keyring = {
     enable = true;
     components = [ "pkcs11" "secrets" "ssh" ];
@@ -12,8 +13,23 @@
   home.sessionVariables = {
     GNOME_KEYRING_CONTROL = "${config.home.homeDirectory}/.cache/keyring-control";
     BRAVE_PASSWORD_STORE = "gnome-libsecret";
-    # GTK theme dark 
+
+    # Enable Ozone Wayland support
+    NIXOS_OZONE_WL = "1";
+
+    # GTK settings
     GTK_THEME = "Adwaita:dark";
+    GDK_BACKEND = "wayland,x11";
+    
+    # QT settings
+    QT_QPA_PLATFORM = "wayland";
+    
+    # Cursor theme
+    XCURSOR_THEME = "Adwaita";
+    XCURSOR_SIZE = "24";  
+
+    # Set the shell to zsh
+    SHELL = "${pkgs.zsh}/bin/zsh";
   };
 	
   imports = [
@@ -24,10 +40,6 @@
 
   home.stateVersion = stateVersion;
   programs.home-manager.enable = true;
-
-  home.sessionVariables = {
-    SHELL = "${pkgs.zsh}/bin/zsh";
-  };
 
   fonts.fontconfig.enable = true;
   

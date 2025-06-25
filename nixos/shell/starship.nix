@@ -79,10 +79,16 @@
       
       nix_shell = {
         disabled = false;
+        # Custom messages for different shell types
         impure_msg = "[❄️ impure](bold blue)";
         pure_msg = "[❄️ pure](bold green)";
-        unknown_msg = "[❄️ unknown](bold yellow)";
-        format = "$state ";
+        unknown_msg = "[❄️ shell](bold yellow)";
+        # Format: shows the shell type and optionally the shell name
+        format = "[$state( \\($name\\))]($style) ";
+        # Style for the entire nix-shell indicator
+        style = "bold purple";
+        # Show shell name when available (from shell.nix, flake.nix, etc.)
+        heuristic = true;
       };
     };
   };
