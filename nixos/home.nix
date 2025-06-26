@@ -18,18 +18,23 @@
     NIXOS_OZONE_WL = "1";
 
     # GTK settings
-    GTK_THEME = "Adwaita:dark";
+    # GTK_THEME = "Adwaita-dark";
+    # GTK_APPLICATION_PREFER_DARK_THEME = "1";
     GDK_BACKEND = "wayland,x11";
     
     # QT settings
     QT_QPA_PLATFORM = "wayland";
     
     # Cursor theme
-    XCURSOR_THEME = "Adwaita";
-    XCURSOR_SIZE = "24";  
+    # XCURSOR_THEME = "Adwaita";
+    # XCURSOR_SIZE = "24";  
 
     # Set the shell to zsh
     SHELL = "${pkgs.zsh}/bin/zsh";
+
+    MESA_LOADER_DRIVER_OVERRIDE = "iris"; # For Intel graphics
+    LIBVA_DRIVER_NAME = "iHD"; # Intel hardware acceleration
+  
   };
 	
   imports = [

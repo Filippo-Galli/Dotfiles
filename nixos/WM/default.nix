@@ -4,10 +4,11 @@
   imports = [
     ./hyprland.nix
     ./waybar.nix
-    #./mako.nix
     ./rofi.nix
     ./nemo.nix
     ./hyprlock.nix
+    ./gtk.nix
     ./swaync.nix
+    #./mako.nix
   ];
 }

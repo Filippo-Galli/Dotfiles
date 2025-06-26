@@ -12,7 +12,6 @@
   nix.settings = {
     experimental-features = [ "nix-command" "flakes" ];
     
-    # Add these lines
     substituters = [
       "https://cache.nixos.org/"
       "https://hyprland.cachix.org"
@@ -21,23 +20,57 @@
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
       "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
+
+    max-jobs = "auto"; # Automatically determine the number of jobs based on available CPU cores
+    cores = 0; # Use all cores
+    auto-optimise-store = true; # Automatically optimize the Nix store
   };
 
-  # Bootloader.
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader = {
+      systemd-boot = {
+        enable = true; # Use systemd-boot as the bootloader
+      };
+      efi.canTouchEfiVariables = true; # Allow NixOS to modify EFI variables
+      timeout = 2; # Set bootloader timeout to 5 seconds
+    };
 
-  networking.hostName = "nixos"; # Define your hostname.
+    kernelParams = [
+      "transparent_hugepage=madvise"
+      "elevator=mq-deadline"  # Good for NVMe SSDs
+    ];
 
-  # Enable networking
-  networking.networkmanager.enable = true;
+  };
+
+  hardware = {
+    enableAllFirmware = true;
+    cpu.intel.updateMicrocode = true;
+
+    bluetooth = {
+      enable = true;
+      powerOnBoot = false;  # Don't auto-enable at boot
+      settings = {
+        General = {
+          Enable = "Source,Sink,Media,Socket";
+          Experimental = true;
+        };
+      };
+    };
+  };
+
+  networking = {
+    hostName = "nixos";
+
+    networkmanager = {
+      enable = true; # Enable NetworkManager for managing network connections
+    };
+  };
 
   # Set your time zone.
   time.timeZone = "Europe/Rome";
 
   # Select internationalisation properties.
   i18n.defaultLocale = "en_US.UTF-8";
-
   i18n.extraLocaleSettings = {
     LC_ADDRESS = "it_IT.UTF-8";
     LC_IDENTIFICATION = "it_IT.UTF-8";
@@ -74,7 +107,6 @@
     # Enable AppArmor for additional security
     apparmor = {
       enable = true;
-      #killUnconfinedConfinables = true;
     };
 
     pam.services = {
@@ -82,9 +114,51 @@
       login.enableGnomeKeyring = true;
       passwd.enableGnomeKeyring = true;
     };
+
+    # Enable RTKit for real-time scheduling
+    rtkit.enable = true;
   };
 
-  services.dbus.enable = true;
+  services = {
+    dbus = {
+      enable = true; # Enable D-Bus for inter-process communication
+    };
+
+    xserver = {
+      enable = false; 
+      displayManager.gdm.enable = true;
+
+      xkb = {
+        layout = "it"; # Set keyboard layout to Italian
+        variant = ""; # No specific variant
+      };
+    };
+
+    upower = {
+      enable = true; # Enable UPower for power management
+    };
+    power-profiles-daemon.enable = true;
+
+    printing.enable = false;
+
+    pulseaudio.enable = false; # Disable PulseAudio, use PipeWire instead
+    pipewire = {
+      enable = true; # Enable PipeWire for audio and video
+      alsa.enable = true; # Enable ALSA support
+      alsa.support32Bit = true; # Support 32-bit applications
+      pulse.enable = true; # Enable PulseAudio compatibility layer
+      wireplumber.enable = true; # Use WirePlumber as the session manager
+    };
+
+    # Enable fstrim for SSDs
+    fstrim.enable = true;
+    
+    # Firmware updates
+    fwupd.enable = true;
+    
+    # System monitoring
+    smartd.enable = true;
+  };
 
   xdg.portal = {
     enable = true;
@@ -92,41 +166,8 @@
     extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk];
   };
 
-  # Optional: Keep GNOME alongside Hyprland
-  services.xserver = {
-    enable = false;
-    displayManager.gdm.enable = true;
-    desktopManager.gnome.enable = false;
-  };
-
-  services.upower = {
-    enable = true;
-  };
-
-  # Configure keymap in X11
-  services.xserver.xkb = {
-    layout = "it";
-    variant = "";
-  };
-
   # Configure console keymap
   console.keyMap = "it2";
-
-  # Enable CUPS to print documents.
-  services.printing.enable = true;
-
-  # Enable sound with pipewire.
-  services.pulseaudio.enable = false;
-  security.rtkit.enable = true;
-  services.pipewire = {
-    enable = true;
-    alsa.enable = true;
-    alsa.support32Bit = true;
-    pulse.enable = true;
-    wireplumber.enable = true;
-  };
-
-  programs.zsh.enable = true;
   
   # Docker 
   virtualisation.docker.rootless = {
@@ -156,25 +197,7 @@
     seahorse
     libsecret  # Needed for apps to talk to gnome-keyring
   ];
-
-  services.power-profiles-daemon.enable = true;
-
-  # Enable all firmware
-  hardware.enableAllFirmware = true;
-
-  # CPU microcode updates
-  hardware.cpu.intel.updateMicrocode = true;
-
-  # Enable fstrim for SSDs
-  services.fstrim.enable = true;
-
-  # Optimize boot times
-  boot.loader.timeout = 2;
-
-  # Enable parallel builds
-  nix.settings.max-jobs = "auto";
-  nix.settings.cores = 0; # Use all cores
-  nix.settings.auto-optimise-store = true; # Automatically optimize the Nix store
+  programs.zsh.enable = true;
 
   environment.sessionVariables.NIXOS_OZONE_WL = "1";
 
@@ -222,18 +245,4 @@
       };
     };
   };
-
-
-  # Enable Bluetooth
-  hardware.bluetooth = {
-    enable = true;
-    powerOnBoot = false;  # Don't auto-enable at boot
-    settings = {
-      General = {
-        Enable = "Source,Sink,Media,Socket";
-        Experimental = true;
-      };
-    };
-  };
-
 }
