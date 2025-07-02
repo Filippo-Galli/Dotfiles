@@ -9,5 +9,6 @@
     ./nixvim.nix
     ./nextcloud-client.nix
     ./kwallet.nix 
+    ./onlyoffice.nix
   ];
 }
