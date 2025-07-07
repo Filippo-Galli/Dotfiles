@@ -1,11 +1,5 @@
+{ config, pkgs, ...}:
 {
-  config,
-  pkgs,
-  ...
-}:
-
-{
-  # Install the tailscale package
   environment.systemPackages = [ pkgs.tailscale ];
 
   # Enable the tailscale service
@@ -13,7 +7,6 @@
     enable = true;
   };
 
-  # Open the tailscale port in the firewall
   networking.firewall = {
     # Allow the Tailscale UDP port through the firewall
     allowedUDPPorts = [ 41641 ];

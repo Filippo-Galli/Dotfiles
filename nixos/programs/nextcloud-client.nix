@@ -3,22 +3,32 @@
   home.packages = with pkgs; [
     nextcloud-client
   ];
+  systemd.user.services.nextcloud = {
+    Unit = {
+      Description = "Nextcloud Desktop Client";
+      After = [ "graphical-session.target" ];
+      Wants = [ "graphical-session.target" ];
+    };
+    Service = {
+      Type = "simple";
+      ExecStart = "${pkgs.nextcloud-client}/bin/nextcloud --background";
+      Restart = "on-failure";
+      RestartSec = "5";
+      KillMode = "mixed";
+      KillSignal = "SIGTERM";
+      TimeoutStopSec = "10";
+      RemainAfterExit = false;
+      # Environment variables for GUI apps
+      Environment = [
+        "PATH=${config.home.profileDirectory}/bin"
+        "XDG_DATA_DIRS=${config.home.profileDirectory}/share"
+      ];
+    };
+    Install = {
+      WantedBy = [ "graphical-session.target" ];
+    };
+  };
 
-  # Updated autostart with single instance protection
-  xdg.configFile."autostart/nextcloud.desktop".text = ''
-    [Desktop Entry]
-    Name=Nextcloud
-    GenericName=Nextcloud Desktop Client
-    Comment=Nextcloud desktop synchronization client
-    Exec=sh -c 'if ! pgrep -x nextcloud > /dev/null; then ${pkgs.nextcloud-client}/bin/nextcloud --background; fi'
-    Terminal=false
-    Hidden=false
-    NoDisplay=false
-    X-GNOME-Autostart-enabled=true
-    Type=Application
-    Categories=Network;FileTransfer;
-    StartupNotify=false
-    X-GNOME-Autostart-Delay=10
-    SingleMainWindow=true
-  '';
+  # Enable the service
+  systemd.user.startServices = true;
 }

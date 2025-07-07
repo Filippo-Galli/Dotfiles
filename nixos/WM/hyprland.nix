@@ -29,7 +29,7 @@
         "hyprsunset -t 4000"
 
         "swww-daemon"
-        "swww img ./pxfuel.jpg"
+        "swww img ./wallpaper/pxfuel.jpg"
         
         "udiskie -an --no-tray -f nemo"
         "bash ./battery_notify.sh"

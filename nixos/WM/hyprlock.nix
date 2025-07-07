@@ -21,7 +21,7 @@
       # Background configuration
       background = [
         {
-          path = "/home/filippo/Pictures/bg/RWB.jpg";
+          path = "/home/filippo/Documents/Dotfiles/nixos/WM/wallpaper/RWB.jpg";
           blur_passes = 0;
           blur_size = 1;
         }

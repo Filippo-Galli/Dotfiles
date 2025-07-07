@@ -9,6 +9,5 @@
     ./hyprlock.nix
     ./gtk.nix
     ./swaync.nix
-    #./mako.nix
   ];
 }

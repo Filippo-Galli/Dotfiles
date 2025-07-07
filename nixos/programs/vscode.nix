@@ -6,7 +6,6 @@
     package = pkgs.unstable.vscode; 
 
     profiles.default = {
-      # User settings (applied to settings.json)
       userSettings = {
         # General editor settings
         "editor.fontFamily" = "'Fira Code'";
@@ -20,7 +19,7 @@
 
         # Auto-save settings
         "files.autoSave" = "afterDelay";
-        "files.autoSaveDelay" = 500; # Auto-save after 1 second of inactivity
+        "files.autoSaveDelay" = 500; 
 
         # Nix-specific settings
         "[nix]" = {
@@ -55,12 +54,10 @@
         github.copilot-chat
       ];
 
-      # Optional: Configure VS Code keybindings
       keybindings = [
         {
           key = "ctrl+q";
           command = "workbench.action.terminal.toggleTerminal";
-          when = "editorTextFocus";
         }
       ];
     };
