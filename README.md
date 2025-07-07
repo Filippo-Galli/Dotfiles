@@ -1,52 +1,44 @@
 # Dotfiles
 
-This directory aimed to share my Arch - Hyprland configuration.
+This directory aimed to share my NixOS configuration with Hyprland as Window Manager.
 
-## Screen
+## Preview
+![Home](Screen/bg+waybar.png)
+![Rofi-1](Screen/rofi-1.png)
+![Rofi-2](Screen/rofi-2.png)
+![starship](Screen/starship.png)
 
-Screenshot of my waybar setup:
-![Screenshot waybar](Screen/waybar.png)
+## To install it
+> **ALERT:** \
+> Before installing it, keep your `hardware-configuration.nix` and check if there are some programs or environments variable not supported by your hardware.
 
-Screenshot of my background and waybar:
-![Screenshot of home](Screen/desktop.png)
+To install my configuration on NixOS you need to do a soft link to of this nixos folder to the one in the /etc: 
+``` Bash
+sudo ln -s /<path-to-this-repo>/nixos /etc/   
+```
 
-Screenshot of my rofi setup:
-![Screen of Waybar and Rofi](Screen/rofi.png)
 
-## Useful link
+You could change the hostname of your computer inside `configuration.nix` while the username into the file `flake.nix`.
 
-Bluetooth manager:
-[Bluetuith](https://github.com/darkhz/bluetuith)
+## How this repo works
+```
+nixos/
+│
+├── programs/                     # All the programs I use
+│
+├── shell/                        # All the config that concern the terminal and its utility
+│
+├── WM/                           # All the config for hyprland related things ti have a usable computer
+│    └── wallpaper                # Contains the home wallpaper and the one used by hyprlock
+│
+├── configuration.nix             # All about basic computer settings (bluetooth, wifi, boot options and so on)
+├── flake.nix                     # Settings about input repo and home-manager 
+├── home.nix                      # Settings about userspace like environments variables and call to specific folders
+├── hardware-configuration.nix    # Settings about my computer - modify it with the one generated during installation
+│
+└── README.md                     
+```
+## How to customize it
+My logic to add more programs or utility using home-manager is to create the <utility/programs name>.nix in the appropriate folder and add it in it also in the `default.nix` of its folder.
+In case of programs which require strong permission or system-wise setting I follow the same logic and add it to `configuration.nix`.
 
-Screen Temperature:
-[wl-gammarelay-rs](https://github.com/MaxVerevkin/wl-gammarelay-rs)
-
-Auto-mount devices:
-[udiskie](https://github.com/coldfix/udiskie)
-
-Hyprland plugin:
-[Hycov](https://github.com/DreamMaoMao/hycov)
-
-Clipboard manager:
-[Cliphist](https://github.com/sentriz/cliphist)
-
-Wifi manager:
-[NetworkManager](https://github.com/Blazzzeee/network_manager_ui/tree/master)
-
-## Scripts
-
-### Wayland-activator
-
-This script help to automate the activation of Wayland on Electron-base programs like Visual Studio Code.
-
-### Daynight-shifter
-
-Script that modifies the temperature of the screen and accepts 2 modes: fixed or varying temperature according to the time.
-
-### Battery level notifier
-
-[battery-notify.sh](https://github.com/cybergaz/scripts/blob/main/hyprland/battery_notify.sh)
-
-### Toogle_temperature
-
-Necessary script to my custom module of waybar. Its aim is to configure the icon on waybar to enable/disable red shift on the screen (red_shifted temperature: 3500, default temperature: 5500).
