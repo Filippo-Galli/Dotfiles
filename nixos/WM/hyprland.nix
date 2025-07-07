@@ -28,8 +28,7 @@
         
         "hyprsunset -t 4000"
 
-        "swww-daemon"
-        "swww img ./wallpaper/pxfuel.jpg"
+        "swww init & swww img /home/filippo/Documents/Dotfiles/nixos/WM/wallpaper/pxfuel.jpg"
         
         "udiskie -an --no-tray -f nemo"
         "bash ./battery_notify.sh"

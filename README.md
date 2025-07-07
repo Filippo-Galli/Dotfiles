@@ -1,6 +1,6 @@
 # Dotfiles
 
-This directory aimed to share my NixOS configuration with Hyprland as Window Manager.
+This directory aimed to share my NixOS configuration with Hyprland as Window Manager. This repo contains my daily laptop configuration and is WIP.
 
 ## Preview
 ![Home](Screen/bg+waybar.png)
@@ -16,8 +16,10 @@ To install my configuration on NixOS you need to do a soft link to of this nixos
 ``` Bash
 sudo ln -s /<path-to-this-repo>/nixos /etc/   
 ```
-
-
+After that you need to generate the new generation and switch to it with: 
+``` Bash
+sudo nixos-rebuild switch
+```
 You could change the hostname of your computer inside `configuration.nix` while the username into the file `flake.nix`.
 
 ## How this repo works
@@ -41,4 +43,3 @@ nixos/
 ## How to customize it
 My logic to add more programs or utility using home-manager is to create the <utility/programs name>.nix in the appropriate folder and add it in it also in the `default.nix` of its folder.
 In case of programs which require strong permission or system-wise setting I follow the same logic and add it to `configuration.nix`.
-
