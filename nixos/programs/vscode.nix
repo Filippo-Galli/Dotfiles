@@ -31,7 +31,11 @@
         };
 
         # Agent mode
-        "workbench.experimental.featureSettings.agentChat" = true;
+        "chat.agent.enabled" = true;
+        "github.copilot.enable"= {
+          "plaintext"= true;
+          "markdown"= true;
+        };
 
         # Theme
         "workbench.activityBar.location" = "bottom";
