@@ -2,7 +2,6 @@
 
   # Packages that should be installed to the user profile.
   home.packages = with pkgs; [
-    neofetch
     bat # A cat clone with syntax highlighting and Git integration
 
     lazygit
