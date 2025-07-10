@@ -3,7 +3,7 @@
 {
   programs.vscode = {
     enable = true;
-    package = pkgs.unstable.vscode; 
+    package = pkgs.vscode; 
 
     profiles.default = {
       userSettings = {
@@ -55,7 +55,6 @@
 
         # Copilot and Copilot Chat
         github.copilot
-        github.copilot-chat
       ];
 
       keybindings = [

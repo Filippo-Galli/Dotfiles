@@ -64,6 +64,21 @@ nixos/
 ```
 
 ---
+## ⌨️ Useful KeyBindings 
+| Keybinding        | Action                                    |
+|-------------------|-------------------------------------------|
+| `Super + Q`    | Open Kitty Terminal                             |
+| `Super + W`    | toggle waybar                          |
+| `Super + E`    | Open rofi app launcher                |
+| `Super + V`    | Open rofi clipboard history                   |
+| `Super + P`    | Open rofi with open programs                   |
+| `Super + C`    | Open Visual Studio Code                  |
+| `Super + B`    | Open Brave Browser                   |
+| `Super + L`    | Lock the screen                  |
+| `Super + shift + R`    | Reboot                 |
+| `Super + shift + S`    | Shutdown the system                  |
+| `Super + K`    | kill the focused programs                 |
+| `Super + O`    | Open Obsidian                  |
 
 ## 🛠️ Customization Guide
 

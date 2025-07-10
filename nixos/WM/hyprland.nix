@@ -186,7 +186,7 @@
         "$mainMod, C, exec, code --password-store=\"gnome-libsecret\""
         "$mainMod, N, exec, nemo"
         "$mainMod, V, exec, cliphist list | rofi -dmenu -display-columns 2- -theme ~/.config/rofi/custom-theme-dmenu.rasi | cliphist decode | wl-copy"
-        "$mainMod, R, exec, ~/Documents/Dotfiles/Script/toogle_temperature.sh"
+        #"$mainMod, R, exec, ~/Documents/Dotfiles/Script/toogle_temperature.sh"
         "$mainMod, O, exec, obsidian"
         
         # Multi-monitor workspace movement
