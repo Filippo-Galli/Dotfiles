@@ -123,6 +123,8 @@ in
 
       "map ctrl+shift+page_up" = "move_tab_backward";
       "map ctrl+shift+page_down" = "move_tab_forward";
+
+      "map ctrl+alt+t" = "set_tab_title";
     };
   };
 }
