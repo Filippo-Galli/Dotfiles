@@ -7,6 +7,9 @@
 
       # Tailscale 
       ./programs/tailscale.nix
+
+      # Battery notifier script
+      ./WM/battery-notifier.nix
     ];
 
   nix.settings = {
@@ -24,6 +27,8 @@
     max-jobs = "auto"; # Automatically determine the number of jobs based on available CPU cores
     cores = 0; # Use all cores
     auto-optimise-store = true; # Automatically optimize the Nix store
+
+    trusted-users = [ "root" "filippo" ]; # Allow these users to run Nix commands without restrictions
   };
 
   boot = {
@@ -196,6 +201,8 @@
     gnome-keyring
     seahorse
     libsecret  # Needed for apps to talk to gnome-keyring
+
+    devenv # Nix development environment
   ];
   programs.zsh.enable = true;
 

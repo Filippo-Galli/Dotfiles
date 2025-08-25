@@ -30,6 +30,19 @@
           "editor.insertSpaces" = true;
         };
 
+        # R-specific settings
+        "[r]" = {
+          "editor.tabSize" = 2;
+          "editor.insertSpaces" = true;
+          "editor.formatOnSave" = true;
+        };
+
+        # R LSP and integration settings
+        "r.rterm.option" = ["--no-save" "--no-restore"];
+        "r.sessionWatcher" = true;
+        "r.bracketedPaste" = true;
+        "r.plot.useHttpgd" = true;
+
         # Agent mode
         "chat.agent.enabled" = true;
         "github.copilot.enable"= {
@@ -46,6 +59,13 @@
         # Terminal settings
         "terminal.integrated.fontFamily" = "'Fira Code'";
         "terminal.integrated.fontSize" = 14;
+
+        # Python settings
+        "python.defaultInterpreterPath" = "./.venv/bin/python";
+
+        # Direnv integration
+        "direnv.restart.automatic" = true;
+        "direnv.status.showOnStatusBar" = true;
       };
 
       # Extensions configuration
@@ -55,6 +75,14 @@
 
         # Copilot and Copilot Chat
         github.copilot
+
+        # Python linting and formatting with ruff
+        charliermarsh.ruff
+        ms-python.python
+        ms-toolsai.jupyter         # Jupyter support
+
+        # R development
+        reditorsupport.r           # Main R extension with console integration
       ];
 
       keybindings = [
