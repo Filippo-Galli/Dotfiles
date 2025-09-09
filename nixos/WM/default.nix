@@ -9,5 +9,6 @@
     ./hyprlock.nix
     ./gtk.nix
     ./swaync.nix
+    ./impala.nix
   ];
 }

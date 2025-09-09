@@ -20,7 +20,7 @@
     shellAliases = {
       ls = "eza -lha";
       update = "sudo nix flake update && sudo nixos-rebuild switch --upgrade";
-      upgrade = "sudo nixos-rebuild switch";
+      refresh = "sudo nixos-rebuild switch";
       rcat = "cat";
       ".." = "cd ..";
       "..." = "cd ../..";

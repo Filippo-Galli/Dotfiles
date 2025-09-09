@@ -74,6 +74,7 @@
           format-linked = "{ifname} (No IP) ";
           format-disconnected = "Disconnected ⚠";
           format-disabled = "Disabled ⚠";
+          on-click = "kitty impala";
         };
         
         pulseaudio = {

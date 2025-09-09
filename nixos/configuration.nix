@@ -67,8 +67,10 @@
     hostName = "nixos";
 
     networkmanager = {
-      enable = true; # Enable NetworkManager for managing network connections
+      enable = false; # Enable NetworkManager for managing network connections
     };
+
+    wireless.iwd.enable = true; # Needed for impala
   };
 
   # Set your time zone.
