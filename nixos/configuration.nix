@@ -43,6 +43,8 @@
     kernelParams = [
       "transparent_hugepage=madvise"
       "elevator=mq-deadline"  # Good for NVMe SSDs
+      "acpi_osi=Linux"
+      "acpi_backlight=intel"
     ];
 
   };
@@ -65,12 +67,11 @@
 
   networking = {
     hostName = "nixos";
-
     networkmanager = {
-      enable = false; # Enable NetworkManager for managing network connections
+      enable = true;
+      #wifi.backend = "iwd";  # Use iwd as the WiFi backend
     };
-
-    wireless.iwd.enable = true; # Needed for impala
+    #wireless.iwd.enable = false;
   };
 
   # Set your time zone.
@@ -93,7 +94,7 @@
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-    withUWSM = true;
+    withUWSM = false;
   };
 
   # Enable necessary services for Hyprland
@@ -120,6 +121,9 @@
       hyprland.enableGnomeKeyring = true;
       login.enableGnomeKeyring = true;
       passwd.enableGnomeKeyring = true;
+      #gdm.enableGnomeKeyring = true;        
+      #gdm-password.enableGnomeKeyring = true;
+      ly.enableGnomeKeyring = true;  
     };
 
     # Enable RTKit for real-time scheduling
@@ -127,17 +131,28 @@
   };
 
   services = {
+    gnome.gnome-keyring.enable = true;
+    
     dbus = {
       enable = true; # Enable D-Bus for inter-process communication
     };
 
     xserver = {
-      enable = false; 
-      displayManager.gdm.enable = true;
+      enable = true; # Enable the X11 server (required for gdm)
+      displayManager.gdm.enable = false;
 
       xkb = {
         layout = "it"; # Set keyboard layout to Italian
         variant = ""; # No specific variant
+      };
+    };
+
+    # Use Ly display manager
+    displayManager.ly = {
+      enable = true;
+      settings = {
+        animation = "matrix";  # Options: none, matrix, doom
+        hide_borders = true;
       };
     };
 
@@ -170,6 +185,7 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
+    config.common.default = "*";
     extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk];
   };
 
@@ -177,16 +193,16 @@
   console.keyMap = "it2";
   
   # Docker 
-  virtualisation.docker.rootless = {
-    enable = true;
-    setSocketVariable = true;
-  };
+  # virtualisation.docker.rootless = {
+  #   enable = true;
+  #   setSocketVariable = true;
+  # };
 
   # Define a user account. Don't forget to set a password with 'passwd'.
   users.users.filippo = {
     isNormalUser = true;
     description = "Filippo Galli";
-    extraGroups = [ "networkmanager" "wheel" "bluetooth"];
+    extraGroups = [ "networkmanager" "wheel" "bluetooth" "docker"];
     shell = pkgs.zsh;
   };
 
@@ -208,7 +224,10 @@
   ];
   programs.zsh.enable = true;
 
-  environment.sessionVariables.NIXOS_OZONE_WL = "1";
+  environment.sessionVariables = {
+    NIXOS_OZONE_WL = "1";
+    QT_QPA_PLATFORM = "wayland"; 
+  };
 
   # Set the default editor to vim
   environment.variables = {

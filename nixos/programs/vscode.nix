@@ -66,6 +66,9 @@
         # Direnv integration
         "direnv.restart.automatic" = true;
         "direnv.status.showOnStatusBar" = true;
+
+	# Disable startup page
+	"workbench.startupEditor" = "none";
       };
 
       # Extensions configuration
@@ -75,6 +78,7 @@
 
         # Copilot and Copilot Chat
         github.copilot
+        github.copilot-chat
 
         # Python linting and formatting with ruff
         charliermarsh.ruff

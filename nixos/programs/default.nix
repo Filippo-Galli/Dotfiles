@@ -10,5 +10,7 @@
     ./nextcloud-client.nix
     ./kwallet.nix 
     ./onlyoffice.nix
+    ./zotero.nix
+    ./firefox.nix
   ];
 }

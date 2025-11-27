@@ -1,8 +1,9 @@
-{ config, pkgs, ... }:
+{ config, pkgs, inputs, ... }:
 {
   wayland.windowManager.hyprland = {
     enable = true;
-    
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+
     settings = {
       "$mainMod" = "SUPER";
 
@@ -28,7 +29,7 @@
         
         "hyprsunset -t 4000"
 
-        "swww init & swww img /home/filippo/Documents/Dotfiles/nixos/WM/wallpaper/pxfuel.jpg"
+        "swww init & swww img /home/filippo/Documents/Dotfiles/nixos/WM/wallpaper/starship.jpg"
         
         "udiskie -an --no-tray -f nemo"
         "bash ./battery_notify.sh"
@@ -52,6 +53,13 @@
         
         sensitivity = 0;
       };
+
+      gesture = [
+        # 3-finger horizontal swipe to switch workspaces
+        "3, horizontal, workspace"
+        # Swipe forever
+        
+      ];
       
       # Miscellaneous settings
       misc = {
@@ -98,11 +106,6 @@
       
       # Master layout settings
       master = {};
-      
-      # Gesture settings
-      gestures = {
-        workspace_swipe = true;
-      };
       
       # Device-specific settings
       device = {
@@ -186,8 +189,9 @@
         "$mainMod, C, exec, code --password-store=\"gnome-libsecret\""
         "$mainMod, N, exec, nemo"
         "$mainMod, V, exec, cliphist list | rofi -dmenu -display-columns 2- -theme ~/.config/rofi/custom-theme-dmenu.rasi | cliphist decode | wl-copy"
-        #"$mainMod, R, exec, ~/Documents/Dotfiles/Script/toogle_temperature.sh"
         "$mainMod, O, exec, obsidian"
+
+        "$mainMod, G, exec, kitty --class gazelle -e gazelle"
         
         # Multi-monitor workspace movement
         "$mainMod ALT, L, movecurrentworkspacetomonitor, l"
@@ -211,6 +215,7 @@
         "$mainMod, mouse:272, movewindow"
         "$mainMod, mouse:273, resizewindow"
       ];
+
     };
   };
 }

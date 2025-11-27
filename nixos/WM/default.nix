@@ -1,4 +1,4 @@
-{pkgs, config, ...}:
+{pkgs, config, inputs, ...}:
 
 {
   imports = [
@@ -9,6 +9,6 @@
     ./hyprlock.nix
     ./gtk.nix
     ./swaync.nix
-    ./impala.nix
+    ./gazelle.nix
   ];
 }

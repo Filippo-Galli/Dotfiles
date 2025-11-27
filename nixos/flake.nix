@@ -15,13 +15,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     
-    hyprland.url = "github:hyprwm/Hyprland/v0.49.0";
+    hyprland.url = "github:hyprwm/Hyprland/v0.51.1";
 
     # Add for better flake management
     flake-utils.url = "github:numtide/flake-utils";
   };
 
-  outputs = { nixpkgs, nixpkgs-unstable, home-manager, ... }:
+  outputs = { nixpkgs, nixpkgs-unstable, home-manager, hyprland, ... }@inputs:
   let 
     stateVersion = "25.05";
     username = "filippo";
@@ -31,7 +31,7 @@
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
       inherit system;
       specialArgs = {
-        inherit username stateVersion;
+        inherit username stateVersion inputs;
       };
       
       modules = [
@@ -60,6 +60,7 @@
             extraSpecialArgs = { 
               inherit username;
               inherit stateVersion; 
+              inherit inputs;
             };
           };
         }
