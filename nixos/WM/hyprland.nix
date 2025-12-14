@@ -29,12 +29,16 @@
         
         "hyprsunset -t 4000"
 
-        "swww init & swww img /home/filippo/Documents/Dotfiles/nixos/WM/wallpaper/starship.jpg"
+        "swww-daemon"
         
         "udiskie -an --no-tray -f nemo"
         "bash ./battery_notify.sh"
         
         "swayosd-server"
+      ];
+
+      exec = [
+	 "swww img /home/filippo/Documents/Dotfiles/nixos/WM/wallpaper/starship.jpg"
       ];
       
       # Input configuration

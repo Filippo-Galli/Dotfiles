@@ -100,6 +100,12 @@ window#waybar {
 #temperature.critical {
     color: #cc3436;
 }
+
+#custom-privacy-dots {
+  padding: 0 10px;
+  font-size: 12px;
+  letter-spacing: 3px;
+}
 /*-----Colors----*/
 /*
  *rgba(0,85,102,1),#005566 --> Indigo(dye)

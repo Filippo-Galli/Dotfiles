@@ -5,7 +5,7 @@
     enable = true;
     systemd = {
       enable = true;
-      target = "hyprland-session.target";  # Start with Hyprland session
+      target = "hyprland-session.target"; # Start with Hyprland session
     };
 
     style = builtins.readFile ./style.css;
@@ -15,22 +15,35 @@
         layer = "top";
         height = 30;
         spacing = 4;
-        
+
         # Module layout
-        modules-left = [ "network" "pulseaudio" "bluetooth" ];
-        modules-center = [ "clock"];
-        modules-right = [ "tray" "cpu" "memory" "temperature" "power-profiles-daemon" "battery" "custom/notification"];
-        
+        modules-left = [
+          "network"
+          "pulseaudio"
+          "bluetooth"
+          "custom/privacy-dots"
+        ];
+        modules-center = [ "clock" ];
+        modules-right = [
+          "tray"
+          "cpu"
+          "memory"
+          "temperature"
+          "power-profiles-daemon"
+          "battery"
+          "custom/notification"
+        ];
+
         # Module configurations
         clock = {
           tooltip-format = "<big>{:%Y %B}</big>\n<tt><small>{calendar}</small></tt>";
           format-alt = "{:%Y-%m-%d}";
         };
-        
+
         cpu = {
           format = "{usage}%  ";
         };
-        
+
         memory = {
           format = "{used} GB  ";
         };
@@ -46,14 +59,14 @@
             "power-saver" = "  ";
           };
         };
-        
+
         temperature = {
           thermal-zone = 9;
           critical-threshold = 80;
           format = "{temperatureC}°C {icon}";
           format-icons = [ "" ];
         };
-        
+
         battery = {
           states = {
             good = 80;
@@ -64,9 +77,15 @@
           format = "{capacity}% {icon}";
           format-charging = "{capacity}%  ";
           format-alt = "{time} {icon}";
-	        format-icons = [" " " " " " " " " "];
+          format-icons = [
+            " "
+            " "
+            " "
+            " "
+            " "
+          ];
         };
-        
+
         network = {
           format-wifi = "{essid} ({signalStrength}%)  ";
           format-ethernet = "[{bandwidthUpBits}]/[{bandwidthDownBits}]  ";
@@ -74,9 +93,9 @@
           format-linked = "{ifname} (No IP) ";
           format-disconnected = "Disconnected ⚠";
           format-disabled = "Disabled ⚠";
-          on-click = "kitty impala";
+          #on-click = "kitty impala";
         };
-        
+
         pulseaudio = {
           format = "{volume}% {icon} {format_source}";
           format-bluetooth = "{volume}% {icon}  {format_source} ";
@@ -91,17 +110,31 @@
             phone = "";
             portable = "";
             car = "";
-            default = ["" " " " " ];
+            default = [
+              ""
+              " "
+              " "
+            ];
           };
           on-click = "pavucontrol";
         };
-        
+
         bluetooth = {
           format-on = " ";
           format-off = "! ";
           on-click = "kitty bluetuith";
         };
-        
+
+        "custom/privacy-dots" = {
+          exec = "/home/filippo/Documents/Dotfiles/nixos/WM/privacy_dots.sh";
+          return-type = "json";
+          interval = 10;
+          format = "{text}";
+          tooltip = true;
+          escape = false;
+          markup = "pango";
+        };
+
         "custom/hyprsunset" = {
           format = "{icon}";
           tooltip-format = "Blue light filter: {}";
@@ -114,27 +147,27 @@
           interval = 5;
         };
 
-        "custom/notification"= {
-          "tooltip"= false;
-          "format"= "{icon}";
-          "format-icons"= {
-            "notification"= " <span foreground='red'><sup> </sup></span>";
-            "none"= " ";
-            "dnd-notification"= " <span foreground='red'><sup> </sup></span>";
-            "dnd-none"= " " ;
-            "inhibited-notification"= " <span foreground='red'><sup> </sup></span>";
-            "inhibited-none"= " ";
-            "dnd-inhibited-notification"= " <span foreground='red'><sup> </sup></span>";
-            "dnd-inhibited-none"= " ";
+        "custom/notification" = {
+          "tooltip" = false;
+          "format" = "{icon}";
+          "format-icons" = {
+            "notification" = " <span foreground='red'><sup> </sup></span>";
+            "none" = " ";
+            "dnd-notification" = " <span foreground='red'><sup> </sup></span>";
+            "dnd-none" = " ";
+            "inhibited-notification" = " <span foreground='red'><sup> </sup></span>";
+            "inhibited-none" = " ";
+            "dnd-inhibited-notification" = " <span foreground='red'><sup> </sup></span>";
+            "dnd-inhibited-none" = " ";
           };
-          "return-type"= "json";
-          "exec-if"= "which swaync-client";
-          "exec"= "swaync-client -swb";
-          "on-click"= "swaync-client -t -sw";
-          "on-click-right"= "swaync-client -d -sw";
-          "escape"= true;
+          "return-type" = "json";
+          "exec-if" = "which swaync-client";
+          "exec" = "swaync-client -swb";
+          "on-click" = "swaync-client -t -sw";
+          "on-click-right" = "swaync-client -d -sw";
+          "escape" = true;
         };
-        
+
         tray = {
           icon-size = 21;
           spacing = 5;

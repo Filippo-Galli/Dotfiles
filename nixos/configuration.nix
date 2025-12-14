@@ -254,7 +254,7 @@
       material-icons
       
       # Emoji support
-      noto-fonts-emoji
+      noto-fonts-color-emoji
       
       # Symbols and icons
       symbola

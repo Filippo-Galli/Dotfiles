@@ -44,6 +44,9 @@
 
     # Automounting
     udiskie # automounting for Wayland
+
+    # JSON processor
+    jq
   ];
 
 }
