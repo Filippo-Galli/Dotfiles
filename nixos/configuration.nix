@@ -97,6 +97,36 @@
     withUWSM = false;
   };
 
+  programs.nix-ld.enable = true;
+  programs.nix-ld.libraries = with pkgs; [
+    # 1. Basics (Compression, Security, C standard libs)
+    stdenv.cc.cc.lib
+    zlib
+    openssl
+    glib
+    
+    # 2. Graphic & GUI libraries (Common for matplotlib, opencv, etc.)
+    libGL
+    libGLU
+    xorg.libX11
+    xorg.libXext
+    xorg.libXrender
+    xorg.libXi
+    xorg.libXcomposite
+    xorg.libXcursor
+    xorg.libXdamage
+    xorg.libXfixes
+    xorg.libXrandr
+    xorg.libXtst
+    
+    # 3. System Utilities (Sometimes required by specific python wheels)
+    util-linux
+    icu
+    libxml2
+    libxslt
+    bzip2
+  ];
+
   # Enable necessary services for Hyprland
   security = {
     polkit.enable = true;
@@ -151,7 +181,7 @@
     displayManager.ly = {
       enable = true;
       settings = {
-        animation = "matrix";  # Options: none, matrix, doom
+        animation = "none";  # Options: none, matrix, doom
         hide_borders = true;
       };
     };
