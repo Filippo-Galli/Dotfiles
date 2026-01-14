@@ -167,15 +167,14 @@
       enable = true; # Enable D-Bus for inter-process communication
     };
 
-    xserver = {
-      enable = true; # Enable the X11 server (required for gdm)
-      displayManager.gdm.enable = false;
+    # xserver = {
+    #   enable = true; # Enable the X11 server (for compatibility with XWayland)
 
-      xkb = {
-        layout = "it"; # Set keyboard layout to Italian
-        variant = ""; # No specific variant
-      };
-    };
+    #   xkb = {
+    #     layout = "it"; # Set keyboard layout to Italian
+    #     variant = ""; # No specific variant
+    #   };
+    # };
 
     # Use Ly display manager
     displayManager.ly = {

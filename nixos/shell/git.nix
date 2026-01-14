@@ -3,11 +3,15 @@
   home.packages = [pkgs.gh];
   
   programs.git = {
+    settings.user = {
+      name = "Filippo-Galli";
+      email = "filippo.galli.cr@gmail.com";
+    };
     enable = true;
-    userName = "Filippo-Galli";
-    userEmail = "filippo.galli.cr@gmail.com";
     lfs.enable = true;
   };
+
+  
 
   programs.gh = {
     enable = true; 
