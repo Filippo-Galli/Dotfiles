@@ -1,20 +1,29 @@
-{ config, pkgs, inputs, stateVersion, ... }:
+{
+  config,
+  pkgs,
+  inputs,
+  stateVersion,
+  ...
+}:
 
 {
-  imports =
-    [ # Include the results of the hardware scan.
-      ./hardware-configuration.nix
+  imports = [
+    # Include the results of the hardware scan.
+    ./hardware-configuration.nix
 
-      # Tailscale 
-      ./programs/tailscale.nix
+    # Tailscale
+    ./programs/tailscale.nix
 
-      # Battery notifier script
-      ./WM/battery-notifier.nix
-    ];
+    # Battery notifier script
+    ./WM/battery-notifier.nix
+  ];
 
   nix.settings = {
-    experimental-features = [ "nix-command" "flakes" ];
-    
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+
     substituters = [
       "https://cache.nixos.org/"
       "https://hyprland.cachix.org"
@@ -28,7 +37,10 @@
     cores = 0; # Use all cores
     auto-optimise-store = true; # Automatically optimize the Nix store
 
-    trusted-users = [ "root" "filippo" ]; # Allow these users to run Nix commands without restrictions
+    trusted-users = [
+      "root"
+      "filippo"
+    ]; # Allow these users to run Nix commands without restrictions
   };
 
   boot = {
@@ -42,7 +54,7 @@
 
     kernelParams = [
       "transparent_hugepage=madvise"
-      "elevator=mq-deadline"  # Good for NVMe SSDs
+      "elevator=mq-deadline" # Good for NVMe SSDs
       "acpi_osi=Linux"
       "acpi_backlight=intel"
     ];
@@ -55,7 +67,7 @@
 
     bluetooth = {
       enable = true;
-      powerOnBoot = false;  # Don't auto-enable at boot
+      powerOnBoot = false; # Don't auto-enable at boot
       settings = {
         General = {
           Enable = "Source,Sink,Media,Socket";
@@ -104,7 +116,7 @@
     zlib
     openssl
     glib
-    
+
     # 2. Graphic & GUI libraries (Common for matplotlib, opencv, etc.)
     libGL
     libGLU
@@ -118,7 +130,7 @@
     xorg.libXfixes
     xorg.libXrandr
     xorg.libXtst
-    
+
     # 3. System Utilities (Sometimes required by specific python wheels)
     util-linux
     icu
@@ -130,8 +142,8 @@
   # Enable necessary services for Hyprland
   security = {
     polkit.enable = true;
-    pam.services.hyprlock = {};
-    
+    pam.services.hyprlock = { };
+
     # Improve sudo security
     sudo = {
       enable = true;
@@ -141,7 +153,7 @@
         Defaults timestamp_timeout=30
       '';
     };
-    
+
     # Enable AppArmor for additional security
     apparmor = {
       enable = true;
@@ -151,9 +163,9 @@
       hyprland.enableGnomeKeyring = true;
       login.enableGnomeKeyring = true;
       passwd.enableGnomeKeyring = true;
-      #gdm.enableGnomeKeyring = true;        
+      #gdm.enableGnomeKeyring = true;
       #gdm-password.enableGnomeKeyring = true;
-      ly.enableGnomeKeyring = true;  
+      ly.enableGnomeKeyring = true;
     };
 
     # Enable RTKit for real-time scheduling
@@ -162,13 +174,13 @@
 
   services = {
     gnome.gnome-keyring.enable = true;
-    
+
     dbus = {
       enable = true; # Enable D-Bus for inter-process communication
     };
 
     # xserver = {
-    #   enable = true; # Enable the X11 server (for compatibility with XWayland)
+    #   enable = true; # Enable the X11 server (for compatibservicility with XWayland)
 
     #   xkb = {
     #     layout = "it"; # Set keyboard layout to Italian
@@ -180,7 +192,7 @@
     displayManager.ly = {
       enable = true;
       settings = {
-        animation = "none";  # Options: none, matrix, doom
+        animation = "none"; # Options: none, matrix, doom
         hide_borders = true;
       };
     };
@@ -203,10 +215,10 @@
 
     # Enable fstrim for SSDs
     fstrim.enable = true;
-    
+
     # Firmware updates
     fwupd.enable = true;
-    
+
     # System monitoring
     smartd.enable = true;
   };
@@ -215,13 +227,16 @@
     enable = true;
     wlr.enable = true;
     config.common.default = "*";
-    extraPortals = [ pkgs.xdg-desktop-portal-hyprland pkgs.xdg-desktop-portal-gtk];
+    extraPortals = [
+      pkgs.xdg-desktop-portal-hyprland
+      pkgs.xdg-desktop-portal-gtk
+    ];
   };
 
   # Configure console keymap
   console.keyMap = "it2";
-  
-  # Docker 
+
+  # Docker
   # virtualisation.docker.rootless = {
   #   enable = true;
   #   setSocketVariable = true;
@@ -231,7 +246,12 @@
   users.users.filippo = {
     isNormalUser = true;
     description = "Filippo Galli";
-    extraGroups = [ "networkmanager" "wheel" "bluetooth" "docker"];
+    extraGroups = [
+      "networkmanager"
+      "wheel"
+      "bluetooth"
+      "docker"
+    ];
     shell = pkgs.zsh;
   };
 
@@ -240,14 +260,15 @@
 
   # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
-  	wget
+    wget
     vim
     kitty
     git
 
     gnome-keyring
     seahorse
-    libsecret  # Needed for apps to talk to gnome-keyring
+    libsecret # Needed for apps to talk to gnome-keyring
+    # polkit_gnome
 
     devenv # Nix development environment
   ];
@@ -255,13 +276,15 @@
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
-    QT_QPA_PLATFORM = "wayland"; 
+    QT_QPA_PLATFORM = "wayland";
   };
 
   # Set the default editor to vim
   environment.variables = {
-  	EDITOR = "nvim";
-	  SECRET_TOOL_BACKEND = "gnome";
+    EDITOR = "nvim";
+    SECRET_TOOL_BACKEND = "gnome";
+    XDG_SESSION_TYPE = "wayland"; # or "x11" if using X11
+    DBUS_SESSION_BUS_ADDRESS = "unix:path=$XDG_RUNTIME_DIR/bus";
   };
 
   system.stateVersion = stateVersion;
@@ -273,25 +296,25 @@
       nerd-fonts.fira-code
       nerd-fonts.hack
       nerd-fonts.dejavu-sans-mono
-      
+
       # Font Awesome (all versions for compatibility)
       font-awesome_6
       font-awesome_5
-      
+
       # Additional icon fonts that many applications use
       material-design-icons
       material-icons
-      
+
       # Emoji support
       noto-fonts-color-emoji
-      
+
       # Symbols and icons
       symbola
     ];
-    
+
     # Enable default fonts for better compatibility
     enableDefaultPackages = true;
-    
+
     # Font configuration
     fontconfig = {
       enable = true;

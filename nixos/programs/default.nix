@@ -1,4 +1,4 @@
-{pkgs, config, nixvim, ...}:
+{pkgs, config, ...}:
 
 {
   imports = [
@@ -6,7 +6,7 @@
     ./obsidian.nix
     ./brave.nix
     ./direnv.nix
-    ./nixvim.nix
+    ./nvim.nix
     ./nextcloud-client.nix
     ./kwallet.nix 
     ./onlyoffice.nix
