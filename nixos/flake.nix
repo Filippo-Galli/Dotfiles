@@ -29,7 +29,7 @@
   in
   {
     nixosConfigurations.nixos = nixpkgs.lib.nixosSystem {
-      inherit system;
+      system = system;
       specialArgs = {
         inherit username stateVersion inputs;
       };
@@ -42,7 +42,7 @@
           nixpkgs.overlays = [
             (final: prev: {
               unstable = import nixpkgs-unstable {
-                system = final.system;
+                system = final.stdenv.hostPlatform.system;
                 config.allowUnfree = true;
               };
             })
