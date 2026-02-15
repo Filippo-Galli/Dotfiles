@@ -13,9 +13,6 @@
 
     # Tailscale
     ./programs/tailscale.nix
-
-    # Battery notifier script
-    ./WM/battery-notifier.nix
   ];
 
   nix.settings = {
