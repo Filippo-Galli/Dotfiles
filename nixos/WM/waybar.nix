@@ -8,7 +8,7 @@
       target = "hyprland-session.target"; # Start with Hyprland session
     };
 
-    style = builtins.readFile ./style.css;
+    style = builtins.readFile .config/waybar/style.css;
 
     settings = {
       mainBar = {
@@ -126,7 +126,7 @@
         };
 
         "custom/privacy-dots" = {
-          exec = "/home/filippo/Documents/Dotfiles/nixos/WM/privacy_dots.sh";
+          exec = "/home/filippo/Documents/Dotfiles/nixos/WM/config/scripts/privacy_dots.sh";
           return-type = "json";
           interval = 10;
           format = "{text}";

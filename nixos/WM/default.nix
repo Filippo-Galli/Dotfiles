@@ -10,5 +10,6 @@
     ./gtk.nix
     ./swaync.nix
     ./gazelle.nix
+    ./battery-notifier.nix  
   ];
 }
