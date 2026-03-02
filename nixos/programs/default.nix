@@ -12,5 +12,6 @@
     ./onlyoffice.nix
     ./zotero.nix
     ./firefox.nix
+    ./mattermost.nix
   ];
 }
