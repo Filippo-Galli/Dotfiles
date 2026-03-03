@@ -11,5 +11,6 @@
     ./swaync.nix
     ./gazelle.nix
     ./battery-notifier.nix  
+    ./hyprmon.nix
   ];
 }

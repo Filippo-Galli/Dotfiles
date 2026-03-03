@@ -78,6 +78,7 @@
     hostName = "nixos";
     networkmanager = {
       enable = true;
+      # powersave = false;
       plugins = with pkgs; [
         networkmanager-openconnect
       ];
