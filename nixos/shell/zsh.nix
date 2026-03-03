@@ -21,6 +21,10 @@
       ls = "eza -lha";
       update = "cd ~/Documents/Dotfiles/nixos; sudo nix flake update && sudo nixos-rebuild switch --upgrade";
       rebuild = "sudo nixos-rebuild switch";
+      vpn_up = "sudo openconnect --background --protocol=anyconnect --user=figalli vpn-01-dc1.inria.fr";
+      vpn_status = "pgrep -x openconnect >/dev/null && echo 'VPN connected' || echo 'VPN disconnected'";
+      vpn_down = "sudo pkill -SIGINT openconnect 2>/dev/null || echo 'No openconnect process found'";
+
       rcat = "cat";
       ".." = "cd ..";
       "..." = "cd ../..";
