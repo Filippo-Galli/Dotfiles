@@ -78,9 +78,10 @@
     hostName = "nixos";
     networkmanager = {
       enable = true;
-      #wifi.backend = "iwd";  # Use iwd as the WiFi backend
+      plugins = with pkgs; [
+        networkmanager-openconnect
+      ];
     };
-    #wireless.iwd.enable = false;
   };
 
   # Set your time zone.
