@@ -288,7 +288,10 @@
     DBUS_SESSION_BUS_ADDRESS = "unix:path=$XDG_RUNTIME_DIR/bus";
   };
 
-  system.stateVersion = stateVersion;
+  system = {
+    stateVersion = stateVersion;
+    configurationRevision = with inputs.self; if sourceInfo ? dirtyShortRev then sourceInfo.dirtyShortRev else sourceInfo.shortRev; # Optional: Track configuration changes
+  };
 
   fonts = {
     packages = with pkgs; [
