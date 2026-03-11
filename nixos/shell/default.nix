@@ -2,8 +2,8 @@
   imports = [
     ./git.nix
     ./kitty.nix
-    # ./bash.nix
     ./zsh.nix
+    ./nushell.nix
     ./starship.nix
     ./terminal_program.nix
   ];

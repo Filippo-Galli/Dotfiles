@@ -86,5 +86,8 @@
 
     # OSD
     swayosd
+
+    # Nix output monitor
+    nix-output-monitor
   ];
 }

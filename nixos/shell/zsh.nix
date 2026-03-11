@@ -20,7 +20,7 @@
     shellAliases = {
       ls = "eza -lha";
       update = "cd ~/Documents/Dotfiles/nixos; sudo nix flake update && sudo nixos-rebuild switch --upgrade";
-      rebuild = "sudo nixos-rebuild switch";
+      rebuild = "sudo nixos-rebuild switch --flake ~/Documents/Dotfiles/nixos#nixos";
       vpn_up = "sudo openconnect --background --protocol=anyconnect --user=figalli vpn-01-dc1.inria.fr";
       vpn_status = "pgrep -x openconnect >/dev/null && echo 'VPN connected' || echo 'VPN disconnected'";
       vpn_down = "sudo pkill -SIGINT openconnect 2>/dev/null || echo 'No openconnect process found'";
@@ -42,20 +42,10 @@
 
       # fzf 
       eval \"$(fzf --zsh)\"
-    ";
-    
-    plugins = [
-      {
-        name = "fzf-tab";
-        src = pkgs.fetchFromGitHub {
-          owner = "Aloxaf";
-          repo = "fzf-tab";
-          rev = "c2b4aa5ad2532cca91f23908ac7f00efb7ff09c9";
-          sha256 = "1b4pksrc573aklk71dn2zikiymsvq19bgvamrdffpf7azpq6kxl2";
-        };
-      }
 
-    ];
+      # Enable nushell as the default shell within zsh
+      exec nu --login
+    ";
   };
 
 }
