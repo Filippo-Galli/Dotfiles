@@ -290,7 +290,7 @@
 
   system = {
     stateVersion = stateVersion;
-    configurationRevision = with inputs.self; if sourceInfo ? dirtyShortRev then sourceInfo.dirtyShortRev else sourceInfo.shortRev; # Optional: Track configuration changes
+    configurationRevision = with inputs.self; if sourceInfo ? dirtyShortRev then sourceInfo.dirtyShortRev else sourceInfo.shortRev;
   };
 
   fonts = {

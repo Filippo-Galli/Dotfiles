@@ -44,7 +44,7 @@
       eval \"$(fzf --zsh)\"
 
       # Enable nushell as the default shell within zsh
-      exec nu --login
+      exec ${pkgs.nushell}/bin/nu --login
     ";
   };
 

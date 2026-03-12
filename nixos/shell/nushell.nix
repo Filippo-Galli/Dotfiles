@@ -16,10 +16,16 @@
       rcat = "cat";
       term = "kitty";
       "..." = "cd ../..";
-      ls= "ls -a";
     };
 
     extraConfig = ''
+      $env.config.show_banner = false
+      $env.config.hooks.env_change.PWD = ($env.config.hooks.env_change.PWD? | default []) ++ [{
+        once: true
+        code: { print $"Nushell startup time: ($nu.startup-time)" }
+      }]
+
+
       def update [] {
         pushd ~/Documents/Dotfiles/nixos
         sudo nix flake update
