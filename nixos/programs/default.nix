@@ -13,5 +13,6 @@
     ./zotero.nix
     ./firefox.nix
     ./mattermost.nix
+    ./zed.nix
   ];
 }
