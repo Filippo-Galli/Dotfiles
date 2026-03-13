@@ -19,12 +19,8 @@
     };
 
     extraConfig = ''
-      $env.config.show_banner = false
-      $env.config.hooks.env_change.PWD = ($env.config.hooks.env_change.PWD? | default []) ++ [{
-        once: true
-        code: { print $"Nushell startup time: ($nu.startup-time)" }
-      }]
-
+      def ll [] { ls -l }
+      def la [] { ls -a }
 
       def update [] {
         pushd ~/Documents/Dotfiles/nixos
