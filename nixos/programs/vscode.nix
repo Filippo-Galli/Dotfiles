@@ -3,7 +3,7 @@
 {
   programs.vscode = {
     enable = true;
-    package = pkgs.vscode; 
+    package = pkgs.vscode;
 
     profiles.default = {
       userSettings = {
@@ -61,7 +61,7 @@
         "terminal.integrated.fontSize" = 14;
 
         # Python settings
-        "python.defaultInterpreterPath" = "./.venv/bin/python";
+        # "python.defaultInterpreterPath" = "./.venv/bin/python";
 
         # Direnv integration
         "direnv.restart.automatic" = true;
@@ -69,6 +69,25 @@
 
 	# Disable startup page
 	"workbench.startupEditor" = "none";
+
+	# Memory / performance
+        # "search.followSymlinks" = false;
+        # "files.watcherExclude" = {
+        #  "**/.git/**" = true;
+        #  "**/node_modules/**" = true;
+        #  "**/__pycache__/**" = true;
+        #  "**/.venv/**" = true;
+        #  };
+
+	"extensions.experimental.affinity" = {
+	  "jnoortheen.nix-ide" = 1;
+	  "github.copilot" = 2;
+	  "github.copilot-chat" = 3;
+	  "charliermarsh.ruff" = 4;
+	  "ms-python.python" = 5;
+	  "ms-toolsai.jupyter" = 6;
+	  "reditorsupport.r" = 7;
+	};
       };
 
       # Extensions configuration
