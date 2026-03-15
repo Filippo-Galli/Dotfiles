@@ -3,6 +3,7 @@
   pkgs,
   username,
   stateVersion,
+  inputs,
   ...
 }:
 
@@ -89,5 +90,8 @@
 
     # Nix output monitor
     nix-output-monitor
+
+    # ghgrab
+    inputs.ghgrab.packages.${pkgs.system}.default
   ];
 }
