@@ -19,23 +19,26 @@
     };
 
     extraConfig = ''
+
+      $env.config.show_banner = false
+
       def ll [] { ls -l }
       def la [] { ls -a }
 
       def update [] {
-        pushd ~/Documents/Dotfiles/nixos
-        sudo nix flake update
-        sudo nixos-rebuild switch --upgrade
-        popd
+          pushd ~/Documents/Dotfiles/nixos
+          sudo nix flake update
+          sudo nixos-rebuild switch --upgrade
+          popd
       }
 
       def vpn_down [] {
-        sudo pkill -SIGINT openconnect
-        if $env.LAST_EXIT_CODE != 0 { print "No openconnect process found" }
+          sudo pkill -SIGINT openconnect
+          if $env.LAST_EXIT_CODE != 0 { print "No openconnect process found" }
       }
 
       def vpn_status [] {
-        if (pgrep -x openconnect | length) > 0 { 'VPN connected' } else { 'VPN disconnected' }
+          if (pgrep -x openconnect | length) > 0 { 'VPN connected' } else { 'VPN disconnected' }
       }
     '';
   };
