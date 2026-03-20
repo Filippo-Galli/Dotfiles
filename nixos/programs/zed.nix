@@ -13,19 +13,9 @@
     ];
 
     userSettings = {
-      # ── Panel layout ────────────────────────────────────────────────────────
-      panel_overrides = {
-        outline_panel = {
-          dock = "right";
-        };
-        collaboration_panel = {
-          dock = "right";
-        };
-        notification_panel = {
-          dock = "right";
-        };
-        # project_panel stays left — file tree and outline on opposite sides
-      };
+
+      # ── Load Direnv  ───────────────────────────────────────────────────────
+      load_direnv = "shell_hook";
 
       # ── Keymaps ────────────────────────────────────────────────────────────
       keymap = [
@@ -160,6 +150,7 @@
   home.packages = with pkgs; [
     # Nix
     nil # Nix LSP
+    nixd # Nix Language Server
     nixfmt-rfc-style # formatter (RFC 166 style)
 
     # R
