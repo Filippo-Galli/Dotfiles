@@ -71,6 +71,11 @@
               "ty"
               "server"
             ];
+            settings = {
+              python = {
+                pythonPath = "$env.UV_PROJECT_ENVIRONMENT/bin/python";
+              };
+            };
           };
         };
       };
