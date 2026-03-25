@@ -17,17 +17,6 @@
       # ── Load Direnv  ───────────────────────────────────────────────────────
       load_direnv = "shell_hook";
 
-      # ── Keymaps ────────────────────────────────────────────────────────────
-      keymap = [
-        {
-          # Workspace-wide: toggle/take focus of terminal with Alt+Q
-          context = "Workspace";
-          bindings = {
-            "alt-q" = "terminal_panel::ToggleFocus";
-          };
-        }
-      ];
-
       # ── LSP configuration ──────────────────────────────────────────────────
       lsp = {
         # R: languageserver (install via: install.packages("languageserver"))
