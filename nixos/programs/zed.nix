@@ -17,6 +17,21 @@
       # ── Load Direnv  ───────────────────────────────────────────────────────
       load_direnv = "shell_hook";
 
+      # -- Right Sidebar
+      collaboration_panel = {
+        dock = "right";
+      };
+      git_panel = {
+        dock = "bottom";
+      };
+      outline_panel = {
+        dock = "right";
+      };
+      project_panel = {
+        dock = "right";
+      };
+      theme = "Dark OLED";
+
       # ── LSP configuration ──────────────────────────────────────────────────
       lsp = {
         # R: languageserver (install via: install.packages("languageserver"))
