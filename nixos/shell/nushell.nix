@@ -12,7 +12,7 @@
     shellAliases = {
       test-build = "sudo nixos-rebuild test --flake ~/Documents/Dotfiles/nixos#nixos";
       rebuild = "sudo nixos-rebuild switch --flake ~/Documents/Dotfiles/nixos#nixos";
-      vpn_up = "sudo openconnect --background --protocol=anyconnect --user=figalli vpn-01-dc1.inria.fr";
+      vpn_up = "sudo openconnect --background --protocol=anyconnect --user=figalli vpn.inria.fr";
       rcat = "cat";
       term = "kitty";
       "..." = "cd ../..";
