@@ -12,7 +12,7 @@
     ./hardware-configuration.nix
 
     # Tailscale
-    ./programs/tailscale.nix
+    ../../programs/tailscale.nix
   ];
 
   nix.settings = {
@@ -190,11 +190,13 @@
     # };
 
     # Use Ly display manager
-    displayManager.ly = {
-      enable = true;
-      settings = {
-        animation = "none"; # Options: none, matrix, doom
-        hide_borders = true;
+    displayManager = {
+      ly = {
+        enable = true;
+        settings = {
+          animation = "none"; # Options: none, matrix, doom
+          hide_borders = true;
+        };
       };
     };
 
@@ -247,13 +249,13 @@
   users.users.filippo = {
     isNormalUser = true;
     description = "Filippo Galli";
+    # initialPassword = "nix" # enable to enter in the vm using this password
     extraGroups = [
       "networkmanager"
       "wheel"
       "bluetooth"
       "docker"
     ];
-    shell = pkgs.zsh;
   };
 
   # Allow unfree packages
@@ -290,7 +292,9 @@
 
   system = {
     stateVersion = stateVersion;
-    configurationRevision = with inputs.self; if sourceInfo ? dirtyShortRev then sourceInfo.dirtyShortRev else sourceInfo.shortRev;
+    configurationRevision =
+      with inputs.self;
+      if sourceInfo ? dirtyShortRev then sourceInfo.dirtyShortRev else sourceInfo.shortRev;
   };
 
   fonts = {

@@ -48,12 +48,6 @@
 
   };
 
-  imports = [
-    ./WM
-    ./shell
-    ./programs
-  ];
-
   home.stateVersion = stateVersion;
   programs.home-manager.enable = true;
 
@@ -93,5 +87,36 @@
 
     # ghgrab
     inputs.ghgrab.packages.${pkgs.system}.default
+  ];
+
+  imports = [
+    ../../programs/vscode.nix
+    ../../programs/obsidian.nix
+    ../../programs/brave.nix
+    ../../programs/direnv.nix
+    ../../programs/nvim.nix
+    ../../programs/nextcloud-client.nix
+    ../../programs/kwallet.nix
+    ../../programs/onlyoffice.nix
+    ../../programs/zotero.nix
+    ../../programs/firefox.nix
+    ../../programs/mattermost.nix
+    ../../programs/zed.nix
+    ../../shell/git.nix
+    ../../shell/kitty.nix
+    ../../shell/zsh.nix
+    ../../shell/nushell.nix
+    ../../shell/starship.nix
+    ../../shell/terminal_program.nix
+    ../../WM/hyprland.nix
+    ../../WM/waybar.nix
+    ../../WM/rofi.nix
+    ../../WM/nemo.nix
+    ../../WM/hyprlock.nix
+    ../../WM/gtk.nix
+    ../../WM/swaync.nix
+    ../../WM/gazelle.nix
+    ../../WM/battery-notifier.nix
+    ../../WM/hyprmon.nix
   ];
 }
