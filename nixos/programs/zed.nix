@@ -68,20 +68,6 @@
         };
 
         # Python: ty — Astral's Rust-based type checker, built into Zed natively
-        ty = {
-          binary = {
-            path = "${pkgs.uv}/bin/uvx";
-            arguments = [
-              "ty"
-              "server"
-            ];
-            settings = {
-              python = {
-                pythonPath = "$env.UV_PROJECT_ENVIRONMENT/bin/python";
-              };
-            };
-          };
-        };
       };
 
       # ── Per-language settings ───────────────────────────────────────────────
