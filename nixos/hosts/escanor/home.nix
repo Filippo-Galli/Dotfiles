@@ -116,7 +116,6 @@
     ../../WM/gtk.nix
     ../../WM/swaync.nix
     ../../WM/gazelle.nix
-    ../../WM/battery-notifier.nix
     ../../WM/hyprmon.nix
   ];
 }

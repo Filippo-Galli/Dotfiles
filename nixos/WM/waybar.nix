@@ -5,7 +5,7 @@
     enable = true;
     systemd = {
       enable = true;
-      target = "hyprland-session.target"; 
+      target = "hyprland-session.target";
     };
 
     style = builtins.readFile ./config/waybar/style.css;
@@ -21,7 +21,7 @@
           "network"
           "pulseaudio"
           "bluetooth"
-          "custom/privacy-dots"
+          #"custom/privacy-dots"
         ];
         modules-center = [ "clock" ];
         modules-right = [
@@ -125,15 +125,15 @@
           on-click = "kitty bluetuith";
         };
 
-        "custom/privacy-dots" = {
-          exec = "/home/filippo/Documents/Dotfiles/nixos/WM/config/scripts/privacy_dots.sh";
-          return-type = "json";
-          interval = 10;
-          format = "{text}";
-          tooltip = true;
-          escape = false;
-          markup = "pango";
-        };
+        # "custom/privacy-dots" = {
+        #   exec = "/home/filippo/Documents/Dotfiles/nixos/WM/config/scripts/privacy_dots.sh";
+        #   return-type = "json";
+        #   interval = 10;
+        #   format = "{text}";
+        #   tooltip = true;
+        #   escape = false;
+        #   markup = "pango";
+        # };
 
         "custom/hyprsunset" = {
           format = "{icon}";
