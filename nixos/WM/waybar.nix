@@ -125,15 +125,15 @@
           on-click = "kitty bluetuith";
         };
 
-        # "custom/privacy-dots" = {
-        #   exec = "/home/filippo/Documents/Dotfiles/nixos/WM/config/scripts/privacy_dots.sh";
-        #   return-type = "json";
-        #   interval = 10;
-        #   format = "{text}";
-        #   tooltip = true;
-        #   escape = false;
-        #   markup = "pango";
-        # };
+        "custom/privacy-dots" = {
+          exec = "${./config/scripts/privacy_dots.sh}";
+          return-type = "json";
+          interval = 10;
+          format = "{text}";
+          tooltip = true;
+          escape = false;
+          markup = "pango";
+        };
 
         "custom/hyprsunset" = {
           format = "{icon}";
