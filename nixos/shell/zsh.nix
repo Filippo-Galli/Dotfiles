@@ -1,4 +1,9 @@
-{config, lib, pkgs, ...}:
+{
+  config,
+  lib,
+  pkgs,
+  ...
+}:
 
 {
   programs.zsh = {
@@ -8,7 +13,7 @@
     autocd = true;
     historySubstringSearch.enable = true;
     syntaxHighlighting.enable = true;
-    
+
     history = {
       size = 10000;
       save = 10000;
@@ -16,7 +21,7 @@
       share = true;
       path = "${config.xdg.dataHome}/zsh/history";
     };
-    
+
     shellAliases = {
       ls = "eza -lha";
       update = "cd ~/Documents/Dotfiles/nixos; sudo nix flake update && sudo nixos-rebuild switch --upgrade";
@@ -31,21 +36,18 @@
       term = "kitty";
     };
 
-    initContent = "
+    initContent = ''
       # Keybindings
       bindkey '^[[A' history-beginning-search-backward # Up arrow
       bindkey '^[[B' history-beginning-search-forward  # Down arrow
-      
+
       # Completion styling
       zstyle ':completion:*' menu select
       zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
-      # fzf 
-      eval \"$(fzf --zsh)\"
-
-      # Enable nushell as the default shell within zsh
-      exec ${pkgs.nushell}/bin/nu --login
-    ";
+      # fzf
+      eval "$(fzf --zsh)"
+    '';
   };
 
 }

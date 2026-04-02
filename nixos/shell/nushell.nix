@@ -6,6 +6,19 @@
 }:
 
 {
+  programs.zsh.initContent = lib.mkOrder 9999 ''
+    if [[ $- == *i* && -z "$__NU_LAUNCHED" ]] && command -v nu > /dev/null; then
+        export __NU_LAUNCHED=1
+        LOGIN_OPT=""
+        if [ -n "$BASH_VERSION" ] && shopt -q login_shell; then
+            LOGIN_OPT="--login"
+        elif [ -n "$ZSH_VERSION" ] && [[ -o login ]]; then
+            LOGIN_OPT="--login"
+        fi
+        exec nu $LOGIN_OPT
+    fi
+  '';
+
   programs.nushell = {
     enable = true;
 
