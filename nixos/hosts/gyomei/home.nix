@@ -87,6 +87,9 @@
 
     # ghgrab
     inputs.ghgrab.packages.${pkgs.stdenv.hostPlatform.system}.default
+
+    # tmux
+    tmux
   ];
 
   imports = [
