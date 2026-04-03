@@ -23,9 +23,9 @@
             if osConfig.networking.hostName == "escanor" then
               "2.0"
             else if osConfig.networking.hostName == "gyomei" then
-              "1.5"
+              "1.6"
             else
-              "1.5"
+              "1.6"
           }"
         ]
         (builtins.readFile ./config/hypr/hyprland.conf);
