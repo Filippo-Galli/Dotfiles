@@ -11,6 +11,9 @@
     # Include the results of the hardware scan.
     ./hardware-configuration.nix
 
+    # Include disko
+    ./disko.nix
+
     # Tailscale
     ../../programs/tailscale.nix
   ];
