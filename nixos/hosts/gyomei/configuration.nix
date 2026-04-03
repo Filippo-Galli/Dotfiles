@@ -78,7 +78,7 @@
   };
 
   networking = {
-    hostName = "nixos";
+    hostName = "gyomei";
     networkmanager = {
       enable = true;
       # powersave = false;

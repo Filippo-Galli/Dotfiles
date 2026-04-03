@@ -75,7 +75,7 @@
   };
 
   networking = {
-    hostName = "nixos";
+    hostName = "escanor";
     networkmanager = {
       enable = true;
       # powersave = false;
