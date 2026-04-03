@@ -102,6 +102,7 @@
     ../../programs/firefox.nix
     ../../programs/mattermost.nix
     ../../programs/zed.nix
+    ../../programs/bitwarden.nix
     ../../shell/git.nix
     ../../shell/kitty.nix
     ../../shell/zsh.nix
