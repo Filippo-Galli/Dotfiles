@@ -97,6 +97,18 @@
             }
           ];
         };
+
+        # --- Oxide Server ---
+        oxide_server = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit username stateVersion inputs; };
+          modules = shared-modules ++ [
+            ./hosts/oxide_server/configuration.nix
+            {
+              home-manager.users.${username} = import ./hosts/oxide_server/home.nix;
+            }
+          ];
+        };
       };
     };
 }
