@@ -58,6 +58,11 @@
     enableAllFirmware = true;
   };
 
+  networking.firewall = {
+    enable = true;
+    allowedTCPPorts = [ 2222 ];
+  };
+
   networking = {
     hostName = "oxide_server";
     networkmanager = {
@@ -84,6 +89,19 @@
     LC_PAPER = "it_IT.UTF-8";
     LC_TELEPHONE = "it_IT.UTF-8";
     LC_TIME = "it_IT.UTF-8";
+  };
+
+  services.openssh = {
+    enable = true;
+    ports = [ 2222 ];
+    settings = {
+      PasswordAuthentication = false;
+      KbdInteractiveAuthentication = false;
+      AllowUsers = [
+        "filippo"
+        "root"
+      ];
+    };
   };
 
   programs.nix-ld.enable = true;
@@ -138,17 +156,37 @@
   console.keyMap = "it2";
 
   # Define a user account. Don't forget to set a password with 'passwd'.
-  users.users.filippo = {
-    shell = pkgs.zsh;
-    isNormalUser = true;
-    description = "Filippo Galli";
-    extraGroups = [
-      "networkmanager"
-      "wheel"
-      "bluetooth"
-      "docker"
-    ];
-    hashedPassword = "$6$bsIqAzLJL63wl7lh$lvJkZcXPLfkpoA3Rx50NtukKCmlDpOZ3Z4FpWIiOgct8LgTLovOmUjixx2TOf/bEVregCSDUjniAXfjbl3cJ0/";
+  users.users = {
+    filippo = {
+      shell = pkgs.zsh;
+      isNormalUser = true;
+      description = "Filippo Galli";
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "bluetooth"
+        "docker"
+      ];
+      initialHashedPassword = "$6$dyDeUE6kLRTEGku7$hDenLW7t6R0Vbdcaht2.aWkCbVshyg4qcK/O5WCoHi/mmVOZBYZRrM5GVTZWcNzqfESLGEJHDDKRK2mm4uLCF/";
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA2kaIJVlVqnY/KzlMRBmICfcaxsKeVmXduJSyxCm0Nu filippo@gyomei"
+      ];
+    };
+    root = {
+      shell = pkgs.zsh;
+      isNormalUser = true;
+      description = "Root User";
+      extraGroups = [
+        "networkmanager"
+        "wheel"
+        "bluetooth"
+        "docker"
+      ];
+      initialHashedPassword = "$6$Zw4CcLqRXcLcE9ua$Sc365jCUgWNb/j5V.2VWBn03jD2vNGjpEsOo6ryg5526zo4tPDJeklKSiaJ.d0jGq30pZG0fj31anlBsk1ccT1";
+      openssh.authorizedKeys.keys = [
+        "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA2kaIJVlVqnY/KzlMRBmICfcaxsKeVmXduJSyxCm0Nu filippo@gyomei"
+      ];
+    };
   };
 
   # Allow unfree packages
