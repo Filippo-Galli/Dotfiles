@@ -22,11 +22,9 @@
 
     substituters = [
       "https://cache.nixos.org/"
-      "https://hyprland.cachix.org"
     ];
     trusted-public-keys = [
       "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-      "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
     ];
 
     max-jobs = "auto"; # Automatically determine the number of jobs based on available CPU cores
@@ -52,24 +50,18 @@
       "transparent_hugepage=madvise"
       "elevator=mq-deadline" # Good for NVMe SSDs
       "acpi_osi=Linux"
-      "acpi_backlight=intel"
     ];
 
   };
 
   hardware = {
     enableAllFirmware = true;
-    cpu.intel.updateMicrocode = true;
-
-    bluetooth = {
-      enable = false;
-    };
   };
 
   networking = {
     hostName = "oxide_server";
     networkmanager = {
-      enable = true;
+      enable = false;
       # powersave = false;
       plugins = with pkgs; [
         networkmanager-openconnect
@@ -94,8 +86,6 @@
     LC_TIME = "it_IT.UTF-8";
   };
 
-  programs.dconf.enable = true;
-
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
     # 1. Basics (Compression, Security, C standard libs)
@@ -103,20 +93,6 @@
     zlib
     openssl
     glib
-
-    # 2. Graphic & GUI libraries (Common for matplotlib, opencv, etc.)
-    libGL
-    libGLU
-    xorg.libX11
-    xorg.libXext
-    xorg.libXrender
-    xorg.libXi
-    xorg.libXcomposite
-    xorg.libXcursor
-    xorg.libXdamage
-    xorg.libXfixes
-    xorg.libXrandr
-    xorg.libXtst
 
     # 3. System Utilities (Sometimes required by specific python wheels)
     util-linux
@@ -128,9 +104,6 @@
 
   # Enable necessary services for Hyprland
   security = {
-    polkit.enable = true;
-    pam.services.hyprlock = { };
-
     # Improve sudo security
     sudo = {
       enable = true;
@@ -146,34 +119,11 @@
       enable = true;
     };
 
-    pam.services = {
-      login.enableGnomeKeyring = true;
-      passwd.enableGnomeKeyring = true;
-    };
-
     # Enable RTKit for real-time scheduling
     rtkit.enable = true;
   };
 
   services = {
-    gnome.gnome-keyring.enable = true;
-
-    dbus = {
-      enable = true; # Enable D-Bus for inter-process communication
-    };
-
-    upower = {
-      enable = true; # Enable UPower for power management
-    };
-    power-profiles-daemon.enable = true;
-
-    printing.enable = false;
-
-    pulseaudio.enable = false; # Disable PulseAudio, use PipeWire instead
-    pipewire = {
-      enable = false; # Enable PipeWire for audio and video
-    };
-
     # Enable fstrim for SSDs
     fstrim.enable = true;
 
@@ -184,24 +134,8 @@
     # smartd.enable = true;
   };
 
-  xdg.portal = {
-    enable = true;
-    wlr.enable = true;
-    config.common.default = "*";
-    extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
-      pkgs.xdg-desktop-portal-gtk
-    ];
-  };
-
   # Configure console keymap
   console.keyMap = "it2";
-
-  # Docker
-  # virtualisation.docker.rootless = {
-  #   enable = true;
-  #   setSocketVariable = true;
-  # };
 
   # Define a user account. Don't forget to set a password with 'passwd'.
   users.users.filippo = {
@@ -225,13 +159,7 @@
     bashInteractive
     wget
     vim
-    kitty
     git
-
-    gnome-keyring
-    seahorse
-    libsecret # Needed for apps to talk to gnome-keyring
-    # polkit_gnome
 
     devenv # Nix development environment
     tmux
@@ -239,18 +167,20 @@
   programs.zsh.enable = true;
 
   # Enable podman
-  podman.enable = true;
+  virtualisation.containers.enable = true;
+  virtualisation = {
+    podman = {
+      enable = true;
+    };
+  };
 
   environment.sessionVariables = {
-    NIXOS_OZONE_WL = "1";
-    QT_QPA_PLATFORM = "wayland";
+    TERM = "xterm";
   };
 
   # Set the default editor to vim
   environment.variables = {
     EDITOR = "nvim";
-    SECRET_TOOL_BACKEND = "gnome";
-    XDG_SESSION_TYPE = "wayland"; # or "x11" if using X11
   };
 
   system = {
@@ -258,42 +188,5 @@
     configurationRevision =
       with inputs.self;
       if sourceInfo ? dirtyShortRev then sourceInfo.dirtyShortRev else sourceInfo.shortRev;
-  };
-
-  fonts = {
-    packages = with pkgs; [
-      # Individual Nerd Fonts (new format)
-      nerd-fonts.jetbrains-mono
-      nerd-fonts.fira-code
-      nerd-fonts.hack
-      nerd-fonts.dejavu-sans-mono
-
-      # Font Awesome (all versions for compatibility)
-      font-awesome_6
-      font-awesome_5
-
-      # Additional icon fonts that many applications use
-      material-design-icons
-      material-icons
-
-      # Emoji support
-      noto-fonts-color-emoji
-
-      # Symbols and icons
-      symbola
-    ];
-
-    # Enable default fonts for better compatibility
-    enableDefaultPackages = true;
-
-    # Font configuration
-    fontconfig = {
-      enable = true;
-      defaultFonts = {
-        serif = [ "DejaVu Serif" ];
-        sansSerif = [ "DejaVu Sans" ];
-        monospace = [ "JetBrainsMono Nerd Font" ];
-      };
-    };
   };
 }
