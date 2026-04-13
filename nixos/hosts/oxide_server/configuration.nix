@@ -174,14 +174,6 @@
     };
     root = {
       shell = pkgs.zsh;
-      isNormalUser = true;
-      description = "Root User";
-      extraGroups = [
-        "networkmanager"
-        "wheel"
-        "bluetooth"
-        "docker"
-      ];
       initialHashedPassword = "$6$Zw4CcLqRXcLcE9ua$Sc365jCUgWNb/j5V.2VWBn03jD2vNGjpEsOo6ryg5526zo4tPDJeklKSiaJ.d0jGq30pZG0fj31anlBsk1ccT1";
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIA2kaIJVlVqnY/KzlMRBmICfcaxsKeVmXduJSyxCm0Nu filippo@gyomei"
