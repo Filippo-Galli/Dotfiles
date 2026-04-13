@@ -15,7 +15,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland/v0.51.1";
+    hyprland.url = "github:hyprwm/Hyprland/v0.54.3";
     flake-utils.url = "github:numtide/flake-utils";
     ghgrab.url = "github:abhixdd/ghgrab";
 
