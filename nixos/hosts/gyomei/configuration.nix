@@ -81,7 +81,6 @@
     hostName = "gyomei";
     networkmanager = {
       enable = true;
-      # powersave = false;
       plugins = with pkgs; [
         networkmanager-openconnect
       ];
@@ -183,15 +182,6 @@
       enable = true; # Enable D-Bus for inter-process communication
     };
 
-    # xserver = {
-    #   enable = true; # Enable the X11 server (for compatibservicility with XWayland)
-
-    #   xkb = {
-    #     layout = "it"; # Set keyboard layout to Italian
-    #     variant = ""; # No specific variant
-    #   };
-    # };
-
     # Use Ly display manager
     displayManager = {
       ly = {
@@ -227,6 +217,12 @@
 
     # System monitoring
     # smartd.enable = true;
+
+    # Keep the computer running if attached to AC with the lid close
+    logind.settings.Login = {
+      HandleLidSwitch = "ignore";
+      HandleLidSwitchExternalPower = "ignore";
+    };
   };
 
   xdg.portal = {
