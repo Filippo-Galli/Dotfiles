@@ -87,8 +87,8 @@
         };
 
         network = {
-          format-wifi = "{essid} ({signalStrength}%)  ";
           format-ethernet = "[{bandwidthUpBits}]/[{bandwidthDownBits}]  ";
+          format-wifi = "{essid} ({signalStrength}%)  ";
           tooltip-format = "{ifname} via {gwaddr} ";
           format-linked = "{ifname} (No IP) ";
           format-disconnected = "Disconnected ⚠";
