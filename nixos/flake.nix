@@ -46,19 +46,16 @@
       system = "x86_64-linux";
 
       shared-modules = [
-        (
-          { config, pkgs, ... }:
-          {
-            nixpkgs.overlays = [
-              (final: prev: {
-                unstable = import nixpkgs-unstable {
-                  system = final.stdenv.hostPlatform.system;
-                  config.allowUnfree = true;
-                };
-              })
-            ];
-          }
-        )
+        {
+          nixpkgs.overlays = [
+            (final: prev: {
+              unstable = import nixpkgs-unstable {
+                system = final.stdenv.hostPlatform.system;
+                config.allowUnfree = true;
+              };
+            })
+          ];
+        }
 
         home-manager.nixosModules.home-manager
         {
