@@ -52,6 +52,8 @@
       timeout = 2; # Set bootloader timeout to 5 seconds
     };
 
+    kernelPackages = pkgs.linuxPackages_latest;
+
     kernelParams = [
       "transparent_hugepage=madvise"
       "elevator=mq-deadline" # Good for NVMe SSDs

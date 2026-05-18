@@ -10,6 +10,8 @@
       "clangd" # C++ via clangd LSP
       "python" # Python syntax & tooling
       "nix" # Nix language support
+      "latex" # LaTeX support
+      "markdown" # Markdown support
     ];
 
     userSettings = {
@@ -34,6 +36,11 @@
 
       # ── LSP configuration ──────────────────────────────────────────────────
       lsp = {
+        # LaTeX
+        texlab = {
+          binary.path = "${pkgs.texlab}/bin/texlab";
+        };
+
         # R: languageserver (install via: install.packages("languageserver"))
         r-language-server = {
           binary = {
@@ -78,6 +85,15 @@
           language_servers = [
             "air"
             "r_language_server"
+          ];
+          use_on_type_format = false; # let Air own all formatting
+          format_on_save = "on";
+        };
+
+        LaTeX = {
+          tab_size = 4;
+          language_servers = [
+            "texlab"
           ];
           use_on_type_format = false; # let Air own all formatting
           format_on_save = "on";
@@ -147,6 +163,9 @@
     nil # Nix LSP
     nixd # Nix Language Server
     nixfmt-rfc-style # formatter (RFC 166 style)
+
+    # LaTeX
+    texlab # LaTeX Language Server
 
     # R
     rWrapper # R runtime (add packages via rWrapper.override)
