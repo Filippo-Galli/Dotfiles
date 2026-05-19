@@ -63,7 +63,7 @@
   home.packages = with pkgs; [
     # Wayland utilities
     waybar # Status bar
-    swww # Wallpaper daemon
+    awww # Wallpaper daemon
     wl-clipboard # Clipboard utilities
     cliphist # Clipboard history
     grim # Screenshot utility
@@ -74,7 +74,7 @@
 
     # Vs code nix extension
     nil
-    nixfmt-rfc-style
+    nixfmt
 
     # Bluetooth
     bluetuith # TUI Bluetooth manager

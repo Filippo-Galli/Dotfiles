@@ -2,11 +2,11 @@
   description = "NixOS configuration for multiple hosts";
 
   inputs = {
-    nixpkgs.url = "github:nixos/nixpkgs/nixos-25.11";
-    nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
 
     home-manager = {
-      url = "github:nix-community/home-manager/release-25.11";
+      url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -36,7 +36,6 @@
     {
       self,
       nixpkgs,
-      nixpkgs-unstable,
       home-manager,
       ...
     }@inputs:
@@ -49,7 +48,7 @@
         {
           nixpkgs.overlays = [
             (final: prev: {
-              unstable = import nixpkgs-unstable {
+              unstable = import nixpkgs {
                 system = final.stdenv.hostPlatform.system;
                 config.allowUnfree = true;
               };

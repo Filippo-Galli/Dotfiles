@@ -71,7 +71,7 @@
         # Nix: nil (understands flakes & devenv.nix)
         nil = {
           binary.path = "${pkgs.nil}/bin/nil";
-          settings.nil.formatting.command = [ "${pkgs.nixfmt-rfc-style}/bin/nixfmt" ];
+          settings.nil.formatting.command = [ "${pkgs.nixfmt}/bin/nixfmt" ];
         };
 
         # Python: ty — Astral's Rust-based type checker, built into Zed natively
@@ -162,7 +162,7 @@
     # Nix
     nil # Nix LSP
     nixd # Nix Language Server
-    nixfmt-rfc-style # formatter (RFC 166 style)
+    nixfmt # formatter (RFC 166 style)
 
     # LaTeX
     texlab # LaTeX Language Server

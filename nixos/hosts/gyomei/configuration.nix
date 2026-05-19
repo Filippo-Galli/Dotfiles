@@ -52,7 +52,7 @@
       timeout = 2; # Set bootloader timeout to 5 seconds
     };
 
-    kernelPackages = pkgs.unstable.linuxPackages_latest;
+    kernelPackages = pkgs.linuxPackages_latest;
 
     kernelParams = [
       "transparent_hugepage=madvise"
@@ -125,17 +125,7 @@
     # 2. Graphic & GUI libraries (Common for matplotlib, opencv, etc.)
     libGL
     libGLU
-    xorg.libX11
-    xorg.libXext
-    xorg.libXrender
-    xorg.libXi
-    xorg.libXcomposite
-    xorg.libXcursor
-    xorg.libXdamage
-    xorg.libXfixes
-    xorg.libXrandr
-    xorg.libXtst
-
+    
     # 3. System Utilities (Sometimes required by specific python wheels)
     util-linux
     icu
