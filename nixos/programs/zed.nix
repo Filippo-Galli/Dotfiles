@@ -134,6 +134,7 @@
             "ty"
             "!basedpyright"
             "!pyright"
+            "!pyflakes"
             "..."
           ];
           formatter = {
