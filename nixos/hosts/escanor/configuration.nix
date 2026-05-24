@@ -121,16 +121,7 @@
     # 2. Graphic & GUI libraries (Common for matplotlib, opencv, etc.)
     libGL
     libGLU
-    xorg.libX11
-    xorg.libXext
-    xorg.libXrender
-    xorg.libXi
-    xorg.libXcomposite
-    xorg.libXcursor
-    xorg.libXdamage
-    xorg.libXfixes
-    xorg.libXrandr
-    xorg.libXtst
+
 
     # 3. System Utilities (Sometimes required by specific python wheels)
     util-linux

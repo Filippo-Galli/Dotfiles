@@ -22,7 +22,7 @@
   home.packages = with pkgs; [
     # Vs code nix extension
     nil
-    nixfmt-rfc-style
+    nixfmt
 
     # Nix output monitor
     nix-output-monitor
