@@ -55,7 +55,8 @@
 
         # R: Air formatter LSP (by Posit)
         air = {
-          binary.path = "${pkgs.air}/bin/air";
+          binary.path = "${pkgs.air-formatter}/bin/air";
+	  binary.arguments = [ "language-server" ];
         };
 
         # C++: clangd
@@ -170,7 +171,7 @@
 
     # R
     rWrapper # R runtime (add packages via rWrapper.override)
-    air # R formatter by Posit
+    air-formatter # R formatter by Posit
 
     # C++
     clang-tools # clangd + clang-format
