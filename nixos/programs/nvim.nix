@@ -4,10 +4,15 @@
   programs.neovim = {
     enable = true;
     defaultEditor = true;
-    withRuby = false; 
+    withRuby = false;
     withPython3 = true;
 
-    extraPackages = with pkgs.vimPlugins; [
+    extraPackages = with pkgs; [
+      ripgrep
+      fd
+    ];
+
+    plugins = with pkgs.vimPlugins; [
       catppuccin-nvim
       lualine-nvim
       telescope-nvim
@@ -24,9 +29,9 @@
     initLua = ''
       require("catppuccin").setup()
       vim.cmd.colorscheme "catppuccin"
-      
+
       require('lualine').setup()
-      
+
       require('telescope').setup({
         defaults = {
           mappings = {
@@ -41,7 +46,7 @@
       vim.keymap.set('n', '<leader>fg', require('telescope.builtin').live_grep, { desc = 'Live grep' })
       vim.keymap.set('n', '<leader>pb', require('telescope.builtin').buffers, { desc = 'Find buffers' })
       vim.keymap.set('n', '<leader>fh', require('telescope.builtin').help_tags, { desc = 'Help tags' })
-      
+
       require("neo-tree").setup({
         close_if_last_window = false,
         popup_border_style = "rounded",
@@ -57,7 +62,7 @@
         },
       })
       vim.keymap.set('n', '<leader>e', ':Neotree toggle<CR>', { desc = 'Toggle Neo-tree' })
-      
+
       require("bufferline").setup({
         options = {
           mode = "buffers",
@@ -75,11 +80,11 @@
       })
       vim.keymap.set('n', '<leader>,', ':BufferLineCyclePrev<CR>', { desc = 'Previous Buffer' })
       vim.keymap.set('n', '<leader>.', ':BufferLineCycleNext<CR>', { desc = 'Next Buffer' })
-      
+
       require('telescope').load_extension('fzf')
-      
+
       vim.keymap.set("n", "<leader>gg", ":LazyGit<CR>", { desc = "LazyGit" })
-      
+
       local wk = require("which-key")
       wk.setup({
         defaults = {
