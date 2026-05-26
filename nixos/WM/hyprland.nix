@@ -18,6 +18,7 @@
           "/home/filippo/Documents/Dotfiles/nixos/WM/wallpaper/starship.jpg"
           "$MONITORS_scale = 1.5"
           "bind = , XF86Calculator, exec, grim -g \"$(slurp)\""
+          "kb_layout = it"
         ]
         [
           "${./wallpaper/starship.jpg}"
@@ -35,6 +36,7 @@
             else
               "bind = , XF86Calculator, exec, grim -g \"$(slurp)\""
           }"
+          "${if osConfig.networking.hostName == "gyomei" then "kb_layout = us" else "kb_layout = it"}"
         ]
         (builtins.readFile ./config/hypr/hyprland.conf);
   };
