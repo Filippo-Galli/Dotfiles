@@ -1,5 +1,4 @@
 {
-  config,
   pkgs,
   inputs,
   stateVersion,
@@ -102,11 +101,14 @@
   };
 
   programs.hyprland = {
-    enable = true;
+    enable = false;
     xwayland.enable = true;
     withUWSM = false;
   };
 
+  programs.niri = {
+    enable = true;
+  };
   programs.dconf.enable = true;
 
   programs.nix-ld.enable = true;
@@ -169,15 +171,6 @@
       enable = true; # Enable D-Bus for inter-process communication
     };
 
-    # xserver = {
-    #   enable = true; # Enable the X11 server (for compatibservicility with XWayland)
-
-    #   xkb = {
-    #     layout = "it"; # Set keyboard layout to Italian
-    #     variant = ""; # No specific variant
-    #   };
-    # };
-
     # Use Ly display manager
     displayManager = {
       ly = {
@@ -188,6 +181,14 @@
         };
       };
     };
+
+    # xserver = {
+    #   enable = true; # Enable the X11 server (for compatibility with XWayland)
+    #   xkb = {
+    #     layout = "it"; # Set keyboard layout to Italian
+    #     variant = ""; # No specific variant
+    #   };
+    # };
 
     upower = {
       enable = true; # Enable UPower for power management
@@ -280,10 +281,10 @@
   };
 
   system = {
-    stateVersion = stateVersion;
     configurationRevision =
       with inputs.self;
       if sourceInfo ? dirtyShortRev then sourceInfo.dirtyShortRev else sourceInfo.shortRev;
+    stateVersion = stateVersion;
   };
 
   fonts = {

@@ -2,14 +2,15 @@
   config,
   pkgs,
   username,
-  stateVersion,
   inputs,
+  stateVersion,
   ...
 }:
 
 {
   home.username = username;
   home.homeDirectory = "/home/${username}";
+  home.stateVersion = stateVersion;
 
   services.gnome-keyring = {
     enable = true;
@@ -48,7 +49,6 @@
 
   };
 
-  home.stateVersion = stateVersion;
   programs.home-manager.enable = true;
 
   fonts.fontconfig.enable = true;
@@ -69,7 +69,6 @@
     grim # Screenshot utility
     slurp # Screen area selection
     mako # Notification daemon
-    hyprsunset # Blue-light
     brightnessctl # Brightness control
 
     # Vs code nix extension
@@ -120,6 +119,5 @@
     ../../WM/gtk.nix
     ../../WM/swaync.nix
     ../../WM/gazelle.nix
-    ../../WM/hyprmon.nix
   ];
 }

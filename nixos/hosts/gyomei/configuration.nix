@@ -107,9 +107,13 @@
   };
 
   programs.hyprland = {
-    enable = true;
+    enable = false;
     xwayland.enable = true;
     withUWSM = false;
+  };
+
+  programs.niri = {
+    enable = true;
   };
 
   programs.dconf.enable = true;
