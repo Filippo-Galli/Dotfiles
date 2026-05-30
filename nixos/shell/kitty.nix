@@ -1,10 +1,10 @@
-{ pkgs, ... }:
+{ osConfig, ... }:
 
 # terminals
 
 let
-  font = "JetBrainsMono Nerd Font";
-  #cfg = config.programs.kitty;
+  hyprlandEnable = osConfig.programs.hyprland.enable;
+  background_opacity = if hyprlandEnable then "0.1" else "1";
 in
 {
   programs.kitty = {
@@ -13,7 +13,7 @@ in
       confirm_os_window_close = 0;
       hide_window_decorations = "yes";
       window_padding_width = 2;
-      background_opacity = "0.1";
+      background_opacity = background_opacity;
       background_blur = 15;
       font_size = 12.0;
 
@@ -44,7 +44,7 @@ in
         (builtins.concatStringsSep "," mappings) + " Symbols Nerd Font";
       # Basic colors
       foreground = "#cdd6f4";
-      background = "#1e1e2e";
+      background = "#000000";
       selection_foreground = "#1e1e2e";
       selection_background = "#f5e0dc";
 

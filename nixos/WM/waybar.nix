@@ -5,7 +5,7 @@
     enable = true;
     systemd = {
       enable = true;
-      targets = [ "hyprland-session.target" ];
+      targets = [ "graphical-session.target" ];
     };
 
     style = builtins.readFile ./config/waybar/style.css;

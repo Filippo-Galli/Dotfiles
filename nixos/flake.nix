@@ -3,7 +3,9 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
-    # nixpkgs-unstable.url = "github:nixos/nixpkgs/nixos-unstable";
+
+    sunsetr.url = "github:psi4j/sunsetr/v0.12.2";
+    nirimon.url = "github:stepbrobd/nirimon";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";
@@ -30,6 +32,11 @@
       url = "github:nix-community/disko";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    niri = {
+      url = "github:sodiboo/niri-flake";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
   outputs =
@@ -40,9 +47,9 @@
       ...
     }@inputs:
     let
-      stateVersion = "25.11";
       username = "filippo";
       system = "x86_64-linux";
+      stateVersion = "26.05";
 
       shared-modules = [
         {
@@ -53,6 +60,7 @@
                 config.allowUnfree = true;
               };
             })
+            inputs.niri.overlays.niri
           ];
         }
 
@@ -61,7 +69,7 @@
           home-manager.useGlobalPkgs = true;
           home-manager.useUserPackages = true;
           home-manager.backupFileExtension = "hm-backup";
-          home-manager.extraSpecialArgs = { inherit username stateVersion inputs; };
+          home-manager.extraSpecialArgs = { inherit username inputs stateVersion; };
         }
       ];
     in
@@ -71,8 +79,9 @@
         # --- Lenovo Yoga Slim 7 Pro 14IAH7  ---
         escanor = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit username stateVersion inputs; };
+          specialArgs = { inherit username inputs stateVersion; };
           modules = shared-modules ++ [
+            inputs.niri.nixosModules.niri
             ./hosts/escanor/configuration.nix
             {
               home-manager.users.${username} = import ./hosts/escanor/home.nix;
@@ -83,7 +92,7 @@
         # --- Dell Pro Max 14 MC14250 ---
         gyomei = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit username stateVersion inputs; };
+          specialArgs = { inherit username inputs stateVersion; };
           modules = shared-modules ++ [
             inputs.disko.nixosModules.disko
             inputs.lanzaboote.nixosModules.lanzaboote
@@ -97,7 +106,7 @@
         # --- Oxide Server ---
         oxide_server = nixpkgs.lib.nixosSystem {
           inherit system;
-          specialArgs = { inherit username stateVersion inputs; };
+          specialArgs = { inherit username inputs stateVersion; };
           modules = shared-modules ++ [
             ./hosts/oxide_server/configuration.nix
             {

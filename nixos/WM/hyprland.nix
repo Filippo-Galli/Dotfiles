@@ -1,12 +1,18 @@
 {
-  config,
   pkgs,
   inputs,
-  lib,
   osConfig,
+  lib,
   ...
 }:
-{
+let
+  hyprlandEnabled = osConfig.programs.hyprland.enable;
+in
+lib.mkIf hyprlandEnabled {
+  home.packages = with pkgs; [
+    hyprsunset
+    hyprmon
+  ];
   wayland.windowManager.hyprland = {
     enable = true;
     package = inputs.hyprland.packages.${pkgs.stdenv.hostPlatform.system}.hyprland;
