@@ -12,6 +12,7 @@
       "nix" # Nix language support
       "latex" # LaTeX support
       "markdown" # Markdown support
+      "typst" # Typst support
     ];
 
     userSettings = {
@@ -56,7 +57,7 @@
         # R: Air formatter LSP (by Posit)
         air = {
           binary.path = "${pkgs.air-formatter}/bin/air";
-	  binary.arguments = [ "language-server" ];
+          binary.arguments = [ "language-server" ];
         };
 
         # C++: clangd
@@ -75,7 +76,11 @@
           settings.nil.formatting.command = [ "${pkgs.nixfmt}/bin/nixfmt" ];
         };
 
-        # Python: ty — Astral's Rust-based type checker, built into Zed natively
+        # Typst: tinymist (language server)
+        tinymist = {
+          binary.path = "${pkgs.tinymist}/bin/tinymist";
+        };
+
       };
 
       # ── Per-language settings ───────────────────────────────────────────────
@@ -149,6 +154,12 @@
           };
           format_on_save = "on";
         };
+
+        Typst = {
+          tab_size = 4;
+          formatter = "language_server";
+          format_on_save = "on";
+        };
       };
 
       # ── General editor preferences ──────────────────────────────────────────
@@ -182,5 +193,10 @@
     uv # runs ty via `uvx ty server`; also replaces pip/venv
     ruff
     python3
+
+    # Typst
+    tinymist # language server
+    typstyle # formatter
+
   ];
 }
