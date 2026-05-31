@@ -45,6 +45,10 @@ lib.mkIf niriEnabled {
       mouse.accel-speed = 0;
     };
 
+    gestures = {
+      hot-corners.enable = false;
+    };
+
     outputs = {
       "eDP-1".scale = monitorScale;
       "DP-3".scale = 1.0;
@@ -58,19 +62,6 @@ lib.mkIf niriEnabled {
         width = 1;
         active.color = "#777777aa";
         inactive.color = "#000000aa";
-      };
-    };
-
-    animations = {
-      horizontal-view-movement.kind.spring = {
-        damping-ratio = 1.0;
-        stiffness = 1400;
-        epsilon = 0.0001;
-      };
-      window-movement.kind.spring = {
-        damping-ratio = 1.0;
-        stiffness = 1400;
-        epsilon = 0.0001;
       };
     };
 
