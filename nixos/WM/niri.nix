@@ -57,6 +57,9 @@ lib.mkIf niriEnabled {
     layout = {
       gaps = 2;
       focus-ring.enable = false;
+      default-column-width = {
+        proportion = 1.0;
+      };
       border = {
         enable = true;
         width = 1;

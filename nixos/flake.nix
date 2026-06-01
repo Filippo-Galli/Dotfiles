@@ -94,6 +94,7 @@
           inherit system;
           specialArgs = { inherit username inputs stateVersion; };
           modules = shared-modules ++ [
+            inputs.niri.nixosModules.niri
             inputs.disko.nixosModules.disko
             inputs.lanzaboote.nixosModules.lanzaboote
             ./hosts/gyomei/configuration.nix

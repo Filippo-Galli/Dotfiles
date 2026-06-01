@@ -112,6 +112,7 @@
     ../../shell/starship.nix
     ../../shell/terminal_program.nix
     ../../WM/hyprland.nix
+    ../../WM/niri.nix
     ../../WM/waybar.nix
     ../../WM/rofi.nix
     ../../WM/nemo.nix
