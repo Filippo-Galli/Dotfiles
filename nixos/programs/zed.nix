@@ -17,6 +17,8 @@
 
     userSettings = {
 
+      open_new_projects_in_new_window = "always";
+
       # ── Load Direnv  ───────────────────────────────────────────────────────
       load_direnv = "shell_hook";
 
@@ -138,10 +140,10 @@
           # ty is built into Zed; explicitly disable basedpyright/pyright
           language_servers = [
             "ty"
+            "ruff"
             "!basedpyright"
             "!pyright"
             "!pyflakes"
-            "..."
           ];
           formatter = {
             external = {
