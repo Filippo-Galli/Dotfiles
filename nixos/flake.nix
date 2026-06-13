@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    sunsetr.url = "github:psi4j/sunsetr/v0.12.2";
+    sunsetr.url = "github:psi4j/sunsetr/v0.12.3";
     nirimon.url = "github:stepbrobd/nirimon";
 
     home-manager = {
@@ -17,7 +17,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland/v0.55.2";
+    hyprland.url = "github:hyprwm/Hyprland/v0.55.4";
     flake-utils.url = "github:numtide/flake-utils";
     ghgrab.url = "github:abhixdd/ghgrab";
 
