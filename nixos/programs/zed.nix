@@ -17,7 +17,11 @@
 
     userSettings = {
 
-      open_new_projects_in_new_window = "always";
+      # Forces terminal commands (e.g., `zed .`) to open in a new window
+      cli_default_open_behavior = "new_window";
+
+      # Forces UI actions (e.g., 'Open Recent') to open in a new window
+      default_open_behavior = "new_window";
 
       # ── Load Direnv  ───────────────────────────────────────────────────────
       load_direnv = "shell_hook";
@@ -82,7 +86,6 @@
         tinymist = {
           binary.path = "${pkgs.tinymist}/bin/tinymist";
         };
-
       };
 
       # ── Per-language settings ───────────────────────────────────────────────
