@@ -1,7 +1,8 @@
-{ pkgs, ... }:
+{ inputs, pkgs, ... }:
 {
   programs.brave = {
     enable = true;
+    package = inputs.brave-origin.packages.${pkgs.system}.default;
     commandLineArgs = [
       "--enable-features=UseOzonePlatform"
       "--ozone-platform=wayland"
@@ -10,13 +11,4 @@
     ];
     extensions = [ /* optional */ ];
   };
-
-  home.file.".config/etc/brave/policies/managed/brave_prefs.json".text = ''
-    {
-      "BraveRewardsDisabled": true,
-      "BraveWalletDisabled": true,
-      "PaymentMethodsDisabled": true,
-      "BraveVPNDisabled": true
-    }
-  '';
 }

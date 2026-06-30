@@ -6,6 +6,7 @@
 
     sunsetr.url = "github:psi4j/sunsetr/v0.12.2";
     nirimon.url = "github:stepbrobd/nirimon";
+    brave-origin.url = "github:Daniel-42-z/brave-origin-flake";
 
     home-manager = {
       url = "github:nix-community/home-manager/master";

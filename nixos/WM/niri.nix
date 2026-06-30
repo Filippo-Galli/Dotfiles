@@ -41,6 +41,7 @@ lib.mkIf niriEnabled {
       mod-key = "Super";
       focus-follows-mouse.enable = true;
       keyboard.xkb.layout = keyboardLayout;
+      keyboard.xkb.variant = "intl";
       touchpad.natural-scroll = true;
       mouse.accel-speed = 0;
     };
@@ -277,7 +278,7 @@ lib.mkIf niriEnabled {
         "if systemctl --user is-active --quiet waybar; then systemctl --user stop waybar; else systemctl --user start waybar; fi";
 
       # Custom application bindings
-      "Mod+B".action.spawn = "brave";
+      "Mod+B".action.spawn = "brave-origin";
       "Mod+F".action."fullscreen-window" = [ ];
       "Mod+C".action.spawn = [
         "code"
