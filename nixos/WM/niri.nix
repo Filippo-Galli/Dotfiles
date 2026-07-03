@@ -8,7 +8,6 @@
 let
   niriEnabled = (osConfig ? programs) && (osConfig.programs ? niri) && osConfig.programs.niri.enable;
   hostName = osConfig.networking.hostName or "";
-  keyboardLayout = if hostName == "gyomei" then "us" else "it";
   screenshotBind = if hostName == "gyomei" then "Mod+S" else "XF86Calculator";
   monitorScale =
     if hostName == "escanor" then
@@ -40,8 +39,8 @@ lib.mkIf niriEnabled {
     input = {
       mod-key = "Super";
       focus-follows-mouse.enable = true;
-      keyboard.xkb.layout = keyboardLayout;
-      keyboard.xkb.variant = "intl";
+      keyboard.xkb.layout = "it,us";
+      keyboard.xkb.variant = ",intl";
       touchpad.natural-scroll = true;
       mouse.accel-speed = 0;
     };
@@ -160,6 +159,7 @@ lib.mkIf niriEnabled {
 
       # Hyprland togglesplit has no direct niri equivalent; closest layout toggle
       "Mod+J".action."toggle-column-tabbed-display" = [ ];
+      "Mod+Shift+Space".action."switch-layout" = "next";
 
       # Focus movement
       "Mod+Left".action."focus-column-left" = [ ];
