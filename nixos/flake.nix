@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    sunsetr.url = "github:psi4j/sunsetr/v0.12.2";
+    sunsetr.url = "github:psi4j/sunsetr/v0.12.4";
     nirimon.url = "github:stepbrobd/nirimon";
     brave-origin.url = "github:Daniel-42-z/brave-origin-flake";
 
@@ -20,13 +20,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland/v0.55.2";
+    hyprland.url = "github:hyprwm/Hyprland/v0.55.4";
     flake-utils.url = "github:numtide/flake-utils";
     ghgrab.url = "github:abhixdd/ghgrab";
 
     # Secure Boot
     lanzaboote = {
-      url = "github:nix-community/lanzaboote/v1.0.0";
+      url = "github:nix-community/lanzaboote/v1.1.0";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
