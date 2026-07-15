@@ -124,6 +124,8 @@
           inherit system;
           specialArgs = { inherit username inputs stateVersion; };
           modules = shared-modules ++ [
+            inputs.disko.nixosModules.disko
+            ./hosts/appa/disko.nix
             ./hosts/appa/configuration.nix
             {
               home-manager.users.${username} = import ./hosts/appa/home.nix;
