@@ -8,6 +8,8 @@
     nirimon.url = "github:stepbrobd/nirimon";
     brave-origin.url = "github:Daniel-42-z/brave-origin-flake";
 
+    proxmox-nixos.url = "github:SaumonNet/proxmox-nixos";
+
     home-manager = {
       url = "github:nix-community/home-manager/master";
       inputs.nixpkgs.follows = "nixpkgs";
