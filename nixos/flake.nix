@@ -118,6 +118,18 @@
             }
           ];
         };
+
+        # --- Appa Server ---
+        appa = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit username inputs stateVersion; };
+          modules = shared-modules ++ [
+            ./hosts/appa/configuration.nix
+            {
+              home-manager.users.${username} = import ./hosts/appa/home.nix;
+            }
+          ];
+        };
       };
     };
 }
