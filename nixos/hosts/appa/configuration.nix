@@ -74,6 +74,7 @@ in
   # -------------------------------------------------------------------------
   networking = {
     hostName = "appa";
+    useNetworkd = true;
 
     networkmanager = {
       enable = false;
@@ -115,7 +116,6 @@ in
     bridges = [ "vmbr0" ];
   };
 
-  # Bind the physical NIC into the bridge. Replace "enp6s0" if needed.
   systemd.network.networks."10-lan" = {
     matchConfig.Name = [ "enp6s0" ];
     networkConfig.Bridge = "vmbr0";
