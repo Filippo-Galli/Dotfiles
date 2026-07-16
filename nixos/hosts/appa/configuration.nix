@@ -149,48 +149,6 @@ in
     ${tailscaleIp} appa
   '';
 
-  # Corosync over Tailscale. This is the cluster transport you want for a
-  # two-node setup connected through the overlay network.
-  environment.etc."pve/corosync.conf".text = ''
-    totem {
-      version: 2
-      cluster_name: ${clusterName}
-      config_version: 1
-      secauth: on
-      interface {
-        linknumber: 0
-        bindnetaddr: ${tailscaleIp}
-        mcastport: 5405
-        transport: udpu
-      }
-    }
-
-    nodelist {
-      node {
-        name: pve1
-        nodeid: 1
-        quorum_votes: 1
-        ring0_addr: ${clusterMasterIp}
-      }
-      node {
-        name: appa
-        nodeid: 2
-        quorum_votes: 1
-        ring0_addr: ${tailscaleIp}
-      }
-    }
-
-    quorum {
-      provider: corosync_votequorum
-      two_node: 1
-    }
-
-    logging {
-      to_syslog: yes
-      debug: off
-    }
-  '';
-
   # -------------------------------------------------------------------------
   # Locale / time
   # -------------------------------------------------------------------------
