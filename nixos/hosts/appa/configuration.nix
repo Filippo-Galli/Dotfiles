@@ -5,6 +5,15 @@
   ...
 }:
 
+let
+  # Replace with this node's real Tailscale IPv4 address after bringing it up.
+  tailscaleIp = "100.94.214.26";
+
+  # Replace with the first Proxmox node's Tailscale IPv4 address.
+  clusterMasterIp = "100.116.74.30";
+
+  clusterName = "pve";
+in
 {
   imports = [
     ./hardware-configuration.nix
@@ -53,7 +62,7 @@
 
     kernelParams = [
       "transparent_hugepage=madvise"
-      "elevator=mq-deadline" # good scheduler choice for NVMe
+      "elevator=mq-deadline"
       "acpi_osi=Linux"
     ];
   };
@@ -63,35 +72,50 @@
   # -------------------------------------------------------------------------
   # Networking
   # -------------------------------------------------------------------------
-  networking.firewall = {
-    enable = true;
-    # Custom SSH port. Add 8006 (Proxmox web UI) if you want it reachable
-    # from outside localhost/Tailscale directly, rather than proxying/VPNing.
-    allowedTCPPorts = [
-      2222
-      8006
-    ];
-  };
-
   networking = {
     hostName = "appa";
+
     networkmanager = {
-      enable = false; # staying with systemd-networkd below instead
+      enable = false;
       plugins = with pkgs; [ networkmanager-openconnect ];
+    };
+
+    firewall = {
+      enable = true;
+
+      allowedTCPPorts = [
+        2222
+        8006
+      ];
+
+      # Corosync usually needs UDP 5405 for cluster traffic.
+      allowedUDPPorts = [
+        5405
+      ];
+
+      # Allow Proxmox clustering and SSH/web access on Tailscale specifically.
+      interfaces."tailscale0" = {
+        allowedTCPPorts = [
+          22
+          2222
+          8006
+        ];
+        allowedUDPPorts = [
+          5405
+        ];
+      };
     };
   };
 
   # Make the vmbr0 bridge visible/selectable inside the Proxmox web UI.
-  # This alone does NOT create the bridge at the OS level — that's done
-  # by the systemd-networkd blocks below.
+  # Use the Tailscale address for node-to-node cluster communication.
   services.proxmox-ve = {
     enable = true;
-    ipAddress = "192.168.1.139/24"; # <-- set this to appa's real static LAN IP
+    ipAddress = "${tailscaleIp}/32";
     bridges = [ "vmbr0" ];
   };
 
-  # Bind the physical NIC into the bridge. Replace "enp3s0" with your
-  # real interface name from `ip link` on the installed system.
+  # Bind the physical NIC into the bridge. Replace "enp6s0" if needed.
   systemd.network.networks."10-lan" = {
     matchConfig.Name = [ "enp6s0" ];
     networkConfig.Bridge = "vmbr0";
@@ -106,10 +130,66 @@
     matchConfig.Name = "vmbr0";
     networkConfig = {
       IPv6AcceptRA = true;
-      DHCP = "ipv4"; # switch to a static address block if you'd rather
+      DHCP = "ipv4";
     };
     linkConfig.RequiredForOnline = "routable";
   };
+
+  # Explicit Tailscale enablement so the node has a stable overlay address
+  # for Proxmox cluster communication.
+  services.tailscale = {
+    enable = true;
+    useRoutingFeatures = "client";
+    openFirewall = true;
+  };
+
+  # Ensure cluster name resolution works even before DNS is arranged.
+  networking.extraHosts = ''
+    ${clusterMasterIp} pve1
+    ${tailscaleIp} appa
+  '';
+
+  # Corosync over Tailscale. This is the cluster transport you want for a
+  # two-node setup connected through the overlay network.
+  environment.etc."pve/corosync.conf".text = ''
+    totem {
+      version: 2
+      cluster_name: ${clusterName}
+      config_version: 1
+      secauth: on
+      interface {
+        linknumber: 0
+        bindnetaddr: ${tailscaleIp}
+        mcastport: 5405
+        transport: udpu
+      }
+    }
+
+    nodelist {
+      node {
+        name: pve1
+        nodeid: 1
+        quorum_votes: 1
+        ring0_addr: ${clusterMasterIp}
+      }
+      node {
+        name: appa
+        nodeid: 2
+        quorum_votes: 1
+        ring0_addr: ${tailscaleIp}
+      }
+    }
+
+    quorum {
+      provider: corosync_votequorum
+      two_node: 1
+    }
+
+    logging {
+      to_syslog: yes
+      debug: off
+    }
+  '';
 
   # -------------------------------------------------------------------------
   # Locale / time
@@ -148,8 +228,7 @@
   };
 
   # -------------------------------------------------------------------------
-  # nix-ld: lets dynamically-linked non-Nix binaries (python wheels, etc.)
-  # find shared libraries at runtime.
+  # nix-ld
   # -------------------------------------------------------------------------
   programs.nix-ld.enable = true;
   programs.nix-ld.libraries = with pkgs; [
@@ -180,10 +259,8 @@
     rtkit.enable = true;
   };
 
-  services = {
-    fstrim.enable = true;
-    fwupd.enable = true;
-  };
+  services.fstrim.enable = true;
+  services.fwupd.enable = true;
 
   # -------------------------------------------------------------------------
   # Users
@@ -215,7 +292,6 @@
 
   nixpkgs.config.allowUnfree = true;
 
-  # Pull in proxmox-nixos's package overlay so `pve-manager` etc. resolve.
   nixpkgs.overlays = [
     inputs.proxmox-nixos.overlays.x86_64-linux
   ];
@@ -236,11 +312,6 @@
   # -------------------------------------------------------------------------
   # Containers/virtualisation
   # -------------------------------------------------------------------------
-  # NOTE: podman and Proxmox VE both want to manage virtualisation on this
-  # box. They can coexist (podman for your own containers, Proxmox for
-  # VMs/LXCs it manages) but it's worth being deliberate about this rather
-  # than accidental — keep it only if you actually want podman containers
-  # running alongside Proxmox guests.
   virtualisation.containers.enable = true;
   virtualisation.podman.enable = true;
 
