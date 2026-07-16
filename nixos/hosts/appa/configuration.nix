@@ -65,6 +65,12 @@ in
       "elevator=mq-deadline"
       "acpi_osi=Linux"
     ];
+
+    # -------------------------------------------------------------------------
+    # ZFS
+    # -------------------------------------------------------------------------
+    supportedFilesystems = [ "zfs" ];
+    zfs.forceImportRoot = false;
   };
 
   hardware.enableAllFirmware = true;
@@ -75,6 +81,8 @@ in
   networking = {
     hostName = "appa";
     useNetworkd = true;
+    # Required by ZFS — must be unique per machine, any 8 hex chars.
+    hostId = "609ca65e";
 
     networkmanager = {
       enable = false;
@@ -107,6 +115,9 @@ in
       };
     };
   };
+
+  services.zfs.autoScrub.enable = true;
+  services.zfs.trim.enable = true;
 
   # Make the vmbr0 bridge visible/selectable inside the Proxmox web UI.
   # Use the Tailscale address for node-to-node cluster communication.
@@ -287,3 +298,4 @@ in
       if sourceInfo ? dirtyShortRev then sourceInfo.dirtyShortRev else sourceInfo.shortRev;
   };
 }
+
