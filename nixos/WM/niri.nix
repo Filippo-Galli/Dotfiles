@@ -51,6 +51,25 @@ lib.mkIf niriEnabled {
       hot-corners.enable = false;
     };
 
+    switch-events = {
+      lid-close = {
+        action.spawn = [
+          "niri"
+          "msg"
+          "action"
+          "power-off-monitors"
+        ];
+      };
+      lid-open = {
+        action.spawn = [
+          "niri"
+          "msg"
+          "action"
+          "power-on-monitors"
+        ];
+      };
+    };
+
     outputs = {
       "eDP-1".scale = monitorScale;
       "DP-3".scale = 1.0;
