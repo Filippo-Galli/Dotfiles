@@ -217,10 +217,10 @@
     # System monitoring
     # smartd.enable = true;
 
-    # Keep the computer running if attached to AC with the lid close
     logind.settings.Login = {
-      HandleLidSwitch = "lock";
-      HandleLidSwitchExternalPower = "lock";
+      HandleLidSwitch = "ignore";
+      HandleLidSwitchExternalPower = "ignore";
+      HandleLidSwitchDocked = "ignore";
     };
   };
 
