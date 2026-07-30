@@ -219,8 +219,8 @@
 
     # Keep the computer running if attached to AC with the lid close
     logind.settings.Login = {
-      HandleLidSwitch = "ignore";
-      HandleLidSwitchExternalPower = "ignore";
+      HandleLidSwitch = "lock";
+      HandleLidSwitchExternalPower = "lock";
     };
   };
 
