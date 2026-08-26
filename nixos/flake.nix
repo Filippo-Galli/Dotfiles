@@ -132,6 +132,15 @@
             }
           ];
         };
+
+        # --- base image for Proxmox LXC ---
+        container-base = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit username inputs stateVersion; };
+          modules = shared-modules ++ [
+            ./hosts/container-base/configuration.nix
+          ];
+        };
       };
     };
 }
