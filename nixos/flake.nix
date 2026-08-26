@@ -133,12 +133,12 @@
           ];
         };
 
-        # --- base image for Proxmox LXC ---
-        container-base = nixpkgs.lib.nixosSystem {
+        # --- Vaultwarden LXC ---
+        service-vaultwarden = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit username inputs stateVersion; };
           modules = shared-modules ++ [
-            ./hosts/container-base/configuration.nix
+            ./hosts/service-vaultwarden/configuration.nix
           ];
         };
       };
