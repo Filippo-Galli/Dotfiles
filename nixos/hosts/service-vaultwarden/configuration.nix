@@ -1,11 +1,13 @@
-{ pkgs, ... }:
+{ config, pkgs, ... }:
 {
   imports = [
     ../../common/lxc-base.nix
-    ../../programs/tailscale.nix
   ];
 
   networking.hostName = "vaultwarden";
+  image.modules.proxmox-lxc = {
+    image.baseName = "${config.networking.hostName}-${config.system.nixos.label}";
+  };
 
   services.tailscale.extraUpFlags = [ "--ssh" ];
 
@@ -13,7 +15,7 @@
     enable = true;
     dbBackend = "sqlite";
     config = {
-      DOMAIN = "https://vaultwarden.<your-tailnet-name>.ts.net";
+      DOMAIN = "https://vw-nix.tail05d5c9.ts.net";
       ROCKET_ADDRESS = "127.0.0.1";
       ROCKET_PORT = 8222;
       SIGNUPS_ALLOWED = true;
@@ -21,7 +23,7 @@
     environmentFile = "/var/lib/vaultwarden/vaultwarden.env";
   };
 
-  # Declaratively run `tailscale serve` on boot instead of doing it by hand each time
+  # Enable Tailscale Serve on boot to expose Vaultwarden to the Tailscale network
   systemd.services.tailscale-serve-vaultwarden = {
     description = "Configure Tailscale Serve for Vaultwarden";
     after = [

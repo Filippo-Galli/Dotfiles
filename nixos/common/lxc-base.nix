@@ -1,5 +1,5 @@
 {
-  config,
+  modulesPath,
   stateVersion,
   lib,
   ...
@@ -7,7 +7,8 @@
 
 {
   imports = [
-    ../../programs/tailscale.nix
+    (modulesPath + "/virtualisation/proxmox-lxc.nix")
+    ../programs/tailscale.nix
   ];
 
   # Minimal system for a container
