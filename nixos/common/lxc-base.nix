@@ -1,5 +1,4 @@
 {
-  modulesPath,
   stateVersion,
   lib,
   ...
@@ -7,7 +6,6 @@
 
 {
   imports = [
-    (modulesPath + "/virtualisation/proxmox-lxc.nix")
     ../programs/tailscale.nix
   ];
 

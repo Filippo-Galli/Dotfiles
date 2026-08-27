@@ -1,4 +1,9 @@
-{ config, pkgs, ... }:
+{
+  config,
+  pkgs,
+  modulesPath,
+  ...
+}:
 {
   imports = [
     ../../common/lxc-base.nix
@@ -6,6 +11,9 @@
 
   networking.hostName = "vaultwarden";
   image.modules.proxmox-lxc = {
+    imports = [
+      (modulesPath + "/virtualisation/proxmox-lxc.nix")
+    ];
     image.baseName = "${config.networking.hostName}-${config.system.nixos.label}";
   };
 
