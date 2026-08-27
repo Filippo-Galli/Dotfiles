@@ -84,9 +84,6 @@
     # Nix output monitor
     nix-output-monitor
 
-    # ghgrab
-    inputs.ghgrab.packages.${pkgs.stdenv.hostPlatform.system}.default
-
     # tmux
     tmux
 

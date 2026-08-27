@@ -84,8 +84,9 @@
     # Nix output monitor
     nix-output-monitor
 
-    # ghgrab
-    inputs.ghgrab.packages.${pkgs.stdenv.hostPlatform.system}.default
+    # agents
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.antigravity-cli
+
   ];
 
   imports = [
