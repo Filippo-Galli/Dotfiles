@@ -4,7 +4,7 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
 
-    sunsetr.url = "github:psi4j/sunsetr/v0.12.4";
+    sunsetr.url = "github:psi4j/sunsetr/v0.12.5";
     nirimon.url = "github:stepbrobd/nirimon";
     brave-origin.url = "github:Daniel-42-z/brave-origin-flake";
     llm-agents.url = "github:numtide/llm-agents.nix";
@@ -21,7 +21,7 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    hyprland.url = "github:hyprwm/Hyprland/v0.56.0";
+    hyprland.url = "github:hyprwm/Hyprland/v0.56.2";
     flake-utils.url = "github:numtide/flake-utils";
     ghgrab.url = "github:abhixdd/ghgrab";
 
