@@ -89,6 +89,9 @@
 
     # tmux
     tmux
+
+    # agents
+    inputs.llm-agents.packages.${pkgs.stdenv.hostPlatform.system}.antigravity-cli
   ];
 
   imports = [

@@ -7,6 +7,7 @@
     sunsetr.url = "github:psi4j/sunsetr/v0.12.4";
     nirimon.url = "github:stepbrobd/nirimon";
     brave-origin.url = "github:Daniel-42-z/brave-origin-flake";
+    llm-agents.url = "github:numtide/llm-agents.nix";
 
     proxmox-nixos.url = "github:SaumonNet/proxmox-nixos";
 
