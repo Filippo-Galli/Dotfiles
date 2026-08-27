@@ -1,0 +1,34 @@
+root = "nixos"
+
+# Supported systems to evaluate and build for
+systems = ["x86_64-linux"]
+
+# Attributes to build
+include = [
+  "nixosConfigurations.*",
+]
+
+# Attributes to exclude from CI builds
+# service-vaultwarden is built as a Proxmox LXC image (via image.modules) rather than a standard system toplevel
+exclude = [
+  "nixosConfigurations.service-vaultwarden",
+]
+
+# Extra binary caches to check before building
+# An attribute already present in any cache is skipped rather than built
+# Note: https://cache.nixos.org is always included and checked by default
+substituters = [
+  "https://cache.ysun.co",
+  "https://hyprland.cachix.org",
+  "https://niri.cachix.org",
+  "https://cache.numtide.com",
+  "https://cache.saumon.network/proxmox-nixos",
+]
+
+trusted-public-keys = [
+  "cache.ysun.co-1:WxPYwT5g3kt9XhUhHPpNLZKI9HIOsVVAuqSHpok8Qt4=",
+  "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc=",
+  "niri.cachix.org-1:Wv0OmO7PsuocRKzfDoJ3mulSl7Z6oezYhGhR+3W2964=",
+  "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g=",
+  "proxmox-nixos:D9RYSWpQQC/msZUWphOY2I5RLH5Dd6yQcaHIuug7dWM=",
+]
