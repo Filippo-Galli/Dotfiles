@@ -64,7 +64,6 @@
                 config.allowUnfree = true;
               };
             })
-            inputs.niri.overlays.niri
           ];
         }
 
