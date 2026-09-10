@@ -32,7 +32,7 @@
     # GTK settings
     # GTK_THEME = "Adwaita-dark";
     # GTK_APPLICATION_PREFER_DARK_THEME = "1";
-    GDK_BACKEND = "wayland,x11";
+    #GDK_BACKEND = "wayland,x11";
 
     # QT settings
     QT_QPA_PLATFORM = "wayland";

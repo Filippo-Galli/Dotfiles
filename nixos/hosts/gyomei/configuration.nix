@@ -230,11 +230,46 @@
   xdg.portal = {
     enable = true;
     wlr.enable = true;
-    config.common.default = "*";
     extraPortals = [
-      pkgs.xdg-desktop-portal-hyprland
       pkgs.xdg-desktop-portal-gtk
     ];
+    config = {
+      common = {
+        default = [
+          "gtk"
+        ];
+      };
+      niri = {
+        default = [
+          "gnome"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.FileChooser" = [
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.Access" = [
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.Notification" = [
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.Secret" = [
+          "gnome-keyring"
+        ];
+      };
+      hyprland = {
+        default = [
+          "hyprland"
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.FileChooser" = [
+          "gtk"
+        ];
+        "org.freedesktop.impl.portal.Secret" = [
+          "gnome-keyring"
+        ];
+      };
+    };
   };
 
   # Configure console keymap
