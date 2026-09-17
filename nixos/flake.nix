@@ -3,6 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+    nixpkgs-master.url = "github:nixos/nixpkgs";
 
     sunsetr.url = "github:psi4j/sunsetr/v0.12.5";
     nirimon.url = "github:stepbrobd/nirimon";

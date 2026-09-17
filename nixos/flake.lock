@@ -832,6 +832,21 @@
         "type": "github"
       }
     },
+    "nixpkgs-master": {
+      "locked": {
+        "lastModified": 1789651005,
+        "narHash": "sha256-jTKJNKd3ZxB4yCYmpZPkCaXTfalpJNfAQFKMiUDNMbc=",
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "rev": "131cf0f911b8fee10ae531f91e391db3e74672a6",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nixos",
+        "repo": "nixpkgs",
+        "type": "github"
+      }
+    },
     "nixpkgs-stable": {
       "locked": {
         "lastModified": 1782847189,
@@ -1082,6 +1097,7 @@
         "niri": "niri",
         "nirimon": "nirimon",
         "nixpkgs": "nixpkgs_6",
+        "nixpkgs-master": "nixpkgs-master",
         "nixvim": "nixvim",
         "proxmox-nixos": "proxmox-nixos",
         "sunsetr": "sunsetr"

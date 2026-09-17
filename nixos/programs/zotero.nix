@@ -1,7 +1,7 @@
-{ config, pkgs, ... }:
+{ inputs, pkgs, ... }:
 
 {
-  home.packages = with pkgs; [
-    zotero
+  home.packages = [
+    inputs.nixpkgs-master.legacyPackages.${pkgs.stdenv.hostPlatform.system}.zotero
   ];
 }
