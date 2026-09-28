@@ -184,10 +184,10 @@ lib.mkIf niriEnabled {
       "Mod+Shift+Space".action."switch-layout" = "next";
 
       # Focus movement
-      "Mod+Left".action."focus-column-left" = [ ];
-      "Mod+Right".action."focus-column-right" = [ ];
-      "Mod+Up".action."focus-window-up" = [ ];
-      "Mod+Down".action."focus-window-down" = [ ];
+      "Mod+Ctrl+Left".action."focus-column-left" = [ ];
+      "Mod+Ctrl+Right".action."focus-column-right" = [ ];
+      "Mod+Ctrl+Up".action."focus-window-up" = [ ];
+      "Mod+Ctrl+Down".action."focus-window-down" = [ ];
 
       # Workspace switching
       "Mod+1".action."focus-workspace" = 1;
@@ -323,11 +323,17 @@ lib.mkIf niriEnabled {
       "Mod+Alt+L".action."move-workspace-to-monitor-left" = [ ];
       "Mod+Alt+R".action."move-workspace-to-monitor-right" = [ ];
 
-      # Window management
-      "Mod+Shift+Left".action."move-column-left" = [ ];
-      "Mod+Shift+Right".action."move-column-right" = [ ];
-      "Mod+Shift+Up".action."move-window-up" = [ ];
-      "Mod+Shift+Down".action."move-window-down" = [ ];
+      # Window management (within current monitor)
+      "Mod+Left".action."move-column-left" = [ ];
+      "Mod+Right".action."move-column-right" = [ ];
+      "Mod+Up".action."move-window-up" = [ ];
+      "Mod+Down".action."move-window-down" = [ ];
+
+      # Multi-monitor window movement
+      "Mod+Shift+Left".action."move-column-to-monitor-left" = [ ];
+      "Mod+Shift+Right".action."move-column-to-monitor-right" = [ ];
+      "Mod+Shift+Up".action."move-column-to-monitor-up" = [ ];
+      "Mod+Shift+Down".action."move-column-to-monitor-down" = [ ];
     };
   };
 }
