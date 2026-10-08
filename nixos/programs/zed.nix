@@ -195,9 +195,9 @@
     ninja
 
     # Python
-    uv # runs ty via `uvx ty server`; also replaces pip/venv
+    ty
     ruff
-    python3
+    #python3
 
     # Typst
     tinymist # language server
