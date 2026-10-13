@@ -5,13 +5,15 @@
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
     nixpkgs-master.url = "github:nixos/nixpkgs";
 
-    sunsetr.url = "github:psi4j/sunsetr/v0.12.5";
-    nirimon.url = "github:stepbrobd/nirimon";
-    brave-origin = {
-      url = "github:Daniel-42-z/brave-origin-flake";
+    nirimon = {
+      url = "github:stepbrobd/nirimon";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    llm-agents.url = "github:numtide/llm-agents.nix";
+
+    llm-agents = {
+      url = "github:numtide/llm-agents.nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
 
     proxmox-nixos.url = "github:SaumonNet/proxmox-nixos";
 
@@ -20,14 +22,10 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    nixvim = {
-      url = "github:nix-community/nixvim";
+    hyprland = {
+      url = "github:hyprwm/Hyprland/v0.56.2";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    hyprland.url = "github:hyprwm/Hyprland/v0.56.2";
-    flake-utils.url = "github:numtide/flake-utils";
-    ghgrab.url = "github:abhixdd/ghgrab";
 
     # Secure Boot
     lanzaboote = {
@@ -60,17 +58,6 @@
       stateVersion = "26.05";
 
       shared-modules = [
-        {
-          nixpkgs.overlays = [
-            (final: prev: {
-              unstable = import nixpkgs {
-                system = final.stdenv.hostPlatform.system;
-                config.allowUnfree = true;
-              };
-            })
-          ];
-        }
-
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
@@ -89,6 +76,7 @@
           specialArgs = { inherit username inputs stateVersion; };
           modules = shared-modules ++ [
             inputs.niri.nixosModules.niri
+            inputs.disko.nixosModules.disko
             ./hosts/escanor/configuration.nix
             {
               home-manager.users.${username} = import ./hosts/escanor/home.nix;
@@ -129,7 +117,7 @@
         service-vaultwarden = nixpkgs.lib.nixosSystem {
           inherit system;
           specialArgs = { inherit username inputs stateVersion; };
-          modules = shared-modules ++ [
+          modules = [
             ./hosts/service-vaultwarden/configuration.nix
           ];
         };

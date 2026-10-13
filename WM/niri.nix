@@ -22,7 +22,7 @@ let
 in
 lib.mkIf niriEnabled {
   home.packages = [
-    inputs.sunsetr.packages.${pkgs.stdenv.hostPlatform.system}.default
+    pkgs.sunsetr
     inputs.nirimon.packages.${pkgs.stdenv.hostPlatform.system}.default
   ];
 

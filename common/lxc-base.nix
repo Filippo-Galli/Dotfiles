@@ -10,6 +10,7 @@
   ];
 
   # Minimal system for a container
+  boot.isContainer = true;
   system.stateVersion = stateVersion;
 
   services.openssh.enable = lib.mkDefault true;

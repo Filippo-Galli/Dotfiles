@@ -1,8 +1,8 @@
-{ inputs, pkgs, ... }:
+{ pkgs, ... }:
 {
   programs.brave = {
     enable = true;
-    package = inputs.brave-origin.packages.${pkgs.stdenv.hostPlatform.system}.default;
+    package = pkgs.brave-origin;
     commandLineArgs = [
       "--enable-features=UseOzonePlatform"
       "--ozone-platform=wayland"

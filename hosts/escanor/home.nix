@@ -60,6 +60,11 @@
     };
   };
 
+  xdg.userDirs = {
+    enable = true;
+    createDirectories = true; # automatically creates ~/Downloads, ~/Documents, ~/Pictures
+  };
+
   home.packages = with pkgs; [
     # Wayland utilities
     waybar # Status bar
