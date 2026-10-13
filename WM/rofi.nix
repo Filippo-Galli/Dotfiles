@@ -216,7 +216,7 @@ in
     enable = true;
     package = pkgs.rofi;
     
-    extraConfig = {
+    settings = {
       modi = "drun,window";
       show-icons = true;
       display-drun = "󰀻 Apps";

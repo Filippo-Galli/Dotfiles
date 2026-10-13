@@ -7,14 +7,7 @@
 
 {
   imports = [
-    # Include the results of the hardware scan.
-    ./hardware-configuration.nix
-
-    # Include disko
-    ./disko.nix
-
-    # Tailscale
-    ../../programs/tailscale.nix
+    ../programs/tailscale.nix
   ];
 
   nix.settings = {
@@ -38,34 +31,30 @@
       "niks3.numtide.com-1:DTx8wZduET09hRmMtKdQDxNNthLQETkc/yaX7M4qK0g="
     ];
 
-    max-jobs = "auto"; # Automatically determine the number of jobs based on available CPU cores
-    cores = 0; # Use all cores
-    auto-optimise-store = true; # Automatically optimize the Nix store
+    max-jobs = "auto";
+    cores = 0;
+    auto-optimise-store = true;
 
     trusted-users = [
       "root"
       "filippo"
-    ]; # Allow these users to run Nix commands without restrictions
+    ];
   };
 
   boot = {
     loader = {
       systemd-boot = {
-        enable = true; # Use systemd-boot as the bootloader
+        enable = true;
       };
-      efi.canTouchEfiVariables = true; # Allow NixOS to modify EFI variables
-      timeout = 2; # Set bootloader timeout to 5 seconds
+      efi.canTouchEfiVariables = true;
+      timeout = 2;
     };
-
     kernelPackages = pkgs.linuxPackages_latest;
-
     kernelParams = [
       "transparent_hugepage=madvise"
-      "elevator=mq-deadline" # Good for NVMe SSDs
       "acpi_osi=Linux"
       "acpi_backlight=intel"
     ];
-
   };
 
   hardware = {
@@ -74,7 +63,7 @@
 
     bluetooth = {
       enable = true;
-      powerOnBoot = false; # Don't auto-enable at boot
+      powerOnBoot = false;
       settings = {
         General = {
           Enable = "Source,Sink,Media,Socket";
@@ -84,14 +73,11 @@
     };
   };
 
-  networking = {
-    hostName = "gyomei";
-    networkmanager = {
-      enable = true;
-      plugins = with pkgs; [
-        networkmanager-openconnect
-      ];
-    };
+  networking.networkmanager = {
+    enable = true;
+    plugins = with pkgs; [
+      networkmanager-openconnect
+    ];
   };
 
   # Set your time zone.
@@ -121,7 +107,6 @@
     enable = true;
     package = pkgs.niri;
   };
-
   programs.dconf.enable = true;
 
   programs.nix-ld.enable = true;
@@ -144,12 +129,11 @@
     bzip2
   ];
 
-  # Enable necessary services for Hyprland
+  # Security & Authentication
   security = {
     polkit.enable = true;
     pam.services.hyprlock = { };
 
-    # Improve sudo security
     sudo = {
       enable = true;
       extraConfig = ''
@@ -159,7 +143,6 @@
       '';
     };
 
-    # Enable AppArmor for additional security
     apparmor = {
       enable = true;
     };
@@ -168,12 +151,9 @@
       hyprland.enableGnomeKeyring = true;
       login.enableGnomeKeyring = true;
       passwd.enableGnomeKeyring = true;
-      #gdm.enableGnomeKeyring = true;
-      #gdm-password.enableGnomeKeyring = true;
       ly.enableGnomeKeyring = true;
     };
 
-    # Enable RTKit for real-time scheduling
     rtkit.enable = true;
   };
 
@@ -181,7 +161,7 @@
     gnome.gnome-keyring.enable = true;
 
     dbus = {
-      enable = true; # Enable D-Bus for inter-process communication
+      enable = true;
     };
 
     # Use Ly display manager
@@ -189,26 +169,26 @@
       ly = {
         enable = true;
         settings = {
-          animation = "none"; # Options: none, matrix, doom
+          animation = "none";
           hide_borders = true;
         };
       };
     };
 
     upower = {
-      enable = true; # Enable UPower for power management
+      enable = true;
     };
     power-profiles-daemon.enable = true;
 
     printing.enable = false;
 
-    pulseaudio.enable = false; # Disable PulseAudio, use PipeWire instead
+    pulseaudio.enable = false;
     pipewire = {
-      enable = true; # Enable PipeWire for audio and video
-      alsa.enable = true; # Enable ALSA support
-      alsa.support32Bit = true; # Support 32-bit applications
-      pulse.enable = true; # Enable PulseAudio compatibility layer
-      wireplumber.enable = true; # Use WirePlumber as the session manager
+      enable = true;
+      alsa.enable = true;
+      alsa.support32Bit = true;
+      pulse.enable = true;
+      wireplumber.enable = true;
     };
 
     # Enable fstrim for SSDs
@@ -217,9 +197,7 @@
     # Firmware updates
     fwupd.enable = true;
 
-    # System monitoring
-    # smartd.enable = true;
-
+    # Ignore lid switch for docked / external power usage
     logind.settings.Login = {
       HandleLidSwitch = "ignore";
       HandleLidSwitchExternalPower = "ignore";
@@ -272,16 +250,6 @@
     };
   };
 
-  # Configure console keymap
-  console.keyMap = "us";
-
-  # Docker
-  # virtualisation.docker.rootless = {
-  #   enable = true;
-  #   setSocketVariable = true;
-  # };
-
-  # Define a user account. Don't forget to set a password with 'passwd'.
   users.users.filippo = {
     shell = pkgs.zsh;
     isNormalUser = true;
@@ -290,14 +258,17 @@
       "networkmanager"
       "wheel"
       "bluetooth"
-      "docker"
     ];
+    hashedPassword = "$y$j9T$dtn6s3fY5WpMwuZtwg/.l0$I3NUWXusHHTYk6w9e4Wq0I7ccRIt3KOygV2HhNoJ4m5";
   };
 
-  # Allow unfree packages
+  users.users.root = {
+    shell = pkgs.zsh;
+    hashedPassword = "$y$j9T$jvHtHzQgvdYK5WrnvsEuU/$n7EF8zPZgUrD1.hJR7m862kiUXTndfyjWtF6di6MsC8";
+  };
+
   nixpkgs.config.allowUnfree = true;
 
-  # List packages installed in system profile. To search, run:
   environment.systemPackages = with pkgs; [
     bashInteractive
     wget
@@ -307,10 +278,7 @@
 
     gnome-keyring
     seahorse
-    libsecret # Needed for apps to talk to gnome-keyring
-    # polkit_gnome
-
-    devenv # Nix development environment
+    libsecret
   ];
   programs.zsh.enable = true;
 
@@ -319,47 +287,36 @@
     QT_QPA_PLATFORM = "wayland";
   };
 
-  # Set the default editor to vim
   environment.variables = {
     EDITOR = "nvim";
     SECRET_TOOL_BACKEND = "gnome";
-    XDG_SESSION_TYPE = "wayland"; # or "x11" if using X11
+    XDG_SESSION_TYPE = "wayland";
   };
 
   system = {
+    configurationRevision = inputs.self.rev or inputs.self.dirtyRev or null;
     stateVersion = stateVersion;
-    configurationRevision =
-      with inputs.self;
-      if sourceInfo ? dirtyShortRev then sourceInfo.dirtyShortRev else sourceInfo.shortRev;
   };
 
   fonts = {
     packages = with pkgs; [
-      # Individual Nerd Fonts (new format)
       nerd-fonts.jetbrains-mono
       nerd-fonts.fira-code
       nerd-fonts.hack
       nerd-fonts.dejavu-sans-mono
 
-      # Font Awesome (all versions for compatibility)
       font-awesome_6
       font-awesome_5
 
-      # Additional icon fonts that many applications use
       material-design-icons
       material-icons
 
-      # Emoji support
       noto-fonts-color-emoji
-
-      # Symbols and icons
       symbola
     ];
 
-    # Enable default fonts for better compatibility
     enableDefaultPackages = true;
 
-    # Font configuration
     fontconfig = {
       enable = true;
       defaultFonts = {
