@@ -1,5 +1,3 @@
-root = "nixos"
-
 # Supported systems to evaluate and build for
 systems = ["x86_64-linux"]
 
@@ -12,6 +10,7 @@ include = [
 # service-vaultwarden is built as a Proxmox LXC image (via image.modules) rather than a standard system toplevel
 exclude = [
   "nixosConfigurations.service-vaultwarden",
+  "nixosConfigurations.appa",
 ]
 
 # Extra binary caches to check before building
