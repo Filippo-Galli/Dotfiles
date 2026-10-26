@@ -12,8 +12,8 @@
 
   # Set environment variables for applications to find the keyring
   home.sessionVariables = {
-    # Set the shell to zsh
-    SHELL = "${pkgs.zsh}/bin/zsh";
+    # Set the shell to nushell
+    SHELL = "${pkgs.nushell}/bin/nu";
   };
 
   home.stateVersion = stateVersion;
@@ -32,7 +32,6 @@
     ../../programs/direnv.nix
     ../../programs/nvim.nix
     ../../shell/git.nix
-    ../../shell/zsh.nix
     ../../shell/nushell.nix
     ../../shell/starship.nix
     ../../shell/terminal_program.nix

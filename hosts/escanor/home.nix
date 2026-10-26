@@ -41,8 +41,8 @@
     # XCURSOR_THEME = "Adwaita";
     # XCURSOR_SIZE = "24";
 
-    # Set the shell to zsh
-    SHELL = "${pkgs.zsh}/bin/zsh";
+    # Set the shell to nushell
+    SHELL = "${pkgs.nushell}/bin/nu";
 
     # MESA_LOADER_DRIVER_OVERRIDE = "iris"; # For Intel graphics
     # LIBVA_DRIVER_NAME = "iHD"; # Intel hardware acceleration
@@ -111,7 +111,6 @@
     #../../programs/bitwarden.nix
     ../../shell/git.nix
     ../../shell/kitty.nix
-    ../../shell/zsh.nix
     ../../shell/nushell.nix
     ../../shell/starship.nix
     ../../shell/terminal_program.nix

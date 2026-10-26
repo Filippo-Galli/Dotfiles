@@ -236,7 +236,7 @@ in
   # -------------------------------------------------------------------------
   users.users = {
     filippo = {
-      shell = pkgs.zsh;
+      shell = pkgs.nushell;
       isNormalUser = true;
       description = "Filippo Galli";
       extraGroups = [
@@ -251,7 +251,7 @@ in
       ];
     };
     root = {
-      shell = pkgs.zsh;
+      shell = pkgs.bashInteractive;
       initialHashedPassword = "$6$xriIDJykhwJ9bPwB$lZYtWTvKYs/HDY0f1lRQfLJC8qr46RWN5CdrC0ntpcwhQaBeZz0KXan7s4/yemq4UOj9kTB/YnwAEAYGX9y3H";
       openssh.authorizedKeys.keys = [
         "ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIM5999CjpyZ340e8Lz8vV3e8kRtvJFHhoMKAn+vluPOv filippo@appa"
@@ -276,7 +276,7 @@ in
     devenv
     tmux
   ];
-  programs.zsh.enable = true;
+  programs.nushell.enable = true;
 
   # -------------------------------------------------------------------------
   # Containers/virtualisation

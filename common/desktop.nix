@@ -251,7 +251,7 @@
   };
 
   users.users.filippo = {
-    shell = pkgs.zsh;
+    shell = pkgs.nushell;
     isNormalUser = true;
     description = "Filippo Galli";
     extraGroups = [
@@ -263,7 +263,7 @@
   };
 
   users.users.root = {
-    shell = pkgs.zsh;
+    shell = pkgs.bashInteractive;
     hashedPassword = "$y$j9T$jvHtHzQgvdYK5WrnvsEuU/$n7EF8zPZgUrD1.hJR7m862kiUXTndfyjWtF6di6MsC8";
   };
 
@@ -280,7 +280,7 @@
     seahorse
     libsecret
   ];
-  programs.zsh.enable = true;
+  programs.nushell.enable = true;
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";

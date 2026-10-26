@@ -5,6 +5,6 @@
     nix-direnv.enable = true;
     
     # Configure shell integration
-    enableZshIntegration = true;
+    enableNushellIntegration = true;
   };
 }
