@@ -267,7 +267,12 @@
     hashedPassword = "$y$j9T$jvHtHzQgvdYK5WrnvsEuU/$n7EF8zPZgUrD1.hJR7m862kiUXTndfyjWtF6di6MsC8";
   };
 
-  nixpkgs.config.allowUnfree = true;
+  nixpkgs.config = {
+    allowUnfree = true;
+    permittedInsecurePackages = [
+      "firefox-esr-140-bin-unwrapped-140.17.0esr"
+    ];
+  };
 
   environment.systemPackages = with pkgs; [
     bashInteractive
