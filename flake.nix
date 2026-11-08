@@ -57,6 +57,7 @@
       stateVersion = "26.05";
 
       shared-modules = [
+        inputs.sops-nix.nixosModules.sops
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;

@@ -1,4 +1,5 @@
 {
+  config,
   pkgs,
   inputs,
   stateVersion,
@@ -203,6 +204,45 @@
       HandleLidSwitchExternalPower = "ignore";
       HandleLidSwitchDocked = "ignore";
     };
+
+    openssh = {
+      enable = true;
+      settings = {
+        PasswordAuthentication = false;
+        KbdInteractiveAuthentication = false;
+      };
+    };
+  };
+
+  system.activationScripts.sopsUserKey = {
+    text = ''
+      USER_HOME="/home/filippo"
+      KEY_PATH="$USER_HOME/.ssh/sops"
+
+      if [ ! -f "$KEY_PATH" ]; then
+        mkdir -p "$USER_HOME/.ssh"
+        chmod 700 "$USER_HOME/.ssh"
+
+        ${pkgs.openssh}/bin/ssh-keygen -t ed25519 -N "" -C "sops@${config.networking.hostName}" -f "$KEY_PATH"
+        chown filippo:users "$KEY_PATH" "$KEY_PATH.pub"
+        chmod 600 "$KEY_PATH"
+        chmod 644 "$KEY_PATH.pub"
+
+        echo "=========================================================="
+        echo "Generated new SOPS SSH key at $KEY_PATH"
+        echo "Public Age key for .sops.yaml:"
+        ${pkgs.ssh-to-age}/bin/ssh-to-age -i "$KEY_PATH.pub"
+        echo "=========================================================="
+      fi
+    '';
+  };
+
+  sops = {
+    defaultSopsFormat = "yaml";
+    age.sshKeyPaths = [
+      "/home/filippo/.ssh/sops"
+      "/etc/ssh/ssh_host_ed25519_key"
+    ];
   };
 
   xdg.portal = {
@@ -284,12 +324,17 @@
     gnome-keyring
     seahorse
     libsecret
+
+    sops
+    age
+    ssh-to-age
   ];
   programs.nushell.enable = true;
 
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     QT_QPA_PLATFORM = "wayland";
+    SOPS_AGE_SSH_PRIVATE_KEY_FILE = "/home/filippo/.ssh/sops";
   };
 
   environment.variables = {
