@@ -102,7 +102,6 @@
     ../../programs/nvim.nix
     ../../programs/nextcloud-client.nix
     ../../programs/kwallet.nix
-    ../../programs/onlyoffice.nix
     ../../programs/zotero.nix
     ../../programs/firefox.nix
     ../../programs/mattermost.nix
