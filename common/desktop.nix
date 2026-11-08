@@ -219,6 +219,8 @@
     text = ''
       USER_HOME="/home/filippo"
       KEY_PATH="$USER_HOME/.ssh/sops"
+      AGE_DIR="$USER_HOME/.config/sops/age"
+      AGE_KEY_PATH="$AGE_DIR/keys.txt"
 
       if [ ! -f "$KEY_PATH" ]; then
         mkdir -p "$USER_HOME/.ssh"
@@ -234,6 +236,14 @@
         echo "Public Age key for .sops.yaml:"
         ${pkgs.ssh-to-age}/bin/ssh-to-age -i "$KEY_PATH.pub"
         echo "=========================================================="
+      fi
+
+      if [ -f "$KEY_PATH" ]; then
+        mkdir -p "$AGE_DIR"
+        chmod 700 "$AGE_DIR"
+        ${pkgs.ssh-to-age}/bin/ssh-to-age -private-key -i "$KEY_PATH" > "$AGE_KEY_PATH"
+        chown -R filippo:users "$USER_HOME/.config/sops"
+        chmod 600 "$AGE_KEY_PATH"
       fi
     '';
   };
@@ -335,7 +345,7 @@
   environment.sessionVariables = {
     NIXOS_OZONE_WL = "1";
     QT_QPA_PLATFORM = "wayland";
-    SOPS_AGE_SSH_PRIVATE_KEY_FILE = "/home/filippo/.ssh/sops";
+    SOPS_AGE_KEY_FILE = "/home/filippo/.config/sops/age/keys.txt";
   };
 
   environment.variables = {
