@@ -27,10 +27,49 @@ jobs:
             gh pr list --author "app/github-actions" --state open --json number --jq '.[].number'
             gh pr list --author "app/dependabot" --state open --json number --jq '.[].number'
           } | sort -u | while read -r pr; do
-            if gh pr checks "$pr" 2>/dev/null; then
-              echo "All checks passed for PR #${pr}, merging."
-              gh pr merge "$pr" --rebase --delete-branch || true
-            else
+            [ -z "$pr" ] && continue
+
+            # 1. Basic check status (fails if any check failed or is pending)
+            if ! gh pr checks "$pr" >/dev/null 2>&1; then
               echo "PR #${pr} has pending or failed checks, skipping."
+              continue
             fi
+
+            # 2. Inspect individual build checks for evaluation or build errors
+            head_sha="$(gh pr view "$pr" --json headRefOid --jq '.headRefOid')"
+            check_runs="$(gh api "repos/${GH_REPO}/commits/${head_sha}/check-runs" --paginate)"
+
+            invalid_builds="$(echo "$check_runs" | jq -r '
+              [ .check_runs[]
+                | select(.name | startswith("Atelier / Build / nixosConfigurations."))
+                | select(
+                    (.conclusion != "success") and
+                    ((.output.title // "") != "Excluded by rule") and
+                    ((.output.title // "") != "Already in the binary cache")
+                  )
+                | (.name + ": " + (.output.title // .conclusion))
+              ] | .[]
+            ')"
+
+            if [ -n "$invalid_builds" ]; then
+              echo "PR #${pr} has unbuilt or failed configurations:"
+              echo "$invalid_builds"
+              echo "Skipping merge."
+              continue
+            fi
+
+            successful_builds="$(echo "$check_runs" | jq -r '
+              [ .check_runs[]
+                | select(.name | startswith("Atelier / Build / nixosConfigurations."))
+                | select((.conclusion == "success") or ((.output.title // "") == "Already in the binary cache"))
+              ] | length
+            ')"
+
+            if [ "$successful_builds" -eq 0 ]; then
+              echo "PR #${pr} has no successful builds, skipping."
+              continue
+            fi
+
+            echo "All checks and builds passed for PR #${pr}, merging."
+            gh pr merge "$pr" --rebase --delete-branch || true
           done
