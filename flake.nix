@@ -10,20 +10,18 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
+    sops-nix = {
+      url = "github:Mic92/sops-nix";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
     llm-agents = {
       url = "github:numtide/llm-agents.nix";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    proxmox-nixos.url = "github:SaumonNet/proxmox-nixos";
-
     home-manager = {
       url = "github:nix-community/home-manager/master";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-
-    hyprland = {
-      url = "github:hyprwm/Hyprland/v0.57.1";
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
@@ -50,6 +48,7 @@
       self,
       nixpkgs,
       home-manager,
+      sops-nix,
       ...
     }@inputs:
     let
@@ -119,6 +118,16 @@
           specialArgs = { inherit username inputs stateVersion; };
           modules = [
             ./hosts/service-vaultwarden/configuration.nix
+          ];
+        };
+
+        # --- Caddy LXC ---
+        service-caddy = nixpkgs.lib.nixosSystem {
+          inherit system;
+          specialArgs = { inherit username inputs stateVersion; };
+          modules = [
+            inputs.sops-nix.nixosModules.sops
+            ./hosts/service-caddy/configuration.nix
           ];
         };
       };

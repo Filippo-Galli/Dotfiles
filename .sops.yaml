@@ -1,0 +1,9 @@
+keys:
+  - &escanor age185xytq4zj5g4vk8rz5wxrfye5g0ayt8f55f6ums9vj2vd59lja7q4qdz4l
+  - &caddy age1xlzs06seyec4s8cnwqtse5k6tqwlsauut9wrsrkmjhqpgxjpye7q0czvd4
+creation_rules:
+  - path_regex: hosts/service-caddy/secrets\.yaml$
+    key_groups:
+      - age:
+          - *escanor
+          - *caddy
