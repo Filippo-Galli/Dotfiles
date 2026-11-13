@@ -23,6 +23,7 @@ let
     "vw.${domain}" = "{$UPSTREAM_VW}";
     "obsidian.${domain}" = "{$UPSTREAM_OBSIDIAN}";
     "ntfy.${domain}" = "{$UPSTREAM_NTFY}";
+    "cache.${domain}" = "{$UPSTREAM_ATTIC}";
   };
 
   # Services accessible only through Tailscale.
