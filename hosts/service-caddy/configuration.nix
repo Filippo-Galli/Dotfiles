@@ -44,6 +44,13 @@ let
     format json
   '';
 
+  publicExtra = {
+    "vw.${domain}" = ''
+      @blocked path /admin /admin/*
+      respond @blocked 404
+    '';
+  };
+
   mkPublic =
     hostname: upstream:
     lib.nameValuePair "http://${hostname}:8080" {
@@ -51,8 +58,9 @@ let
       logFormat = accessLog;
 
       extraConfig = ''
+        ${publicExtra.${hostname} or ""}
         reverse_proxy ${upstream} {
-          trusted_proxies 127.0.0.1/32
+          header_up X-Real-IP {client_ip}
         }
       '';
     };
@@ -124,26 +132,6 @@ in
     group = "cloudflared";
   };
 
-  assertions = [
-    {
-      assertion = acmeEmail != "CHANGE-ME@example.org";
-      message = "Set acmeEmail in configuration.nix.";
-    }
-    {
-      assertion = tunnelId != "00000000-0000-0000-0000-000000000000";
-      message = "Set your locally managed Cloudflare tunnel UUID.";
-    }
-    {
-      assertion = lib.all (host: !(host == privateDomain || lib.hasSuffix ".${privateDomain}" host)) (
-        builtins.attrNames publicUpstreams
-      );
-
-      message = ''
-        Private-domain hostnames must not be added to publicUpstreams.
-      '';
-    }
-  ];
-
   networking.firewall = {
     enable = true;
     interfaces.tailscale0.allowedTCPPorts = [ 443 ];
@@ -174,6 +162,11 @@ in
 
     globalConfig = ''
       auto_https disable_redirects
+
+      servers {
+        trusted_proxies static 127.0.0.1/32
+        client_ip_headers CF-Connecting-IP
+      }
     '';
 
     virtualHosts =
